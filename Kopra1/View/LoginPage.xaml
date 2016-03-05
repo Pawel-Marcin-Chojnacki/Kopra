@@ -32,6 +32,7 @@
                 <TextBlock Style="{ThemeResource BaseTextBlockStyle}">Hasło</TextBlock>
                 <PasswordBox x:Name="password"  
                              PreventKeyboardDisplayOnProgrammaticFocus="true" 
+                             KeyDown="Password_OnKeyDown"
                               />
             </StackPanel>
 

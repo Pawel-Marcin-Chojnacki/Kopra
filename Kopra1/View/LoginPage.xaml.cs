@@ -175,12 +175,27 @@ namespace Kopra
             }).AsAsyncAction();
         }
 
+        /// <summary>
+        /// Change focus to password when enter key is pressed in email field.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Email_OnKeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == VirtualKey.Enter)
             {
                 password.Focus(FocusState.Keyboard);
             }
-    }
+        }
+
+        /// <summary>
+        /// Login action when enter key is pressed in password field.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Password_OnKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+                loginButton_Click(sender, e);
+        }
     }
 }
