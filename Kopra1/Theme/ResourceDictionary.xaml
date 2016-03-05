@@ -1,0 +1,102 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Kopra">
+
+    <SolidColorBrush x:Key="AppPaletteMainAccentBrush" Color="Blue"></SolidColorBrush>
+    <SolidColorBrush x:Key="AppPaletteCompletiveBrush" Color="BlueViolet"></SolidColorBrush>
+    <!--BlueViolet-->
+    <SolidColorBrush x:Key="AppPaletteFairBrush" Color="White"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="ProgressBarIndeterminateForegroundThemeBrush" Color="{Binding Source={StaticResource AppPaletteFairBrush}, Path=Color}" />
+    <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="{Binding Source={StaticResource AppPaletteFairBrush}, Path=Color}"></SolidColorBrush>
+
+    <Style x:Key="FormFieldStyle" TargetType="StackPanel">
+        <Setter Property="Margin" Value="0,19,0,0"></Setter>
+    </Style>
+
+    <Style x:Key="MainPageLogoStyle" TargetType="Image">
+        <Setter Property="Margin" Value="0,0,0,10"></Setter>
+        <Setter Property="Width" Value="250"></Setter>
+    </Style>
+
+    <Style x:Key="SubmitButtonStyle" TargetType="Button">
+        <Setter Property="Padding" Value="30,0,30,0"></Setter>
+        <Setter Property="Margin" Value="0,10,0,0"></Setter>
+    </Style>
+
+    <Style x:Key="SquareButtonStyle" TargetType="Button">
+        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+        <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+        <Setter Property="BorderThickness" Value="0"></Setter>
+        <Setter Property="Margin" Value="0,-10,0,-10"></Setter>
+        <Setter Property="MinWidth" Value="20"></Setter>
+    </Style>
+
+    <Style x:Key="AddFilterButtonStyle" BasedOn="{StaticResource SquareButtonStyle}" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource AppPaletteCompletiveBrush}"></Setter>
+    </Style>
+
+    <Style x:Key="SquareButtonIconStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI Symbol"></Setter>
+        <Setter Property="Foreground" Value="White"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="FontSize" Value="36"></Setter>
+    </Style>
+
+    <Style x:Key="AddFilterIconStyle" BasedOn="{StaticResource SquareButtonIconStyle}" TargetType="TextBlock">
+        <Setter Property="Text" Value=""></Setter>
+        <Setter Property="FontSize" Value="76"></Setter>
+    </Style>
+
+    <Style x:Key="SearchIconStyle" BasedOn="{StaticResource SquareButtonIconStyle}" TargetType="TextBlock">
+        <Setter Property="Text" Value=""></Setter>
+    </Style>
+
+    <Style x:Key="SettingsIconStyle" BasedOn="{StaticResource SquareButtonIconStyle}" TargetType="TextBlock">
+        <Setter Property="Text" Value=""></Setter>
+    </Style>
+    
+    <Style x:Key="ReportIconStyle" BasedOn="{StaticResource SquareButtonIconStyle}" TargetType="TextBlock">
+        <Setter Property="Text" Value=""></Setter>
+    </Style>
+    
+    <Style x:Key="BrowserIconStyle" BasedOn="{StaticResource SquareButtonIconStyle}" TargetType="TextBlock">
+        <Setter Property="Text" Value=""></Setter>
+    </Style>
+
+    <Style x:Key="SquareButtonDescriptionStyle" BasedOn="{StaticResource BaseTextBlockStyle}" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="VerticalAlignment" Value="Bottom"></Setter>
+        <Setter Property="Foreground" Value="White"></Setter>
+        <Setter Property="Padding" Value="10,0,0,5"></Setter>
+        <Setter Property="Height" Value="30"></Setter>
+        <Setter Property="Margin" Value="0,-30,0,0"></Setter>
+    </Style>
+
+    <Style x:Key="ListItemStyle" TargetType="ListViewItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+
+    <Style x:Key="ProgressRingStyle" TargetType="ProgressRing">
+        <Setter Property="Background" Value="{x:Null}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource AppPaletteMainAccentBrush}"></Setter>
+    </Style>
+
+    <Style x:Key="PercentageBorderStyle" TargetType="Border">
+        <Setter Property="Padding" Value="10,10,10,10"></Setter>
+        <Setter Property="Margin" Value="0,0,16,0"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="Background" Value="{ThemeResource PhoneChromeBrush}"></Setter>
+        <Setter Property="Width" Value="56"></Setter>
+        <Setter Property="Height" Value="56"></Setter>
+    </Style>
+
+    <Style x:Key="PercentageTextBlockStyle" BasedOn="{StaticResource ListViewItemContentTextBlockStyle}" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="FontWeight" Value="Bold"></Setter>
+    </Style>
+
+</ResourceDictionary>

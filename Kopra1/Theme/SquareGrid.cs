@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Windows.Foundation;
+using Windows.UI.Xaml.Controls;
+
+namespace Kopra.Theme
+{
+    public class SquareGrid : Grid
+    {
+        protected override Size MeasureOverride(Size availableSize)
+        {
+            availableSize = base.MeasureOverride(availableSize);
+
+            return new Size(availableSize.Width, availableSize.Width);
+        }
+
+        protected override Size ArrangeOverride(Size finalSize)
+        {
+            finalSize = base.ArrangeOverride(finalSize);
+            Width = Height = finalSize.Width;
+
+            return new Size(finalSize.Width, finalSize.Width);
+        }
+    }
+}

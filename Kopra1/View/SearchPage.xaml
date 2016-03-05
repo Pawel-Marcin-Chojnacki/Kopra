@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="Kopra.SearchPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Kopra"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:viewModel="using:Kopra.ViewModel"
+    RequestedTheme="Light"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.DataContext>
+        <viewModel:SearchViewModel/>
+    </Page.DataContext>
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+            <TextBlock Text="KOPRA" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+            <TextBlock Text="Szukaj" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+        </StackPanel>
+
+        <!--TODO: Content should be placed within the following grid-->
+        
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+            <ScrollViewer>
+            <StackPanel>
+                    <TextBlock>Tytuł aukcji</TextBlock>
+                <TextBox x:Name="SzukajWTreści" PlaceholderText="Szukaj w tytule aukcji..."  TextWrapping="Wrap"  Margin="0,10,0,10" />
+                <TextBlock>Kwota</TextBlock>
+                <ComboBox x:Name="KwotaPożyczki" ItemsSource="{Binding KwotaList, Mode=TwoWay}" PlaceholderText="Kwota pożyczki" SelectedValue="{Binding Kwota, Mode=TwoWay}" ></ComboBox>
+                <!--<Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Column="0">
+                        <TextBox x:Name="KwotaOd" Margin="10,10,10,0" TextWrapping="Wrap" Text="1000" IsReadOnly="True" InputScope="Number"/>
+                    </Grid><Grid Column="1">
+                        <TextBox x:Name="KwotaDo" Margin="10,10,10,0" TextWrapping="Wrap" Text="5000" IsReadOnly="True" InputScope="Number"/>
+                    </Grid>-->
+                <!--</Grid>-->
+                <TextBlock>Okres pożyczki</TextBlock>
+                <ComboBox ItemsSource="{Binding OkresList}" PlaceholderText="Okres pożyczki" SelectedValue="{Binding Okres, Mode=TwoWay}"></ComboBox>
+                <TextBlock>Oprocentowanie całkowite</TextBlock>
+                <ComboBox ItemsSource="{Binding OprocentowanieList}" PlaceholderText="Oprocentowanie całkowite" SelectedValue="{Binding Oprocentowanie, Mode=TwoWay}"></ComboBox>
+                
+            </StackPanel>
+
+        </ScrollViewer>
+    </Grid>
+    </Grid>
+    <Page.BottomAppBar><CommandBar>
+        <AppBarButton Name="Szukaj" Click="Szukaj_OnClick" Icon="Find" Label="Szukaj"></AppBarButton>
+    </CommandBar></Page.BottomAppBar>
+</Page>
