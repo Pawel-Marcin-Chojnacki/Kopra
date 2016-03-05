@@ -10,6 +10,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
 using Windows.System;
+using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -23,6 +24,7 @@ using Windows.Web.Http.Filters;
 using Windows.Web.Http.Headers;
 using Kopra.Common;
 using Kopra.Theme;
+using Kopra1.Common;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -36,17 +38,28 @@ namespace Kopra
         private NavigationHelper _navigationHelper;
         private ObservableDictionary _defaultViewModel = new ObservableDictionary();
         private SettingsManager _settingsManager;
+        private ConnectionManager _connectionManager;
         private bool _loginSuccessful = false;
 
         public LoginPage()
         {
             this.InitializeComponent();
             _settingsManager = new SettingsManager();
+            _connectionManager = new ConnectionManager();
+            _connectionManager.OnInternetConnectionFail += ConnectionManagerOnInternetConnectionFail;
             this._navigationHelper = new NavigationHelper(this);
             this._navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this._navigationHelper.SaveState += this.NavigationHelper_SaveState;
             StatusBarManager.Hide();
-            
+        }
+
+
+        /// <summary>
+        /// Connects to "InternetConnectionFail" event.
+        /// </summary>
+        private void ConnectionManagerOnInternetConnectionFail()
+        {
+            Information.ShowNoConnectionInfo(this, "Brak połączenia z internetem.");
         }
 
         /// <summary>
@@ -80,7 +93,6 @@ namespace Kopra
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             Frame.BackStack.Clear();
-            
         }
 
         /// <summary>
@@ -120,6 +132,8 @@ namespace Kopra
             }
         }
 
+        #endregion
+
         private bool IsCredentialStoredInLocalStorage()
         {
             if (_settingsManager.Email != null && _settingsManager.Password != null) return true;
@@ -150,16 +164,22 @@ namespace Kopra
             this._navigationHelper.OnNavigatedFrom(e);
         }
 
-        #endregion
-
-
         private async void loginButton_Click(object sender, RoutedEventArgs e)
         {
-            DisableLoginForm();
-            if (!IsEmailValid(Email.Text) || !IsPassordValid(Password.Password))
+            if (_connectionManager.CheckInternetConnection())
+                return;
+            if (!IsEmailValid(Email.Text))
             {
+                EmailStoryboard.Begin();
                 return;
             }
+            if (!IsPassordValid(Password.Password))
+            {
+                PasswordStoryboard.Begin();
+                return;
+            }
+
+            DisableLoginForm();
             await LoginToServiceAsync(Email.Text, Password.Password);
             if (_loginSuccessful)
             {
@@ -221,7 +241,12 @@ namespace Kopra
         /// <param name="e"></param>
         private void Password_OnKeyDown(object sender, KeyRoutedEventArgs e)
         {
+            if (e.Key == VirtualKey.Enter)
+            {
+                LoginButton.Focus(FocusState.Keyboard);
                 loginButton_Click(sender, e);
+            }
+                
         }
     }
 }
