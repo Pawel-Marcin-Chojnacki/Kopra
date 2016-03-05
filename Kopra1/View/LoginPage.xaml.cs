@@ -167,7 +167,7 @@ namespace Kopra
             ProgressIndicator.Visibility = Visibility.Visible;
         }
 
-        public static IAsyncAction LoginToServiceAsync(string t, string p)
+        private static IAsyncAction LoginToServiceAsync(string t, string p)
         {
             return Task.Run(async() =>
             {
