@@ -23,8 +23,8 @@
                 </TextBlock>
                 <TextBox x:Name="email" 
                          IsSpellCheckEnabled="False"
-                         IsTextPredictionEnabled="False"
-                         PreventKeyboardDisplayOnProgrammaticFocus="true" 
+                         IsTextPredictionEnabled="False" PreventKeyboardDisplayOnProgrammaticFocus="true" 
+                         KeyDown="Email_OnKeyDown"
                           />
             </StackPanel>
 

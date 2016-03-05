@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.System;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -32,17 +33,17 @@ namespace Kopra
     /// </summary>
     public sealed partial class LoginPage : Page
     {
-        private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private SettingsManager sm;
+        private NavigationHelper _navigationHelper;
+        private ObservableDictionary _defaultViewModel = new ObservableDictionary();
+        private SettingsManager _settingsManager;
 
         public LoginPage()
         {
             this.InitializeComponent();
-            sm = new SettingsManager();
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+            _settingsManager = new SettingsManager();
+            this._navigationHelper = new NavigationHelper(this);
+            this._navigationHelper.LoadState += this.NavigationHelper_LoadState;
+            this._navigationHelper.SaveState += this.NavigationHelper_SaveState;
             StatusBarManager.Hide();
             
         }
@@ -52,7 +53,7 @@ namespace Kopra
         /// </summary>
         public NavigationHelper NavigationHelper
         {
-            get { return this.navigationHelper; }
+            get { return this._navigationHelper; }
         }
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace Kopra
         /// </summary>
         public ObservableDictionary DefaultViewModel
         {
-            get { return this.defaultViewModel; }
+            get { return this._defaultViewModel; }
         }
 
         /// <summary>
@@ -110,7 +111,7 @@ namespace Kopra
         /// handlers that cannot cancel the navigation request.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.navigationHelper.OnNavigatedTo(e);
+            this._navigationHelper.OnNavigatedTo(e);
             if (IsCredentialStoredInLocalStorage())
             {
                 FillLoginForm();
@@ -120,7 +121,7 @@ namespace Kopra
 
         private bool IsCredentialStoredInLocalStorage()
         {
-            if (sm.Email != null && sm.Password != null) return true;
+            if (_settingsManager.Email != null && _settingsManager.Password != null) return true;
             return false;
         }
 
@@ -139,16 +140,17 @@ namespace Kopra
 
         private void FillLoginForm()
         {
-            email.Text = sm.Email;
-            password.Password = sm.Password;
+            email.Text = _settingsManager.Email;
+            password.Password = _settingsManager.Password;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            this.navigationHelper.OnNavigatedFrom(e);
+            this._navigationHelper.OnNavigatedFrom(e);
         }
 
         #endregion
+
 
         private async void loginButton_Click(object sender, RoutedEventArgs e)
         {
@@ -172,5 +174,13 @@ namespace Kopra
                 await KokosConnectionManager.LoginToService(t, p);
             }).AsAsyncAction();
         }
+
+        private void Email_OnKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Enter)
+            {
+                password.Focus(FocusState.Keyboard);
+            }
+    }
     }
 }
