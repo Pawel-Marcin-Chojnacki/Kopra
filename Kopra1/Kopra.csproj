@@ -80,6 +80,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ComboBoxFiltr.cs" />
+    <Compile Include="Common\ConnectionManager.cs" />
+    <Compile Include="Common\Information.cs" />
     <Compile Include="PoleFiltru.cs" />
     <Compile Include="ViewModel\AddFilterFieldsViewModel.cs" />
     <Compile Include="ViewModel\AddFilterInitsViewModel.cs" />
