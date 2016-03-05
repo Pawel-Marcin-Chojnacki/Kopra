@@ -18,7 +18,7 @@
                    Source="/Assets/LogoTheme.png" />
 
             <StackPanel Style="{StaticResource FormFieldStyle}">
-                <TextBlock Style="{ThemeResource BaseTextBlockStyle}">
+                <TextBlock Style="{ThemeResource BaseTextBlockStyle}" x:Name="UserName">
                     Nazwa użytkownika
                 </TextBlock>
                 <TextBox x:Name="Email" 
@@ -26,7 +26,18 @@
                          IsTextPredictionEnabled="False" 
                          PreventKeyboardDisplayOnProgrammaticFocus="true" 
                          KeyDown="Email_OnKeyDown"
-                          />
+                          >
+                    <TextBox.Resources>
+                        <Storyboard x:Name="EmailStoryboard">
+                            <ColorAnimation Storyboard.TargetName="EmailSolidColorBrush"
+                                            Storyboard.TargetProperty="Color"
+                                            From="Red" To="White" Duration="0:0:4"></ColorAnimation>
+                        </Storyboard>
+                    </TextBox.Resources>
+                    <TextBox.Background>
+                        <SolidColorBrush x:Name="EmailSolidColorBrush" Color="White" />
+                    </TextBox.Background>
+                </TextBox>
             </StackPanel>
 
             <StackPanel Style="{StaticResource FormFieldStyle}">
@@ -34,7 +45,18 @@
                 <PasswordBox x:Name="Password"  
                              PreventKeyboardDisplayOnProgrammaticFocus="true" 
                              KeyDown="Password_OnKeyDown"
-                              />
+                              >
+                    <PasswordBox.Resources>
+                        <Storyboard x:Name="PasswordStoryboard">
+                            <ColorAnimation Storyboard.TargetName="PasswordSolidColorBrush"
+                                            Storyboard.TargetProperty="Color"
+                                            From="Red" To="White" Duration="0:0:4"></ColorAnimation>
+                        </Storyboard>
+                    </PasswordBox.Resources>
+                    <PasswordBox.Background>
+                        <SolidColorBrush x:Name="PasswordSolidColorBrush" Color="White" />
+                    </PasswordBox.Background>
+                </PasswordBox>
             </StackPanel>
 
             <Button Style="{StaticResource SubmitButtonStyle}" 
@@ -51,7 +73,6 @@
                            Margin="0,10,0,10">Logowanie...</TextBlock>
                 <ProgressBar IsIndeterminate="True"></ProgressBar>
             </StackPanel>
-
         </StackPanel>
 
     </Grid>
