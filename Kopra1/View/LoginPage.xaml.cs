@@ -36,6 +36,7 @@ namespace Kopra
         private NavigationHelper _navigationHelper;
         private ObservableDictionary _defaultViewModel = new ObservableDictionary();
         private SettingsManager _settingsManager;
+        private bool _loginSuccessful = false;
 
         public LoginPage()
         {
@@ -155,8 +156,33 @@ namespace Kopra
         private async void loginButton_Click(object sender, RoutedEventArgs e)
         {
             DisableLoginForm();
+            if (!IsEmailValid(Email.Text) || !IsPassordValid(Password.Password))
+            {
+                return;
+            }
             await LoginToServiceAsync(Email.Text, Password.Password);
-            this.Frame.Navigate(typeof(MainMenuPage));
+            if (_loginSuccessful)
+            {
+                Frame.Navigate(typeof(MainMenuPage));
+            }
+        }
+
+        private bool IsPassordValid(string password)
+        {
+            if (password.Length < 6)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool IsEmailValid(string email)
+        {
+            if (!email.Contains("@") || !email.Contains(".") || email.Length < 6)
+            {
+                return false;
+            }
+            return true;
         }
 
         private void DisableLoginForm()
