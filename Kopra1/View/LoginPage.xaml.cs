@@ -140,8 +140,8 @@ namespace Kopra
 
         private void FillLoginForm()
         {
-            email.Text = _settingsManager.Email;
-            password.Password = _settingsManager.Password;
+            Email.Text = _settingsManager.Email;
+            Password.Password = _settingsManager.Password;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -155,15 +155,15 @@ namespace Kopra
         private async void loginButton_Click(object sender, RoutedEventArgs e)
         {
             DisableLoginForm();
-            await LoginToServiceAsync(email.Text, password.Password);
+            await LoginToServiceAsync(Email.Text, Password.Password);
             this.Frame.Navigate(typeof(MainMenuPage));
         }
 
         private void DisableLoginForm()
         {
-            email.IsEnabled = false;
-            password.IsEnabled = false;
-            loginButton.Visibility = Visibility.Collapsed;
+            Email.IsEnabled = false;
+            Password.IsEnabled = false;
+            LoginButton.Visibility = Visibility.Collapsed;
             ProgressIndicator.Visibility = Visibility.Visible;
         }
 
@@ -184,7 +184,7 @@ namespace Kopra
         {
             if (e.Key == VirtualKey.Enter)
             {
-                password.Focus(FocusState.Keyboard);
+                Password.Focus(FocusState.Keyboard);
             }
         }
 

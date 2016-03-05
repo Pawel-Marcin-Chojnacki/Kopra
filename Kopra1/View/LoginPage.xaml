@@ -21,24 +21,26 @@
                 <TextBlock Style="{ThemeResource BaseTextBlockStyle}">
                     Nazwa użytkownika
                 </TextBlock>
-                <TextBox x:Name="email" 
+                <TextBox x:Name="Email" 
                          IsSpellCheckEnabled="False"
-                         IsTextPredictionEnabled="False" PreventKeyboardDisplayOnProgrammaticFocus="true" 
+                         IsTextPredictionEnabled="False" 
+                         PreventKeyboardDisplayOnProgrammaticFocus="true" 
                          KeyDown="Email_OnKeyDown"
                           />
             </StackPanel>
 
             <StackPanel Style="{StaticResource FormFieldStyle}">
                 <TextBlock Style="{ThemeResource BaseTextBlockStyle}">Hasło</TextBlock>
-                <PasswordBox x:Name="password"  
+                <PasswordBox x:Name="Password"  
                              PreventKeyboardDisplayOnProgrammaticFocus="true" 
                              KeyDown="Password_OnKeyDown"
                               />
             </StackPanel>
 
             <Button Style="{StaticResource SubmitButtonStyle}" 
+                    HorizontalAlignment="Center"
                     Click="loginButton_Click"
-                    x:Name="loginButton">
+                    x:Name="LoginButton">
                 Zaloguj się
             </Button>
 
