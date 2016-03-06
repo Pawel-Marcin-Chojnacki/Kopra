@@ -40,7 +40,7 @@ namespace Kopra
         private SettingsManager _settingsManager;
         private ConnectionManager _connectionManager;
         private LoginPageViewModel _viewModel;
-        //private bool _loginSuccessful = false;
+        private bool _loginSuccessful = false;
         private bool internetConnected = false;
 
         public LoginPage()

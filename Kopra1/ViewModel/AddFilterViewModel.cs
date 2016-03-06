@@ -20,12 +20,12 @@ namespace Kopra.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        //public void DodajFiltr(string filtr)
-        //{
-        //}
+        public void DodajFiltr(string filtr)
+        {
+        }
 
-        //private string _filtr;
-        //public string Filtr { get; set; }
+        private string _filtr;
+        public string Filtr { get; set; }
 
         private string _tytułAukcji;
         public string TytułAukcji

@@ -17,7 +17,7 @@ namespace Kopra.Theme
 
         public static async void SetStyle()
         {
-           statusBar.ShowAsync();
+            statusBar.ShowAsync();
             statusBar.BackgroundColor = (Application.Current.Resources["AppPaletteMainAccentBrush"] as SolidColorBrush).Color;
             statusBar.BackgroundOpacity = 1;
             statusBar.ProgressIndicator.Text = " ";

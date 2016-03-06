@@ -19,51 +19,55 @@ namespace Kopra
         private static Uri resourceAddress = new Uri(LoginAddress);
         private static HttpResponseMessage response;
 
-        //public static void FillLoginData()
-        //{
+        public static void FillLoginData()
+        {
             
-        //}
+        }
 
         public static  async Task<HttpResponseMessage> LoginToService(string text, string password)
         {
             Debug.WriteLine("LoginToService");
+            if (IsEmailValid(text) && IsPasswordValid(password)) ;
+            if (!(text.Contains("@") && password.Length >= 5))
+            {
+                return null;
+            }
             httpClient.DefaultRequestHeaders.UserAgent.Add(new HttpProductInfoHeaderValue("Kopra","1"));
             var form = new HttpMultipartFormDataContent
             {
-                {
-                    new HttpStringContent(text), "handle"
-                },
-                {
-                    new HttpStringContent(password), "passwd"
-                }
+                {new HttpStringContent(text), "handle"},
+                {new HttpStringContent(password), "passwd"}
             };
 
+            // Add new content to string.
             SaveNewCredentials(text, password);
-            response = await httpClient.PostAsync(resourceAddress, form).AsTask(cts.Token);
+            response =  httpClient.PostAsync(resourceAddress, form).AsTask(cts.Token).Result;
             return response;
         }
 
-        //private static bool IsPasswordValid(string password)
-        //{
-        //    return password.Length >= 5;
-        //}
+        private static bool IsPasswordValid(string password)
+        {
+            if (password.Length >= 5) return true;
+            else return false;
+            //password.Length >= 5 ? true : false;
+        }
 
-        ///// <summary>
-        ///// Naive method to check basic correctness of email address.
-        ///// </summary>
-        ///// <param name="email">String to check if it's an correct form of email address.</param>
-        ///// <returns>Bool, true if string contains @ sign.</returns>
-        //private static bool IsEmailValid(string email)
-        //{
-        //    return email.Contains("@");
-        //}
+        /// <summary>
+        /// Naive method to check basic correctness of email address.
+        /// </summary>
+        /// <param name="email">String to check if it's an correct form of email address.</param>
+        /// <returns>Bool, true if string contains @ sign.</returns>
+        private static bool IsEmailValid(string email)
+        {
+            return email.Contains("@");
+        }
 
         private static void SaveNewCredentials(string email, string password)
         {
             //Debug.WriteLine("SaveNewCredentials");
             SettingsManager credentials = new SettingsManager();
             credentials.Email = email;
-            //Debug.WriteLine(credentials.Email);
+            Debug.WriteLine(credentials.Email);
             credentials.Password = password;
         }
 
@@ -75,6 +79,7 @@ namespace Kopra
             {
                 //Debug.WriteLine("Kokos webapiKEy " + credentials.KokosWebApiKey);
                 return;
+
             }
             else
             {
@@ -96,21 +101,21 @@ namespace Kopra
         }
         
        
-        /// <summary>
-        /// If key is not present at runtime, generate new key.
-        /// </summary>
         public static void GenerateApiKeyFromService()
         {
+
             Uri apiGeneratorAddress = new Uri("https://kokos.pl/webapiinfo/key/webapiinfo/generate-key");
             HttpMultipartFormDataContent form = new HttpMultipartFormDataContent();
-            // response = await httpClient.GetAsync(apiGeneratorAddress).AsTask(cts.Token);
+            
+
+           // response = await httpClient.GetAsync(apiGeneratorAddress).AsTask(cts.Token);
             Debug.WriteLine(response.Content);
             GetWebApiKeyFromService();
         }
 
         public static async Task<SearchAuctionResult> SendRestRequest(Uri address)
         {
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            await Task.Delay(TimeSpan.FromSeconds(1)); //Change for Timestamp
             Debug.WriteLine("SendRESTRequest");
             response = await httpClient.GetAsync(address).AsTask(cts.Token);
             var auctionsJSON = new SearchAuctionResult();
