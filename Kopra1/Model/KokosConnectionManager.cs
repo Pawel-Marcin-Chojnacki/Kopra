@@ -27,14 +27,11 @@ namespace Kopra
         public static  async Task<HttpResponseMessage> LoginToService(string text, string password)
         {
             Debug.WriteLine("LoginToService");
-            // Sprawdź czy text i password nie są puste.
             if (IsEmailValid(text) && IsPasswordValid(password)) ;
             if (!(text.Contains("@") && password.Length >= 5))
             {
                 return null;
             }
-            //WTF? Sam nie rozumiem tego co tu wyżej napisł
-            // Jeśli nie są, spróbuj się zalogować, zapisz w pamięci telefonu email i hasło.
             httpClient.DefaultRequestHeaders.UserAgent.Add(new HttpProductInfoHeaderValue("Kopra","1"));
             var form = new HttpMultipartFormDataContent
             {
@@ -67,7 +64,7 @@ namespace Kopra
 
         private static void SaveNewCredentials(string email, string password)
         {
-            Debug.WriteLine("SaveNewCredentials");
+            //Debug.WriteLine("SaveNewCredentials");
             SettingsManager credentials = new SettingsManager();
             credentials.Email = email;
             Debug.WriteLine(credentials.Email);
@@ -76,11 +73,11 @@ namespace Kopra
 
         public static void GetWebApiKeyFromService()
         {
-            Debug.WriteLine("GetWebAPIKeyFromService");
+            //Debug.WriteLine("GetWebAPIKeyFromService");
             var credentials = new SettingsManager();
             if (credentials.KokosWebApiKey != null)
             {
-                Debug.WriteLine("Kokos webapiKEy " + credentials.KokosWebApiKey);
+                //Debug.WriteLine("Kokos webapiKEy " + credentials.KokosWebApiKey);
                 return;
 
             }
@@ -90,9 +87,9 @@ namespace Kopra
                 response = httpClient.GetAsync(apiAccessAdress).AsTask(cts.Token).Result;
                 string key = response.Content.ToString();
                 //Debug.WriteLine(key);
-                if (key.Contains("klucz to: <b>"))
+                if (key.Contains("klucz to: <strong>"))
                 { 
-                    key = key.Substring(key.IndexOf("klucz to: <b>")+13, 32);
+                    key = key.Substring(key.IndexOf("klucz to: <strong>")+18, 32);
                     Debug.WriteLine(key);
                     credentials.KokosWebApiKey = key;
                 }
@@ -103,7 +100,7 @@ namespace Kopra
             }
         }
         
-        //!!!!--Does not work.--!!!!//
+       
         public static void GenerateApiKeyFromService()
         {
 
