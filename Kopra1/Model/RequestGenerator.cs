@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Kopra
 {
+    /// <summary>
+    /// Class responsible for generating Web API url's for REST server.
+    /// </summary>
     public class RequestGenerator
     {
         private const string BaseAddress = "https://kokos.pl/webapi/";
@@ -13,6 +16,7 @@ namespace Kopra
         private const string Search = "search?";
         private const string RecentAuctions = "get-recent-auctions?";
         private const string Records = "records=";
+        private const string Key = "key=";
 
         /// <summary>
         /// Composes new query for searching. 
@@ -39,7 +43,7 @@ namespace Kopra
         {
             var requestAddress = BaseAddress + RecentAuctions;
             var sm = new SettingsManager();
-            requestAddress += "key=" + sm.KokosWebApiKey + "&";
+            requestAddress += Key + sm.KokosWebApiKey + "&";
             requestAddress += DataType + "&";
             requestAddress += Records + "3";
             var result = new Uri(requestAddress);
