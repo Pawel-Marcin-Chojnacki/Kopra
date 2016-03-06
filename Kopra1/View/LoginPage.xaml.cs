@@ -24,7 +24,7 @@ using Windows.Web.Http.Filters;
 using Windows.Web.Http.Headers;
 using Kopra.Common;
 using Kopra.Theme;
-using Kopra1.Common;
+using Kopra.ViewModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -39,11 +39,15 @@ namespace Kopra
         private ObservableDictionary _defaultViewModel = new ObservableDictionary();
         private SettingsManager _settingsManager;
         private ConnectionManager _connectionManager;
+        private LoginPageViewModel _viewModel;
         private bool _loginSuccessful = false;
+        private bool internetConnected = false;
 
         public LoginPage()
         {
             this.InitializeComponent();
+
+            _viewModel = this.DataContext as LoginPageViewModel;
             _settingsManager = new SettingsManager();
             _connectionManager = new ConnectionManager();
             _connectionManager.OnInternetConnectionFail += ConnectionManagerOnInternetConnectionFail;
@@ -51,6 +55,14 @@ namespace Kopra
             this._navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this._navigationHelper.SaveState += this.NavigationHelper_SaveState;
             StatusBarManager.Hide();
+            this.Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            internetConnected = _connectionManager.CheckInternetConnection();
+            Email.Text = "hakerpawel@gmail.com";
+            Password.Password = "pawelek992CHOJ!";
         }
 
 
@@ -59,7 +71,7 @@ namespace Kopra
         /// </summary>
         private void ConnectionManagerOnInternetConnectionFail()
         {
-            Information.ShowNoConnectionInfo(this, "Brak połączenia z internetem.");
+            Information.ShowFlyoutInfo(this, "Brak połączenia z internetem.");
         }
 
         /// <summary>
@@ -119,17 +131,18 @@ namespace Kopra
         /// The navigation parameter is available in the LoadState method 
         /// in addition to page state preserved during an earlier session.
         /// </para>
-        ///// </summary>
+        /// </summary>
         /// <param name="e">Provides data for navigation methods and event
         /// handlers that cannot cancel the navigation request.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this._navigationHelper.OnNavigatedTo(e);
-            if (IsCredentialStoredInLocalStorage())
+            if (IsCredentialStoredInLocalStorage() && internetConnected)
             {
-                FillLoginForm();
+                _viewModel.FillLoginForm(_settingsManager.Email, _settingsManager.Password);
                 NavigateToMainPage();
             }
+
         }
 
         #endregion
@@ -147,17 +160,13 @@ namespace Kopra
         }
 
 
-        private bool IsLoginDataCorrect()
-        {
-            return true;
-            throw new NotImplementedException();
-        }
+        //private bool IsLoginDataCorrect()
+        //{
+        //    return true;
+        //    throw new NotImplementedException();
+        //}
 
-        private void FillLoginForm()
-        {
-            Email.Text = _settingsManager.Email;
-            Password.Password = _settingsManager.Password;
-        }
+        
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
@@ -166,25 +175,25 @@ namespace Kopra
 
         private async void loginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_connectionManager.CheckInternetConnection())
+            if (_connectionManager.CheckInternetConnection() == false)
                 return;
             if (!IsEmailValid(Email.Text))
             {
+                Information.ShowFlyoutInfo(this, "Sprawdź czy email jest poprawny.");
                 EmailStoryboard.Begin();
                 return;
             }
             if (!IsPassordValid(Password.Password))
             {
+                Information.ShowFlyoutInfo(this, "Sprawdź wpisane hasło.");
                 PasswordStoryboard.Begin();
                 return;
             }
 
             DisableLoginForm();
             await LoginToServiceAsync(Email.Text, Password.Password);
-            if (_loginSuccessful)
-            {
-                Frame.Navigate(typeof(MainMenuPage));
-            }
+            Frame.Navigate(typeof(MainMenuPage));
+            
         }
 
         private bool IsPassordValid(string password)
@@ -215,6 +224,7 @@ namespace Kopra
 
         private static IAsyncAction LoginToServiceAsync(string t, string p)
         {
+            //await KokosConnectionManager.LoginToService(t, p);
             return Task.Run(async() =>
             {
                 await KokosConnectionManager.LoginToService(t, p);
