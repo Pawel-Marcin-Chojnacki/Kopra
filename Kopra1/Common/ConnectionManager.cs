@@ -11,7 +11,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace Kopra1.Common
+namespace Kopra.Common
 {
     public class ConnectionManager
     {
