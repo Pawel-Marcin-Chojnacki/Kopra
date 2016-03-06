@@ -5,11 +5,15 @@
     xmlns:local="using:Kopra"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Kopra.ViewModel"
+    xmlns:viewModel="using:Kopra.ViewModel"
     mc:Ignorable="d"
     RequestedTheme="Dark"
     Background="{StaticResource AppPaletteMainAccentBrush}">
-
-    <Grid x:Name="LayoutRoot">
+    <Page.DataContext>
+        <viewModel:LoginPageViewModel></viewModel:LoginPageViewModel>
+    </Page.DataContext>
+        <Grid x:Name="LayoutRoot">
 
 
         <StackPanel VerticalAlignment="Center" Margin="19,19,19,19">
@@ -26,6 +30,7 @@
                          IsTextPredictionEnabled="False" 
                          PreventKeyboardDisplayOnProgrammaticFocus="true" 
                          KeyDown="Email_OnKeyDown"
+                         Text="{Binding Email, Mode=TwoWay}"
                           >
                     <TextBox.Resources>
                         <Storyboard x:Name="EmailStoryboard">
@@ -45,6 +50,7 @@
                 <PasswordBox x:Name="Password"  
                              PreventKeyboardDisplayOnProgrammaticFocus="true" 
                              KeyDown="Password_OnKeyDown"
+                             Password="{Binding Password, Mode=TwoWay}"
                               >
                     <PasswordBox.Resources>
                         <Storyboard x:Name="PasswordStoryboard">
