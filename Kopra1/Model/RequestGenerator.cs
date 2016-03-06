@@ -17,6 +17,7 @@ namespace Kopra
         private const string RecentAuctions = "get-recent-auctions?";
         private const string Records = "records=";
         private const string Key = "key=";
+        private const string SearchQuery = BaseAddress + Search + Key;
 
         /// <summary>
         /// Composes new query for searching. 
@@ -25,7 +26,7 @@ namespace Kopra
         /// <returns>URI with API request.</returns>
         public Uri ComposeSearchAuctionQuery(Dictionary<string, string> search)
         {
-            string requestAddress = BaseAddress + Search;
+            string requestAddress = SearchQuery;
             foreach (var item in search)
             {
                 requestAddress += item.Key + "=" + item.Value + "&";
@@ -49,9 +50,5 @@ namespace Kopra
             var result = new Uri(requestAddress);
             return result;
         }
-
-
-
-       
     }
 }
