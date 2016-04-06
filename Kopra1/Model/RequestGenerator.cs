@@ -16,6 +16,18 @@ namespace Kopra
         private const string Key = "key=";
         private const string SearchQuery = BaseAddress + Search + Key;
 
+        public Uri SearchAuction(Dictionary<string, string> search)
+        {
+            string requestAddress = BaseAddress + "search?";
+            foreach (var item in search)
+            {
+                requestAddress += item.Key + "=" + item.Value + "&";
+            }
+            requestAddress += DataType;
+            var result = new Uri(requestAddress);
+            return result;
+        }
+
         /// <summary>
         /// Composes new query for searching. 
         /// </summary>
