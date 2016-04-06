@@ -19,8 +19,8 @@ namespace Kopra.Common
                 Key = key;
             }
 
-            public CollectionChange CollectionChange { get; }
-            public string Key { get; }
+            public CollectionChange CollectionChange { get; private set; }
+            public string Key { get; private set; }
         }
 
         private Dictionary<string, object> _dictionary = new Dictionary<string, object>();
@@ -29,7 +29,10 @@ namespace Kopra.Common
         private void InvokeMapChanged(CollectionChange change, string key)
         {
             var eventHandler = MapChanged;
-            eventHandler?.Invoke(this, new ObservableDictionaryChangedEventArgs(change, key));
+            if (eventHandler != null)
+            {
+                eventHandler(this, new ObservableDictionaryChangedEventArgs(change, key));
+            }
         }
 
         public void Add(string key, object value)
@@ -88,7 +91,10 @@ namespace Kopra.Common
             }
         }
 
-        public ICollection<string> Keys => _dictionary.Keys;
+        public ICollection<string> Keys
+        {
+            get { return _dictionary.Keys; }
+        }
 
         public bool ContainsKey(string key)
         {
@@ -100,16 +106,25 @@ namespace Kopra.Common
             return _dictionary.TryGetValue(key, out value);
         }
 
-        public ICollection<object> Values => _dictionary.Values;
+        public ICollection<object> Values
+        {
+            get { return _dictionary.Values; }
+        }
 
         public bool Contains(KeyValuePair<string, object> item)
         {
             return _dictionary.Contains(item);
         }
 
-        public int Count => _dictionary.Count;
+        public int Count
+        {
+            get { return _dictionary.Count; }
+        }
 
-        public bool IsReadOnly => false;
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
 
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
         {

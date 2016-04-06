@@ -55,8 +55,8 @@ namespace Kopra.Common
     [WebHostHidden]
     public class NavigationHelper : DependencyObject
     {
-        private Page Page { get; }
-        private Frame Frame => Page.Frame;
+        private Page Page { get; set; }
+        private Frame Frame { get { return Page.Frame; } }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NavigationHelper"/> class.
@@ -116,13 +116,17 @@ namespace Kopra.Common
         /// The <see cref="RelayCommand"/> is set up to use the virtual method <see cref="GoBack"/>
         /// as the Execute Action and <see cref="CanGoBack"/> for CanExecute.
         /// </summary>
-        private RelayCommand GoBackCommand
+        public RelayCommand GoBackCommand
         {
             get
             {
-                return _goBackCommand ?? (_goBackCommand = new RelayCommand(
-                    GoBack,
-                    CanGoBack));
+                if (_goBackCommand == null)
+                {
+                    _goBackCommand = new RelayCommand(
+                        () => GoBack(),
+                        () => CanGoBack());
+                }
+                return _goBackCommand;
             }
             set
             {
@@ -136,9 +140,19 @@ namespace Kopra.Common
         /// The <see cref="RelayCommand"/> is set up to use the virtual method <see cref="GoForward"/>
         /// as the Execute Action and <see cref="CanGoForward"/> for CanExecute.
         /// </summary>
-        public RelayCommand GoForwardCommand => _goForwardCommand ?? (_goForwardCommand = new RelayCommand(
-            GoForward,
-            CanGoForward));
+        public RelayCommand GoForwardCommand
+        {
+            get
+            {
+                if (_goForwardCommand == null)
+                {
+                    _goForwardCommand = new RelayCommand(
+                        () => GoForward(),
+                        () => CanGoForward());
+                }
+                return _goForwardCommand;
+            }
+        }
 
         /// <summary>
         /// Virtual method used by the <see cref="GoBackCommand"/> property
@@ -148,7 +162,7 @@ namespace Kopra.Common
         /// true if the <see cref="Frame"/> has at least one entry 
         /// in the back navigation history.
         /// </returns>
-        protected virtual bool CanGoBack()
+        public virtual bool CanGoBack()
         {
             return Frame != null && Frame.CanGoBack;
         }
@@ -160,7 +174,7 @@ namespace Kopra.Common
         /// true if the <see cref="Frame"/> has at least one entry 
         /// in the forward navigation history.
         /// </returns>
-        protected virtual bool CanGoForward()
+        public virtual bool CanGoForward()
         {
             return Frame != null && Frame.CanGoForward;
         }
@@ -169,7 +183,7 @@ namespace Kopra.Common
         /// Virtual method used by the <see cref="GoBackCommand"/> property
         /// to invoke the <see cref="Windows.UI.Xaml.Controls.Frame.GoBack"/> method.
         /// </summary>
-        protected virtual void GoBack()
+        public virtual void GoBack()
         {
             if (Frame != null && Frame.CanGoBack) Frame.GoBack();
         }
@@ -177,7 +191,7 @@ namespace Kopra.Common
         /// Virtual method used by the <see cref="GoForwardCommand"/> property
         /// to invoke the <see cref="Windows.UI.Xaml.Controls.Frame.GoForward"/> method.
         /// </summary>
-        protected virtual void GoForward()
+        public virtual void GoForward()
         {
             if (Frame != null && Frame.CanGoForward) Frame.GoForward();
         }
@@ -315,7 +329,10 @@ namespace Kopra.Common
                 }
 
                 // Pass the navigation parameter to the new page
-                LoadState?.Invoke(this, new LoadStateEventArgs(e.Parameter, null));
+                if (LoadState != null)
+                {
+                    LoadState(this, new LoadStateEventArgs(e.Parameter, null));
+                }
             }
             else
             {
