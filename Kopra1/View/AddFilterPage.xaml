@@ -96,7 +96,7 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Column="0">
-                            <TextBox x:Name="KwotaPożyczkiOd" PlaceholderText="Minimum" BorderThickness="2" BorderBrush="Black" Margin="0,5,5,0" ></TextBox>
+                            <TextBox x:Name="KwotaPożyczkiOd" PlaceholderText="Minimum" BorderThickness="2" BorderBrush="" Margin="0,5,5,0" ></TextBox>
                         </Grid>
                         <Grid Column="1">
                             <ComboBox x:Name="KwotaPożyczkiDo" ItemsSource="{Binding KwotaList, Mode=TwoWay}" PlaceholderText="Maksimum" Margin="5,0,0,0" SelectedValue="{Binding Kwota, Mode=TwoWay}"></ComboBox>
