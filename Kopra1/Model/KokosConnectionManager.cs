@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Web.Http;
 using Windows.Web.Http.Headers;
+using Newtonsoft.Json;
 
 namespace Kopra
 {
@@ -48,7 +46,7 @@ namespace Kopra
         private static bool IsPasswordValid(string password)
         {
             if (password.Length >= 5) return true;
-            else return false;
+            return false;
             //password.Length >= 5 ? true : false;
         }
 
@@ -78,8 +76,6 @@ namespace Kopra
             if (credentials.KokosWebApiKey != null)
             {
                 //Debug.WriteLine("Kokos webapiKEy " + credentials.KokosWebApiKey);
-                return;
-
             }
             else
             {
@@ -123,7 +119,7 @@ namespace Kopra
             Debug.WriteLine(response.Content);
             try
             {
-                auctionsJSON = Newtonsoft.Json.JsonConvert.DeserializeObject<SearchAuctionResult>(response.Content.ToString());
+                auctionsJSON = JsonConvert.DeserializeObject<SearchAuctionResult>(response.Content.ToString());
             }
             catch (Exception)
             {

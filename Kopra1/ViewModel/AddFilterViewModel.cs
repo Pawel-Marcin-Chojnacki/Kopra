@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Media;
 using Kopra.Annotations;
 
 namespace Kopra.ViewModel
@@ -20,12 +14,12 @@ namespace Kopra.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        //public void DodajFiltr(string filtr)
-        //{
-        //}
+        public void DodajFiltr(string filtr)
+        {
+        }
 
-        //private string _filtr;
-        //public string Filtr { get; set; }
+        private string _filtr;
+        public string Filtr { get; set; }
 
         private string _tytułAukcji;
         public string TytułAukcji
@@ -41,7 +35,7 @@ namespace Kopra.ViewModel
         public void WyczyśćFiltr()
         {
             //Kwota = Okres = Oprocentowanie = Aukcje = Dochody = LimitRaty = NegatywneRekomendacje = NeutralneRekomendacje = PozytywneRekomendacje = Rating = Realizacja = StanCywilny = SumaNajbliższychRat = TypAukcji = Wiek = WiekKonta = Województwo = Wydatki = null;
-            //StronaWWW = InwestorWKokos = NumerGG = NumerSkype = ProfilFacebook = ProfilGoldenLine = ProfilLinkedIn = ProfilNaszaKlasa = Promowane = TylkoAukcjeOsóbFizycznych =TylkoFirmoweAukcje = TylkoWyróżnioneAukcje = WeryfikacjAdresu = WeryfikacjaFinansowa = WeryfikacjaPracodawcy = WeryfikacjaRachunków = false;
+            //StronaWWW = InwestorWKokos = NumerGG = NumerSkype = ProfilFacebook = ProfilGoldenLine = ProfilLinkedIn = ProfilNaszaKlasa = Promowane = TylkoAukcjeOsóbFizycznych = TylkoFirmoweAukcje = TylkoWyróżnioneAukcje = WeryfikacjAdresu = WeryfikacjaFinansowa = WeryfikacjaPracodawcy = WeryfikacjaRachunków = false;
 
         }
     }

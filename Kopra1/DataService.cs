@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Kopra;
 
 namespace Kopra
 {
@@ -16,7 +11,7 @@ namespace Kopra
             var rg = new RequestGenerator();
             KokosConnectionManager.GetWebApiKeyFromService();
             var mostRecentAuctions = await KokosConnectionManager.SendRestRequest(rg.MostRecentAuctions());
-            foreach (var auction in mostRecentAuctions.response.auctions.auction)
+            foreach (var auction in mostRecentAuctions.Response.Auctions.Auction)
             {
                 result.Add(auction);
             }

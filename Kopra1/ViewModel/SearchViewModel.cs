@@ -1,18 +1,19 @@
-﻿    using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
     using Kopra.Annotations;
 
 namespace Kopra.ViewModel
 {
-    class SearchViewModel:INotifyPropertyChanged
+    internal class SearchViewModel:INotifyPropertyChanged
     {
         public SearchViewModel()
         {
+        }
+
+        public SearchViewModel(string oprocentowanie)
+        {
+            Oprocentowanie = oprocentowanie;
             //Inicjalizacja wartości comboboxów.
             InicjalizujOkresyPożyczek();
             InicjalizujKwotyPożyczek();
@@ -119,6 +120,8 @@ namespace Kopra.ViewModel
                 NotifyPropertyChanged(nameof(OprocentowanieList));
             }
         }
+
+        public string Oprocentowanie { get; }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

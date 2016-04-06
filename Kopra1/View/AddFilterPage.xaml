@@ -40,6 +40,56 @@
                         <TextBlock>Szukaj aukcji</TextBlock>
                         <TextBox x:Name="SzukajWTreści" PlaceholderText="Zawiera w tytule.."  TextWrapping="Wrap"  Margin="0,10,0,10" Text="{Binding TytułAukcji, Mode=TwoWay}" />
                         <TextBlock>Kwota</TextBlock>
+                    <!--Tutaj wklej kontrolki, które chciałeś stworzyć wcześniej-->
+                    <ComboBox  x:Uid="0"  x:Name="ComboBoxKwota" ItemsSource="{Binding KwotaList.PolaCB}"   PlaceholderText="Kwota" SelectedValue="{Binding Kwota, Mode=TwoWay}" PickerFlyoutBase.Title="Kwota">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Item2}"></TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <ComboBox  x:Uid="1" x:Name="ComboBoxOkres" ItemsSource="{Binding OkresList.PolaCB}" SelectedValuePath="Item2" PlaceholderText="Okres" SelectedValue="{Binding Okres, Mode=TwoWay}" PickerFlyoutBase.Title="Okres pożyczki">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Item2}"></TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+
+                    <ComboBox  x:Uid="2" x:Name="ComboBoxOprocentowanie" ItemsSource="{Binding OprocentowanieList.PolaCB}" PlaceholderText="Oprocentowanie" SelectedValue="{Binding OprocentowanieList, Mode=TwoWay}" PickerFlyoutBase.Title="Oprocentowanie">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Item2}"></TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <ComboBox  x:Uid="3" x:Name="ComboBoxRealizacja" ItemsSource="{Binding RealizacjaList.PolaCB}" PlaceholderText="Realizacja" SelectedValue="{Binding Realizacja, Mode=TwoWay}" PickerFlyoutBase.Title="Realizacja">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Item2}"></TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    
+                    <ComboBox  x:Uid="5" x:Name="ComboBoxRating" ItemsSource="{Binding RatingList.PolaCB}" PlaceholderText="Rating" SelectedValue="{Binding Rating, Mode=TwoWay}" PickerFlyoutBase.Title="Rating">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Item2}"></TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <ComboBox  x:Uid="6" x:Name="ComboBoxWojewództwo" ItemsSource="{Binding WojewództwoList.PolaCB}" PlaceholderText="Województwo" SelectedValue="{Binding Województwo, Mode=TwoWay}" PickerFlyoutBase.Title="Województwo">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Item2}"></TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -120,13 +170,17 @@
     </Grid>
 
 
-    <!--<ComboBox  x:Uid="0"  x:Name="ComboBoxKwota" ItemsSource="{Binding KwotaList.PolaCB}"   PlaceholderText="Kwota" SelectedValue="{Binding Kwota, Mode=TwoWay}" PickerFlyoutBase.Title="Kwota">
+    <!--
+    KWOTA
+    <ComboBox  x:Uid="0"  x:Name="ComboBoxKwota" ItemsSource="{Binding KwotaList.PolaCB}"   PlaceholderText="Kwota" SelectedValue="{Binding Kwota, Mode=TwoWay}" PickerFlyoutBase.Title="Kwota">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Item2}"></TextBlock>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
+    
+    OKRES POŻYCZKI
                     <ComboBox  x:Uid="1" x:Name="ComboBoxOkres" ItemsSource="{Binding OkresList.PolaCB}" SelectedValuePath="Item2" PlaceholderText="Okres" SelectedValue="{Binding Okres, Mode=TwoWay}" PickerFlyoutBase.Title="Okres pożyczki">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -134,6 +188,8 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
+    
+    OPROCENTOWANIE
                     <ComboBox  x:Uid="2" x:Name="ComboBoxOprocentowanie" ItemsSource="{Binding OprocentowanieList.PolaCB}" PlaceholderText="Oprocentowanie" SelectedValue="{Binding OprocentowanieList, Mode=TwoWay}" PickerFlyoutBase.Title="Oprocentowanie">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -141,6 +197,8 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
+    
+    REALIZACJA
                     <ComboBox  x:Uid="3" x:Name="ComboBoxRealizacja" ItemsSource="{Binding RealizacjaList.PolaCB}" PlaceholderText="Realizacja" SelectedValue="{Binding Realizacja, Mode=TwoWay}" PickerFlyoutBase.Title="Realizacja">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -148,6 +206,8 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
+    
+    TYP AUKCJI
                     <ComboBox  x:Uid="4" x:Name="ComboBoxTypAukcji" ItemsSource="{Binding TypAukcjiList.PolaCB}" PlaceholderText="Typ aukcji" SelectedValue="{Binding TypAukcji, Mode=TwoWay}" PickerFlyoutBase.Title="Typ aukcji">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -155,6 +215,8 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
+    
+    RATING
                     <ComboBox  x:Uid="5" x:Name="ComboBoxRating" ItemsSource="{Binding RatingList.PolaCB}" PlaceholderText="Rating" SelectedValue="{Binding Rating, Mode=TwoWay}" PickerFlyoutBase.Title="Rating">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -162,6 +224,8 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
+    
+    WOJEWÓDZTWO
                     <ComboBox  x:Uid="6" x:Name="ComboBoxWojewództwo" ItemsSource="{Binding WojewództwoList.PolaCB}" PlaceholderText="Województwo" SelectedValue="{Binding Województwo, Mode=TwoWay}" PickerFlyoutBase.Title="Województwo">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
