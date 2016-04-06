@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 
 namespace Kopra
 {
@@ -23,7 +20,7 @@ namespace Kopra
         }
         public SettingsManager()
         {
-            _values = Windows.Storage.ApplicationData.Current.LocalSettings.Values;
+            _values = ApplicationData.Current.LocalSettings.Values;
         }
 
         public bool LiveTile

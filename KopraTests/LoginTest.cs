@@ -9,7 +9,7 @@ namespace KopraTests
         [TestMethod]
         public void InternetConnectionFailedTest()
         {
-            Assert.AreEqual(3,4);
+
         }
 
         [TestMethod]
@@ -26,6 +26,30 @@ namespace KopraTests
 
         [TestMethod]
         public void PasswordFieldEmptyTest()
+        {
+            
+        }
+
+        [TestMethod]
+        public void EmailIncorrectTest()
+        {
+
+        }
+
+        [TestMethod]
+        public void PasswordIncorrectTest()
+        {
+            
+        }
+
+        [TestMethod]
+        public void APIKeyNotGenerated()
+        {
+            
+        }
+
+        [TestMethod]
+        public void ApiKeyNotValid()
         {
             
         }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Kopra.ViewModel
+﻿namespace Kopra.ViewModel
 {
     /// <summary>
     /// AddFilterViewModel to store all information about search auction filter

@@ -1,27 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading;
 using System.Threading.Tasks;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
 using Windows.System;
-using Windows.UI;
-using Windows.UI.ViewManagement;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.Web.Http;
-using Windows.Web.Http.Filters;
-using Windows.Web.Http.Headers;
 using Kopra.Common;
 using Kopra.Theme;
 using Kopra.ViewModel;
@@ -41,21 +26,21 @@ namespace Kopra
         private ConnectionManager _connectionManager;
         private LoginPageViewModel _viewModel;
         private bool _loginSuccessful = false;
-        private bool internetConnected = false;
+        private bool internetConnected;
 
         public LoginPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            _viewModel = this.DataContext as LoginPageViewModel;
+            _viewModel = DataContext as LoginPageViewModel;
             _settingsManager = new SettingsManager();
             _connectionManager = new ConnectionManager();
             _connectionManager.OnInternetConnectionFail += ConnectionManagerOnInternetConnectionFail;
-            this._navigationHelper = new NavigationHelper(this);
-            this._navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this._navigationHelper.SaveState += this.NavigationHelper_SaveState;
+            _navigationHelper = new NavigationHelper(this);
+            _navigationHelper.LoadState += NavigationHelper_LoadState;
+            _navigationHelper.SaveState += NavigationHelper_SaveState;
             StatusBarManager.Hide();
-            this.Loaded += OnLoaded;
+            Loaded += OnLoaded;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
@@ -79,7 +64,7 @@ namespace Kopra
         /// </summary>
         public NavigationHelper NavigationHelper
         {
-            get { return this._navigationHelper; }
+            get { return _navigationHelper; }
         }
 
         /// <summary>
@@ -88,7 +73,7 @@ namespace Kopra
         /// </summary>
         public ObservableDictionary DefaultViewModel
         {
-            get { return this._defaultViewModel; }
+            get { return _defaultViewModel; }
         }
 
         /// <summary>
@@ -136,7 +121,7 @@ namespace Kopra
         /// handlers that cannot cancel the navigation request.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this._navigationHelper.OnNavigatedTo(e);
+            _navigationHelper.OnNavigatedTo(e);
             if (IsCredentialStoredInLocalStorage() && internetConnected)
             {
                 _viewModel.FillLoginForm(_settingsManager.Email, _settingsManager.Password);
@@ -155,8 +140,8 @@ namespace Kopra
 
         private async void NavigateToMainPage()
         {
-            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
-                                () => this.Frame.Navigate(typeof(MainMenuPage)));
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                () => Frame.Navigate(typeof(MainMenuPage)));
         }
 
 
@@ -170,7 +155,7 @@ namespace Kopra
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            this._navigationHelper.OnNavigatedFrom(e);
+            _navigationHelper.OnNavigatedFrom(e);
         }
 
         private async void loginButton_Click(object sender, RoutedEventArgs e)

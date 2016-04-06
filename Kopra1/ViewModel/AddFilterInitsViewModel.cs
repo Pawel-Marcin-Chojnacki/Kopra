@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kopra.ViewModel
 {
@@ -38,7 +35,7 @@ namespace Kopra.ViewModel
 
         private void InicjalizyujOkresy()
         {
-            OkresList = new ComboBoxFiltr()
+            OkresList = new ComboBoxFiltr
             {
                 TytułCB = "OkresList",
                 IdCB = 1,

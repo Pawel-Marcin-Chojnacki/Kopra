@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Resources;
 
 namespace Kopra
 {
@@ -34,7 +30,7 @@ namespace Kopra
             get
             {
                 double a = Convert.ToDouble(_percent);
-                return Math.Round(a).ToString()+"%";
+                return Math.Round(a)+"%";
             }
              set
             {
@@ -80,7 +76,7 @@ namespace Kopra
 
         private string FormatDate(DateTime datetimeUTC)
         {
-            var difference = UTCTimeToLocalTime(System.DateTime.UtcNow.Subtract(datetimeUTC));
+            var difference = UTCTimeToLocalTime(DateTime.UtcNow.Subtract(datetimeUTC));
             Debug.WriteLine(difference);
             if (difference.TotalDays > 30)
                 return datetimeUTC.ToLocalTime().ToString("yyyy-MM-dd");
@@ -96,17 +92,17 @@ namespace Kopra
             if (difference.TotalHours >= 2)
                 return string.Format("{0} godziny temu", difference.TotalHours.ToString("0"));
             if (difference.TotalHours == 1)
-                return string.Format("godzinę temu");
+                return "godzinę temu";
             
             if (difference.TotalMinutes >= 2)
             {
                 if (difference.TotalMinutes % 10 >= 5 || difference.TotalMinutes % 10 <= 1)
                     return string.Format("{0} minut temu", difference.TotalHours.ToString("0"));
-                else return string.Format("{0} minuty temu", difference.TotalHours.ToString("0"));
+                return string.Format("{0} minuty temu", difference.TotalHours.ToString("0"));
             }
-            if (difference.TotalMinutes == 1) return string.Format("minutę temu");
+            if (difference.TotalMinutes == 1) return "minutę temu";
 
-            return String.Format("w ciągu ostatniej minuty");
+            return "w ciągu ostatniej minuty";
         }
 
         public int timeToEnd { get; set; }

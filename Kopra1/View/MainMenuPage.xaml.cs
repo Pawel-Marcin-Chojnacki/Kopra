@@ -1,19 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Kopra.Common;
 using Kopra.Theme;
@@ -33,11 +20,11 @@ namespace Kopra
 
         public MainMenuPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+            navigationHelper = new NavigationHelper(this);
+            navigationHelper.LoadState += NavigationHelper_LoadState;
+            navigationHelper.SaveState += NavigationHelper_SaveState;
         }
 
         /// <summary>
@@ -45,7 +32,7 @@ namespace Kopra
         /// </summary>
         public NavigationHelper NavigationHelper
         {
-            get { return this.navigationHelper; }
+            get { return navigationHelper; }
         }
 
         /// <summary>
@@ -54,7 +41,7 @@ namespace Kopra
         /// </summary>
         public ObservableDictionary DefaultViewModel
         {
-            get { return this.defaultViewModel; }
+            get { return defaultViewModel; }
         }
 
         /// <summary>
@@ -104,30 +91,30 @@ namespace Kopra
         /// handlers that cannot cancel the navigation request.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.navigationHelper.OnNavigatedTo(e);
+            navigationHelper.OnNavigatedTo(e);
             //Frame.BackStack.Clear();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            this.navigationHelper.OnNavigatedFrom(e);
+            navigationHelper.OnNavigatedFrom(e);
         }
 
         #endregion
 
         private void addFilterButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AddFilterPage));
+            Frame.Navigate(typeof(AddFilterPage));
         }
 
         private void searchAuctionButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(SearchPage));
+            Frame.Navigate(typeof(SearchPage));
         }
 
         private void settingsButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(SettingsPage));
+            Frame.Navigate(typeof(SettingsPage));
         }
 
         /// <summary>
@@ -160,7 +147,7 @@ namespace Kopra
 
         private void ShowFilters(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(ShowFiltersPage));
+            Frame.Navigate(typeof(ShowFiltersPage));
         }
     }
 }
