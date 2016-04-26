@@ -11,11 +11,11 @@ namespace Kopra
     public static class KokosConnectionManager
     {
         //private static UserCredentials user;
-        public static HttpClient httpClient = new HttpClient();
-        private static CancellationTokenSource cts = new CancellationTokenSource();
+        public static HttpClient HttpClient = new HttpClient();
+        private static CancellationTokenSource _cts = new CancellationTokenSource();
         private const string LoginAddress = "https://kokos.pl/uzytkownik/dane-osobowe";
-        private static Uri resourceAddress = new Uri(LoginAddress);
-        private static HttpResponseMessage response;
+        private static readonly Uri _resourceAddress = new Uri(LoginAddress);
+        private static HttpResponseMessage _response;
 
         public static void FillLoginData()
         {
@@ -25,12 +25,11 @@ namespace Kopra
         public static  async Task<HttpResponseMessage> LoginToService(string text, string password)
         {
             Debug.WriteLine("LoginToService");
-            if (IsEmailValid(text) && IsPasswordValid(password)) ;
-            if (!(text.Contains("@") && password.Length >= 5))
-            {
+            if (IsEmailValid(text) && IsPasswordValid(password))
                 return null;
-            }
-            httpClient.DefaultRequestHeaders.UserAgent.Add(new HttpProductInfoHeaderValue("Kopra","1"));
+            if (!(text.Contains("@") && password.Length >= 5))
+                return null;
+            HttpClient.DefaultRequestHeaders.UserAgent.Add(new HttpProductInfoHeaderValue("Kopra","1"));
             var form = new HttpMultipartFormDataContent
             {
                 {new HttpStringContent(text), "handle"},
@@ -39,8 +38,8 @@ namespace Kopra
 
             // Add new content to string.
             SaveNewCredentials(text, password);
-            response =  httpClient.PostAsync(resourceAddress, form).AsTask(cts.Token).Result;
-            return response;
+            _response =  HttpClient.PostAsync(_resourceAddress, form).AsTask(_cts.Token).Result;
+            return _response;
         }
 
         private static bool IsPasswordValid(string password)
@@ -63,8 +62,7 @@ namespace Kopra
         private static void SaveNewCredentials(string email, string password)
         {
             //Debug.WriteLine("SaveNewCredentials");
-            SettingsManager credentials = new SettingsManager();
-            credentials.Email = email;
+            SettingsManager credentials = new SettingsManager {Email = email};
             Debug.WriteLine(credentials.Email);
             credentials.Password = password;
         }
@@ -80,8 +78,8 @@ namespace Kopra
             else
             {
                 var apiAccessAdress = new Uri("https://kokos.pl/webapiinfo/key");
-                response = httpClient.GetAsync(apiAccessAdress).AsTask(cts.Token).Result;
-                string key = response.Content.ToString();
+                _response = HttpClient.GetAsync(apiAccessAdress).AsTask(_cts.Token).Result;
+                string key = _response.Content.ToString();
                 //Debug.WriteLine(key);
                 if (key.Contains("klucz to: <strong>"))
                 { 
@@ -91,7 +89,7 @@ namespace Kopra
                 }
                 else
                 {
-                    Debug.WriteLine(response.Content);
+                    Debug.WriteLine(_response.Content);
                 }
             }
         }
@@ -105,7 +103,7 @@ namespace Kopra
             
 
            // response = await httpClient.GetAsync(apiGeneratorAddress).AsTask(cts.Token);
-            Debug.WriteLine(response.Content);
+            Debug.WriteLine(_response.Content);
             GetWebApiKeyFromService();
         }
 
@@ -113,20 +111,19 @@ namespace Kopra
         {
             await Task.Delay(TimeSpan.FromSeconds(1)); //Change for Timestamp
             Debug.WriteLine("SendRESTRequest");
-            response = await httpClient.GetAsync(address).AsTask(cts.Token);
-            var auctionsJSON = new SearchAuctionResult();
+            _response = await HttpClient.GetAsync(address).AsTask(_cts.Token);
+            var auctionsJson = new SearchAuctionResult();
             Debug.WriteLine(address);
-            Debug.WriteLine(response.Content);
+            Debug.WriteLine(_response.Content);
             try
             {
-                auctionsJSON = JsonConvert.DeserializeObject<SearchAuctionResult>(response.Content.ToString());
+                auctionsJson = JsonConvert.DeserializeObject<SearchAuctionResult>(_response.Content.ToString());
             }
             catch (Exception)
             {
                 return null;
-                throw;
             }
-            return auctionsJSON;
+            return auctionsJson;
         }
 
     }

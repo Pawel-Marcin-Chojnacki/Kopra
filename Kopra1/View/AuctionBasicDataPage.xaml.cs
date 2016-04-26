@@ -12,16 +12,16 @@ namespace Kopra
     /// </summary>
     public sealed partial class AuctionBasicDataPage : Page
     {
-        private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private NavigationHelper _navigationHelper;
+        private ObservableDictionary _defaultViewModel = new ObservableDictionary();
 
         public AuctionBasicDataPage()
         {
             InitializeComponent();
 
-            navigationHelper = new NavigationHelper(this);
-            navigationHelper.LoadState += NavigationHelper_LoadState;
-            navigationHelper.SaveState += NavigationHelper_SaveState;
+            _navigationHelper = new NavigationHelper(this);
+            _navigationHelper.LoadState += NavigationHelper_LoadState;
+            _navigationHelper.SaveState += NavigationHelper_SaveState;
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Kopra
         /// </summary>
         public NavigationHelper NavigationHelper
         {
-            get { return navigationHelper; }
+            get { return _navigationHelper; }
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Kopra
         /// </summary>
         public ObservableDictionary DefaultViewModel
         {
-            get { return defaultViewModel; }
+            get { return _defaultViewModel; }
         }
 
         /// <summary>
@@ -85,12 +85,12 @@ namespace Kopra
         /// handlers that cannot cancel the navigation request.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            navigationHelper.OnNavigatedTo(e);
+            _navigationHelper.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            navigationHelper.OnNavigatedFrom(e);
+            _navigationHelper.OnNavigatedFrom(e);
         }
 
         #endregion

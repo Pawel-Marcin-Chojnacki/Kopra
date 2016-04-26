@@ -8,7 +8,7 @@ namespace KopraTests
         [TestMethod]
         public void InternetConnectionFailedTest()
         {
-
+            
         }
 
         [TestMethod]

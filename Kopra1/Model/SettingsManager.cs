@@ -6,7 +6,7 @@ namespace Kopra
 {
     public  class SettingsManager
     {
-        private IPropertySet _values;
+        private readonly IPropertySet _values;
         private const string LiveTileKey = "liveTile";
         private const string KokosWebApiKeyKey = "kokosWebApiKey";
         private const string EmailKey = "email";

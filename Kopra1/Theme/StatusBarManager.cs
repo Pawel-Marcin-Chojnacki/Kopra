@@ -7,26 +7,26 @@ namespace Kopra.Theme
 {
     public static class StatusBarManager
     {
-        private static StatusBar statusBar = StatusBar.GetForCurrentView();
+        private static StatusBar _statusBar = StatusBar.GetForCurrentView();
 
         public static async void SetStyle()
         {
-            statusBar.ShowAsync();
-            statusBar.BackgroundColor = (Application.Current.Resources["AppPaletteMainAccentBrush"] as SolidColorBrush).Color;
-            statusBar.BackgroundOpacity = 1;
-            statusBar.ProgressIndicator.Text = " ";
-            await statusBar.ProgressIndicator.ShowAsync();
-            statusBar.ProgressIndicator.ProgressValue = 0;
+            _statusBar.ShowAsync();
+            _statusBar.BackgroundColor = (Application.Current.Resources["AppPaletteMainAccentBrush"] as SolidColorBrush).Color;
+            _statusBar.BackgroundOpacity = 1;
+            _statusBar.ProgressIndicator.Text = " ";
+            await _statusBar.ProgressIndicator.ShowAsync();
+            _statusBar.ProgressIndicator.ProgressValue = 0;
         }
 
         public static async void Hide()
         {
-            await statusBar.HideAsync();
+            await _statusBar.HideAsync();
         }
 
         public static void SetText(string text)
         {
-            statusBar.ProgressIndicator.Text = text;
+            _statusBar.ProgressIndicator.Text = text;
         }
     }
 }

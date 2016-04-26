@@ -106,8 +106,8 @@ namespace Kopra
         {
             SettingsManager sm = new SettingsManager();
             sm.ClearData();
-            KokosConnectionManager.httpClient = new HttpClient();
-            KokosConnectionManager.httpClient.GetAsync(new Uri("https://kokos.pl/uzytkownik/autoryzacja?logout=1"));
+            KokosConnectionManager.HttpClient = new HttpClient();
+            KokosConnectionManager.HttpClient.GetAsync(new Uri("https://kokos.pl/uzytkownik/autoryzacja?logout=1"));
             Frame.Navigate(typeof(LoginPage));
         }
     }

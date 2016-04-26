@@ -79,10 +79,10 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ComboBoxFiltr.cs" />
+    <Compile Include="Model\ComboBoxFiltr.cs" />
     <Compile Include="Common\ConnectionManager.cs" />
     <Compile Include="Common\Information.cs" />
-    <Compile Include="PoleFiltru.cs" />
+    <Compile Include="Model\PoleFiltru.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="ViewModel\AddFilterFieldsViewModel.cs" />
     <Compile Include="ViewModel\AddFilterInitsViewModel.cs" />
@@ -103,14 +103,14 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
-    <Compile Include="DataService.cs" />
+    <Compile Include="Common\DataService.cs" />
     <Compile Include="Model\KokosConnectionManager.cs" />
-    <Compile Include="NotifyTaskCompletion.cs" />
+    <Compile Include="Common\NotifyTaskCompletion.cs" />
     <Compile Include="Model\RequestGenerator.cs" />
     <Compile Include="Model\SearchAuctionResult.cs" />
     <Compile Include="Model\SettingsManager.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="SearchAuctionFields.cs" />
+    <Compile Include="Model\SearchAuctionFields.cs" />
     <Compile Include="Theme\SquareGrid.cs" />
     <Compile Include="Theme\StatusBarManager.cs" />
     <Compile Include="Model\UserCredentials.cs" />

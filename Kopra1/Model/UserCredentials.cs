@@ -4,26 +4,11 @@ namespace Kopra
 {
     class UserCredentials
     {
-        private string email;
-        public string Email
-        {
-            get { return email; }
-            set { email = value; }
-        }
+        public string Email { get; set; }
 
-        private string password;
-        public string Password
-        {
-            get { return password; }
-            set { password = value; }
-        }
+        public string Password { get; set; }
 
-        private string userName;
-        public string UserName
-        {
-            get { return userName;  }
-            set { userName = value; }
-        }
+        public string UserName { get; set; }
 
         public string EmailToUserName(string mail)
         {
