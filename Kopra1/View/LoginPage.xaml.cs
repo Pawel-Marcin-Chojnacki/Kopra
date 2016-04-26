@@ -47,7 +47,7 @@ namespace Kopra
         {
             internetConnected = _connectionManager.CheckInternetConnection();
             Email.Text = "hakerpawel@gmail.com";
-            Password.Password = "pawelek992CHOJ!";
+            Password.Password = "KopraTest";
         }
 
 

@@ -17,15 +17,10 @@ namespace Kopra
         private static readonly Uri ResourceAddress = new Uri(LoginAddress);
         private static HttpResponseMessage _response;
 
-        public static void FillLoginData()
-        {
-            
-        }
-
         public static  async Task<HttpResponseMessage> LoginToService(string text, string password)
         {
             Debug.WriteLine("LoginToService");
-            if (IsEmailValid(text) && IsPasswordValid(password))
+            if (!(IsEmailValid(text) && IsPasswordValid(password)))
                 return null;
             if (!(text.Contains("@") && password.Length >= 5))
                 return null;
@@ -44,9 +39,7 @@ namespace Kopra
 
         private static bool IsPasswordValid(string password)
         {
-            if (password.Length >= 5) return true;
-            return false;
-            //password.Length >= 5 ? true : false;
+            return password.Length >= 5;
         }
 
         /// <summary>
@@ -69,18 +62,18 @@ namespace Kopra
 
         public static void GetWebApiKeyFromService()
         {
-            //Debug.WriteLine("GetWebAPIKeyFromService");
+            Debug.WriteLine("GetWebAPIKeyFromService");
             var credentials = new SettingsManager();
             if (credentials.KokosWebApiKey != null)
-            {
-                //Debug.WriteLine("Kokos webapiKEy " + credentials.KokosWebApiKey);
+            {   
+                Debug.WriteLine("Kokos webapiKEy " + credentials.KokosWebApiKey);
             }
             else
             {
                 var apiAccessAdress = new Uri("https://kokos.pl/webapiinfo/key");
                 _response = HttpClient.GetAsync(apiAccessAdress).AsTask(_cts.Token).Result;
                 string key = _response.Content.ToString();
-                //Debug.WriteLine(key);
+                Debug.WriteLine(key);
                 if (key.Contains("klucz to: <strong>"))
                 { 
                     key = key.Substring(key.IndexOf("klucz to: <strong>")+18, 32);
@@ -100,7 +93,7 @@ namespace Kopra
             Uri apiGeneratorAddress = new Uri("https://kokos.pl/webapiinfo/key/webapiinfo/generate-key");
             HttpMultipartFormDataContent form = new HttpMultipartFormDataContent();
             // response = await httpClient.GetAsync(apiGeneratorAddress).AsTask(cts.Token);
-            Debug.WriteLine(_response.Content);
+            //Debug.WriteLine(_response.Content);
             GetWebApiKeyFromService();
         }
 
