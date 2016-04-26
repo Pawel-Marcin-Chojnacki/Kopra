@@ -9,8 +9,8 @@ namespace Kopra
         {
             var result = new ObservableCollection<Auction>();
             var rg = new RequestGenerator();
-            KokosConnectionManager.GetWebApiKeyFromService();
-            var mostRecentAuctions = await KokosConnectionManager.SendRestRequest(rg.MostRecentAuctions());
+            ConnectionManager.GetWebApiKeyFromService();
+            var mostRecentAuctions = await ConnectionManager.SendRestRequest(rg.MostRecentAuctions());
             foreach (var auction in mostRecentAuctions.response.auctions.auction)
             {
                 result.Add(auction);

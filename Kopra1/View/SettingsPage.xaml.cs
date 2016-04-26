@@ -99,15 +99,15 @@ namespace Kopra
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            KokosConnectionManager.GenerateApiKeyFromService();
+            ConnectionManager.GenerateApiKeyFromService();
         }
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
             SettingsManager sm = new SettingsManager();
             sm.ClearData();
-            KokosConnectionManager.HttpClient = new HttpClient();
-            KokosConnectionManager.HttpClient.GetAsync(new Uri("https://kokos.pl/uzytkownik/autoryzacja?logout=1"));
+            ConnectionManager.HttpClient = new HttpClient();
+            ConnectionManager.HttpClient.GetAsync(new Uri("https://kokos.pl/uzytkownik/autoryzacja?logout=1"));
             Frame.Navigate(typeof(LoginPage));
         }
     }

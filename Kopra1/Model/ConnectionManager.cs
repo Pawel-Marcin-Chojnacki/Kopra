@@ -8,13 +8,13 @@ using Newtonsoft.Json;
 
 namespace Kopra
 {
-    public static class KokosConnectionManager
+    public static class ConnectionManager
     {
         //private static UserCredentials user;
         public static HttpClient HttpClient = new HttpClient();
         private static CancellationTokenSource _cts = new CancellationTokenSource();
         private const string LoginAddress = "https://kokos.pl/uzytkownik/dane-osobowe";
-        private static readonly Uri _resourceAddress = new Uri(LoginAddress);
+        private static readonly Uri ResourceAddress = new Uri(LoginAddress);
         private static HttpResponseMessage _response;
 
         public static void FillLoginData()
@@ -38,7 +38,7 @@ namespace Kopra
 
             // Add new content to string.
             SaveNewCredentials(text, password);
-            _response =  HttpClient.PostAsync(_resourceAddress, form).AsTask(_cts.Token).Result;
+            _response =  HttpClient.PostAsync(ResourceAddress, form).AsTask(_cts.Token).Result;
             return _response;
         }
 
@@ -97,12 +97,9 @@ namespace Kopra
        
         public static void GenerateApiKeyFromService()
         {
-
             Uri apiGeneratorAddress = new Uri("https://kokos.pl/webapiinfo/key/webapiinfo/generate-key");
             HttpMultipartFormDataContent form = new HttpMultipartFormDataContent();
-            
-
-           // response = await httpClient.GetAsync(apiGeneratorAddress).AsTask(cts.Token);
+            // response = await httpClient.GetAsync(apiGeneratorAddress).AsTask(cts.Token);
             Debug.WriteLine(_response.Content);
             GetWebApiKeyFromService();
         }

@@ -102,7 +102,7 @@ namespace Kopra
             //Przykładowe wyszkukiwanie.
             var rg = new RequestGenerator();
             var auctionsResult = new SearchAuctionResult();
-            auctionsResult = KokosConnectionManager.SendRestRequest(rg.SearchAuction(searchDictionary())).Result;
+            auctionsResult = ConnectionManager.SendRestRequest(rg.SearchAuction(searchDictionary())).Result;
             //Debug.WriteLine(auctionsResult.Auction.id.ToString());
         }
 

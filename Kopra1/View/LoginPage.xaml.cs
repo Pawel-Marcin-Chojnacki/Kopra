@@ -23,7 +23,7 @@ namespace Kopra
         private NavigationHelper _navigationHelper;
         private ObservableDictionary _defaultViewModel = new ObservableDictionary();
         private SettingsManager _settingsManager;
-        private ConnectionManager _connectionManager;
+        private Common.ConnectionManager _connectionManager;
         private LoginPageViewModel _viewModel;
         private bool _loginSuccessful = false;
         private bool internetConnected;
@@ -34,7 +34,7 @@ namespace Kopra
 
             _viewModel = DataContext as LoginPageViewModel;
             _settingsManager = new SettingsManager();
-            _connectionManager = new ConnectionManager();
+            _connectionManager = new Common.ConnectionManager();
             _connectionManager.OnInternetConnectionFail += ConnectionManagerOnInternetConnectionFail;
             _navigationHelper = new NavigationHelper(this);
             _navigationHelper.LoadState += NavigationHelper_LoadState;
@@ -200,10 +200,10 @@ namespace Kopra
 
         private static IAsyncAction LoginToServiceAsync(string t, string p)
         {
-            //await KokosConnectionManager.LoginToService(t, p);
+            //await ConnectionManager.LoginToService(t, p);
             return Task.Run(async() =>
             {
-                await KokosConnectionManager.LoginToService(t, p);
+                await ConnectionManager.LoginToService(t, p);
             }).AsAsyncAction();
         }
 
