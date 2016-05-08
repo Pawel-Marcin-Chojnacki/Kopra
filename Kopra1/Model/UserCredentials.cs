@@ -2,6 +2,9 @@
 
 namespace Kopra
 {
+    /// <summary>
+    /// Class stores and provices user credential services.
+    /// </summary>
     class UserCredentials
     {
         //public string Email { get; set; }
