@@ -82,7 +82,7 @@
     <Compile Include="Model\ComboBoxFiltr.cs" />
     <Compile Include="Common\ConnectionManager.cs" />
     <Compile Include="Common\Information.cs" />
-    <Compile Include="Model\PoleFiltru.cs" />
+    <Compile Include="Model\InvestorsModel.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="ViewModel\AddFilterFieldsViewModel.cs" />
     <Compile Include="ViewModel\AddFilterInitsViewModel.cs" />

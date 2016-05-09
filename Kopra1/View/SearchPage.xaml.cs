@@ -112,12 +112,6 @@ namespace Kopra
 
             var sd = new Dictionary<string, string>();
             sd.Add("key", sm.KokosWebApiKey);
-            //sd.Add(valueFrom.Name, valueFrom.Text);
-            //foreach (TextBox element in searchCriteria.Children)
-            //{
-            //    sd.Add(element.Name, element.Text);
-            //    Debug.WriteLine(element.Name + " " + element.Text);
-            //}
             return sd;
         }
 
