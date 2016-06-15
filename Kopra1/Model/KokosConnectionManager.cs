@@ -25,10 +25,10 @@ namespace Kopra
         public static  async Task<HttpResponseMessage> LoginToService(string text, string password)
         {
             Debug.WriteLine("LoginToService");
-            if (IsEmailValid(text) && IsPasswordValid(password))
-                return null;
-            if (!(text.Contains("@") && password.Length >= 5))
-                return null;
+            //if (IsEmailValid(text) && IsPasswordValid(password))
+            //    return null;
+            //if (!(text.Contains("@") && password.Length >= 5))
+            //    return null;
             HttpClient.DefaultRequestHeaders.UserAgent.Add(new HttpProductInfoHeaderValue("Kopra","1"));
             var form = new HttpMultipartFormDataContent
             {

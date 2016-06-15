@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Kopra.Common;
+using Kopra.ViewModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -16,6 +18,7 @@ namespace Kopra
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private SearchViewModel vm = null;
 
         public SearchPage()
         {
@@ -24,6 +27,8 @@ namespace Kopra
             navigationHelper = new NavigationHelper(this);
             navigationHelper.LoadState += NavigationHelper_LoadState;
             navigationHelper.SaveState += NavigationHelper_SaveState;
+
+            vm = (SearchViewModel) this.DataContext;
         }
 
         /// <summary>
@@ -117,7 +122,10 @@ namespace Kopra
 
         private void Szukaj_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            Debug.WriteLine(vm.TitleSearch);
+            //Debug.WriteLine(vm.LoanInterest);
+            Debug.WriteLine(vm.Realizacja);
+            Debug.WriteLine(vm.Investor);
         }
     }
 }

@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Kopra1.Annotations;
 
 namespace Kopra1.Model
 {
-    class InvestorsModel : INotifyPropertyChanged
+    internal sealed class InvestorsModel : INotifyPropertyChanged
     {
         public InvestorsModel()
         {
             Investors = new Dictionary<string, Tuple<int, int>>();
             InvestorsRange = new List<Tuple<int, int>>
             {
-                {new Tuple<int, int>(0, 0)},
-                {new Tuple<int, int>(1, 5)},
-                {new Tuple<int, int>(6, 10)},
-                {new Tuple<int, int>(11, 20)},
-                {new Tuple<int, int>(21, 50)},
-                {new Tuple<int, int>(50, 999)}
+                new Tuple<int, int>(0, 0),
+                new Tuple<int, int>(1, 5),
+                new Tuple<int, int>(6, 10),
+                new Tuple<int, int>(11, 20),
+                new Tuple<int, int>(21, 50),
+                new Tuple<int, int>(50, 999)
             };
             InvestorsAmount = new List<string>
             {
@@ -53,7 +49,8 @@ namespace Kopra1.Model
         }
 
         private List<string> _investorsAmount;
-        public List<string> InvestorsAmount
+
+        private List<string> InvestorsAmount
         {
             get { return _investorsAmount; }
             set
@@ -65,7 +62,7 @@ namespace Kopra1.Model
 
         private List<Tuple<int, int>> _investorsRange;
 
-        public List<Tuple<int, int>> InvestorsRange
+        private List<Tuple<int, int>> InvestorsRange
         {
             get { return _investorsRange; }
             set
@@ -79,7 +76,7 @@ namespace Kopra1.Model
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

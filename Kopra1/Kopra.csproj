@@ -82,7 +82,13 @@
     <Compile Include="Model\ComboBoxFiltr.cs" />
     <Compile Include="Common\ConnectionManager.cs" />
     <Compile Include="Common\Information.cs" />
+    <Compile Include="Model\InterestModel.cs" />
     <Compile Include="Model\InvestorsModel.cs" />
+    <Compile Include="Model\KwotaPożyczkiModel.cs" />
+    <Compile Include="Model\LoanAmount.cs" />
+    <Compile Include="Model\LoanAmountModel.cs" />
+    <Compile Include="Model\LoanPeriodsModel.cs" />
+    <Compile Include="Model\Status.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="ViewModel\AddFilterFieldsViewModel.cs" />
     <Compile Include="ViewModel\AddFilterInitsViewModel.cs" />

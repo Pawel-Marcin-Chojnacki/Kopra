@@ -36,41 +36,52 @@
                 <TextBox 
                     x:Name="AuctionTitle" 
                     PlaceholderText="Szukaj w tytule aukcji..." 
-                    Text="{Binding Path=TitleSearch}" 
+                    Text="{Binding Path=TitleSearch, Mode=TwoWay}" 
                     TextWrapping="Wrap"  
                     Margin="0,10,0,10" />
                 <TextBlock>Status</TextBlock>
-                <ComboBox 
+                <!--<ComboBox 
                     x:Name="AuctionStatus" 
-                    ItemsSource="{Binding Path=StatusDictionary.Values, Mode=TwoWay}" 
-                    PlaceholderText="Status pożyczki" 
-                    SelectedValue="{Binding Path=Status, Mode=TwoWay}" ></ComboBox>
-                <TextBlock>Kwota</TextBlock>
+                    ItemsSource="{Binding Path=StatusDictionary.Values, Mode=TwoWay}" PlaceholderText="Status pożyczki" 
+                    SelectedValue="{Binding Path=Status, Mode=TwoWay}" ></ComboBox>-->
+                    <ComboBox 
+                    x:Name="AuctionStatus" 
+                    ItemsSource="{Binding Path=StatusyPozyczek}" PlaceholderText="Status pożyczki" 
+                    SelectedValue="{Binding Path=Status, Mode=TwoWay}"
+                    DisplayMemberPath="Opis"
+                    SelectedValuePath="StatusLiczbowy">
+                    </ComboBox>
+                    <TextBlock>Kwota</TextBlock>
                 <ComboBox 
                     x:Name="KwotaPożyczki" 
-                    ItemsSource="{Binding KwotaList, Mode=TwoWay}" 
+                    ItemsSource="{Binding LoanAmounts.LoanAmount.Keys, Mode=TwoWay}" 
                     PlaceholderText="Kwota pożyczki" 
-                    SelectedValue="{Binding Kwota, Mode=TwoWay}" ></ComboBox>
+                    SelectedValue="{Binding LoanAmount, Mode=TwoWay}" ></ComboBox>
                 <TextBlock>Okres pożyczki</TextBlock>
                 <ComboBox 
-                    ItemsSource="{Binding OkresList}" 
+                    ItemsSource="{Binding LoanPeriods.LoanPeriods.Keys}" 
                     PlaceholderText="Okres pożyczki" 
-                    SelectedValue="{Binding Okres, Mode=TwoWay}"></ComboBox>
+                    SelectedValue="{Binding LoanPeriod, Mode=TwoWay}">
+                </ComboBox>
+              
                 <TextBlock>Oprocentowanie całkowite</TextBlock>
                 <ComboBox
-                    ItemsSource="{Binding OprocentowanieList}" 
+                    ItemsSource="{Binding LoanInterests }" 
                     PlaceholderText="Oprocentowanie"
-                    SelectedValue="{Binding Oprocentowanie, Mode=TwoWay}"></ComboBox>
+                    DisplayMemberPath="ValueRanges "
+                    SelectedValuePath="Interest.Value"
+                    SelectedValue="{Binding WybranaKwota, Mode=TwoWay}"></ComboBox>
+                
                 <TextBlock>Realizacja</TextBlock>
                     <ComboBox 
-                        ItemsSource="{Binding RealizacjaList}" 
+                        ItemsSource="{Binding RealizacjaList.Values}" 
                         PlaceholderText="Procent realizacji" 
                         SelectedValue="{Binding Realizacja, Mode=TwoWay}"></ComboBox>
                 <TextBlock>Ilość inwestorów</TextBlock>
                 <ComboBox 
                         ItemsSource="{Binding Investors.Investors.Keys}" 
                         PlaceholderText="Ilość inwestorów" 
-                        SelectedValue="{Binding Investors.Investors.Values, Mode=TwoWay}"></ComboBox>
+                        SelectedValue="{Binding Investor, Mode=TwoWay}"></ComboBox>
                 </StackPanel>
         </ScrollViewer>
     </Grid>

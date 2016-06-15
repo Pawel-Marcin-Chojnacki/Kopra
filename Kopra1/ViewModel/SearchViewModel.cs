@@ -1,17 +1,47 @@
-﻿    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
-    using Kopra.Annotations;
-    using Kopra1.Model;
+﻿using Kopra.Annotations;
+using Kopra1.Model;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Kopra.ViewModel
 {
     internal class SearchViewModel : INotifyPropertyChanged
     {
+        #region Constructors
 
-        private InvestorsModel _investors;
+        public SearchViewModel()
+        {
+            InicjalizujRealizację();
+            InicjalizujStatusyPożyczek();
+            InicjalizujOkresyPożyczek();
+            InicjalizujOprocentowaniePożyczek();
+            InicjalizujKwotęPożyczek();
+
+            InicjalizujIlośćInwestorów();
+        }
+
+        #endregion Constructors
+
+        #region Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion Events
+
+        #region Properties
+
+        public InvestorsModel Investor
+        {
+            get { return _investor; }
+            set
+            {
+                _investor = value;
+                NotifyPropertyChanged(nameof(Investor));
+            }
+        }
 
         public InvestorsModel Investors
         {
@@ -23,64 +53,15 @@ namespace Kopra.ViewModel
             }
         }
 
-
-        //private ObservableCollection<Tuple<int,int , string>> _iloscInwestorow;
-        //public ObservableCollection<Tuple<int, int, string>> IloscInwestorow
-        //{
-        //    get
-        //    {
-        //        return _iloscInwestorow;
-        //    }
-        //    set
-        //    {
-        //        _iloscInwestorow = value;
-        //        NotifyPropertyChanged("IloscInwestorow");
-        //    }
-        //}
-
-        private List<string> _realizacjaList; 
-        public List<string> RealizacjaList
+        public string Kwota
         {
-            get
-            {
-                return _realizacjaList;
-            }
+            get { return _kwota; }
             set
             {
-                _realizacjaList = value;
-                NotifyPropertyChanged("RealizacjaList");
+                _kwota = value;
+                NotifyPropertyChanged(nameof(Kwota));
             }
         }
-
-        private string _realizacja;
-        public string Realizacja
-        {
-            get
-            {
-                return _realizacja;
-            }
-            set
-            {
-                _realizacja = value;
-                NotifyPropertyChanged("Realizacja");
-            }
-        }
-        private string _status;
-        public string Status
-        {
-            get
-            {
-                return _status;
-            }
-            set
-            {
-                _status = value;
-                NotifyPropertyChanged("Status");
-            }
-        }
-
-
-        private List<string> _kwotaList;
 
         public List<string> KwotaList
         {
@@ -92,146 +73,81 @@ namespace Kopra.ViewModel
             }
         }
 
-        private Dictionary<int, string> _statusDictionary;
-
-        public Dictionary<int, string> StatusDictionary
+        public KeyValuePair<string, Tuple<int, int>> LoanAmount
         {
-            get { return _statusDictionary; }
+            get { return _loanAmount; }
             set
             {
-                _statusDictionary = value;
-                NotifyPropertyChanged(nameof(StatusDictionary));
+                _loanAmount = value;
+                NotifyPropertyChanged(nameof(LoanAmount));
             }
+        }
 
-        } 
-        private string _titleSearch;
-        public string TitleSearch
+        public List<LoanAmount> LoanAmounts { get; set; }
+
+        private KwotaPożyczkiModel _wybranaKwota;
+        public KwotaPożyczkiModel WybranaKwota
         {
             get
             {
-                return _titleSearch;
+                return _wybranaKwota;
             }
             set
             {
-                _titleSearch = value;
-                NotifyPropertyChanged(nameof(TitleSearch));
+                _wybranaKwota = value;
+                NotifyPropertyChanged(nameof(WybranaKwota));
             }
         }
 
-        
-
-        public SearchViewModel()
-        {
-            InicjalizujRealizację();
-            InicjalizujStatusyPożyczek();
-            InicjalizujOkresyPożyczek();
-            InicjalizujKwotyPożyczek();
-            InicjalizujOprocentowaniePożyczek();
-            Investors = new InvestorsModel();
-            //InicjalizujIlośćInwestorów();
-        }
-
-        //private void InicjalizujIlośćInwestorów()
+        //public KeyValuePair<string, Tuple<int, int>> LoanInterest
         //{
-        //    IloscInwestorow = new ObservableCollection<Tuple<int, int, string>>()
+        //    get { return _loanInterest; }
+        //    set
         //    {
-        //        new Tuple<int, int, string>(0,0,"Brak inwestorów"),
-        //        new Tuple<int, int, string>(1,5,"1 - 5 inwestorów"),
-        //        new Tuple<int, int, string>(6,10,"6 - 10 inwestorów"),
-        //        new Tuple<int, int, string>(11,20,"11 - 20 inwestorów"),
-        //        new Tuple<int, int, string>(21,50,"21 - 50 inwestorów"),
-        //        new Tuple<int, int, string>(50,999,"Powyżej 50 inwestorów")
-        //    };
+        //        _loanInterest = value;
+        //        NotifyPropertyChanged(nameof(LoanInterest));
+        //    }
         //}
 
-
-        public SearchViewModel(string oprocentowanie)
+        public List<InterestModel> LoanInterests
         {
-            Oprocentowanie = oprocentowanie;
-            //Inicjalizacja wartości comboboxów.
-            InicjalizujStatusyPożyczek();
-            InicjalizujOkresyPożyczek();
-            InicjalizujKwotyPożyczek();
-            InicjalizujOprocentowaniePożyczek();
-
-        }
-
-        private void InicjalizujRealizację()
-        {
-            RealizacjaList = new List<string>
+            get { return _loanInterests; }
+            set
             {
-                "Co najmniej 25%",
-                "Co najmniej 50%",
-                "Co najmniej 75%"
-            };
+                _loanInterests = value;
+                NotifyPropertyChanged(nameof(LoanInterests));
+            }
         }
 
-        private void InicjalizujStatusyPożyczek()
+        public KeyValuePair<string, Tuple<int, int>> LoanPeriod
         {
-            StatusDictionary = new Dictionary<int, string>()
+            get { return _loanPeriod; }
+            set
             {
-                {100, "Nowa pożyczka"},
-                {110, "W trakcie tworzenia"},
-                {500, "Trwa spłata"},
-                {1100, "Uzbierano poniżej 50% inwestycji"},
-                {1200, "Uzbierano 0% inwestycji"},
-                {1300, "Spłacona w całości"},
-                {1400, "Usunięta przez obsługę"},
-                {1500, "Usunięta przez użytkownika"}
-            };
+                _loanPeriod = value;
+                NotifyPropertyChanged(nameof(LoanPeriod));
+            }
         }
 
-        private void InicjalizujOprocentowaniePożyczek()
+        public LoanPeriodsModel LoanPeriods
         {
-            OprocentowanieList = new List<string>
+            get { return _loanPeriods; }
+            set
             {
-                "Dowolny %",
-                "Od 1 do 10%",
-                "Od 11 do 20%",
-                "Od 21 do 25%",
-                "Powyżej 25%"
-            };
+                _loanPeriods = value;
+                NotifyPropertyChanged(nameof(LoanPeriods));
+            }
         }
-
-        private void InicjalizujKwotyPożyczek()
-        {
-           KwotaList = new List<string>
-           {
-               "Dowolna kwota",
-               "Od 500 do 1000 zł",
-               "Od 1100 do 2500 zł",
-               "Od 2600 do 5000 zł",
-               "Od 5100 do 10000 zł",
-               "Od 10100 do 25000 zł"
-           };
-        }
-
-        private void InicjalizujOkresyPożyczek()
-        {
-
-            OkresList = new List<string>
-            {
-                "Dowolny okres",
-                "Do pół roku",
-                "Do 1 roku",
-                "Od 1 do 2 lat",
-                "Od 2 do 3 lat"
-            };
-        }
-
-        private string _okres;
 
         public string Okres
         {
-            get { return _okres;}
+            get { return _okres; }
             set
             {
                 _okres = value;
                 NotifyPropertyChanged("Okres");
             }
         }
-
-        private List<string> _okresList;
 
         public List<string> OkresList
         {
@@ -243,20 +159,7 @@ namespace Kopra.ViewModel
             }
         }
 
-        private string _kwota;
-        public string Kwota
-        {
-            get { return _kwota;}
-            set
-            {
-                _kwota = value;
-                NotifyPropertyChanged(nameof(Kwota));
-            }
-        }
-
-
-
-        private List<string> _oprocentowanieList;
+        public string Oprocentowanie { get; }
 
         public List<string> OprocentowanieList
         {
@@ -271,16 +174,175 @@ namespace Kopra.ViewModel
             }
         }
 
-        public string Oprocentowanie { get; }
+        public string Realizacja
+        {
+            get
+            {
+                return _realizacja;
+            }
+            set
+            {
+                _realizacja = value;
+                NotifyPropertyChanged("Realizacja");
+            }
+        }
 
-  
+        public Dictionary<int, string> RealizacjaList
+        {
+            get
+            {
+                return _realizacjaList;
+            }
+            set
+            {
+                _realizacjaList = value;
+                NotifyPropertyChanged("RealizacjaList");
+            }
+        }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public string Status
+        {
+            get
+            {
+                return _status;
+            }
+            set
+            {
+                _status = value;
+                NotifyPropertyChanged("Status");
+            }
+        }
+
+        public Dictionary<int, string> StatusDictionary
+        {
+            get { return _statusDictionary; }
+            set
+            {
+                _statusDictionary = value;
+                NotifyPropertyChanged(nameof(StatusDictionary));
+            }
+        }
+
+        public string TitleSearch
+        {
+            get
+            {
+                return _titleSearch;
+            }
+            set
+            {
+                _titleSearch = value;
+                NotifyPropertyChanged(nameof(TitleSearch));
+            }
+        }
+
+        #endregion Properties
+
+        #region Methods
 
         [NotifyPropertyChangedInvocator]
         protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        #endregion Methods
+
+        #region Fields
+
+        private InvestorsModel _investor;
+        private InvestorsModel _investors;
+        private string _kwota;
+        private List<string> _kwotaList;
+        private KeyValuePair<string, Tuple<int, int>> _loanAmount;
+        private LoanAmountModel _loanAmounts;
+        private KeyValuePair<string, Tuple<int, int>> _loanInterest;
+        private List<InterestModel> _loanInterests;
+        private KeyValuePair<string, Tuple<int, int>> _loanPeriod;
+        private LoanPeriodsModel _loanPeriods;
+        private string _okres;
+        private List<string> _okresList;
+        private List<string> _oprocentowanieList;
+        private string _realizacja;
+        private Dictionary<int, string> _realizacjaList;
+        private string _status;
+        private Dictionary<int, string> _statusDictionary;
+        private string _titleSearch;
+
+        #endregion Fields
+
+        private void InicjalizujIlośćInwestorów() => Investors = new InvestorsModel();
+
+        private void InicjalizujKwotęPożyczek()
+        {
+            LoanAmounts = new LoanAmountModel();
+        }
+
+        private void InicjalizujOkresyPożyczek()
+        {
+            LoanPeriods = new LoanPeriodsModel();
+        }
+
+        private void InicjalizujOprocentowaniePożyczek()
+        {
+            //LoanInterests = new InterestModel();
+        }
+
+        private void InicjalizujRealizację()
+        {
+            RealizacjaList = new Dictionary<int, string>
+            {
+                {25, "Co najmniej 25%"},
+                {50, "Co najmniej 50%"},
+                {75, "Co najmniej 75%"}
+            };
+        }
+
+        
+        public List<Status> StatusyPozyczek { get; set; }
+
+        private void InicjalizujStatusyPożyczek()
+        {
+            StatusyPozyczek = new List<Status>()
+            {
+                new Status() {Opis = "Nowa pożyczka", StatusLiczbowy = 100},
+                new Status() {Opis = "W trakcie tworzenia", StatusLiczbowy = 110},
+                new Status() {Opis = "Trwa spłata", StatusLiczbowy = 500},
+                new Status() {Opis = "Uzbierano poniżej 50% inwestycji", StatusLiczbowy = 1100},
+                new Status() {Opis = "Uzbierano 0% inwestycji", StatusLiczbowy = 1200},
+                new Status() {Opis = "Spłacona w całości", StatusLiczbowy = 1300},
+                new Status() {Opis = "Usunięta przez obsługę", StatusLiczbowy = 1400},
+                new Status() {Opis = "Usunięta przez użytkownika", StatusLiczbowy = 1500}
+            };
+            StatusDictionary = new Dictionary<int, string>()
+            {
+                {100, "Nowa pożyczka"},
+                {110, "W trakcie tworzenia"},
+                {500, "Trwa spłata"},
+                {1100, "Uzbierano poniżej 50% inwestycji"},
+                {1200, "Uzbierano 0% inwestycji"},
+                {1300, "Spłacona w całości"},
+                {1400, "Usunięta przez obsługę"},
+                {1500, "Usunięta przez użytkownika"}
+            };
+
+            statusNieDictionary = new List<costam>();
+            var costam1 = new costam();
+            costam1.napis = "Nowa pożyczka";
+            costam1.wartosc = 100;
+            statusNieDictionary.Add(costam1);
+        }
+
+        public List<costam> statusNieDictionary
+        {
+            get;
+            set;
+        }
+    }
+
+    public class costam
+    {
+        public int wartosc { get; set; }
+        public string napis { get; set; }
     }
 }
