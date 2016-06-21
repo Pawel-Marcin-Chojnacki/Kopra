@@ -8,6 +8,7 @@ using Windows.Storage;
 using System.Text;
 using System.IO;
 using Windows.UI.Popups;
+using System.Diagnostics;
 
 namespace Kopra.ViewModel
 {
@@ -111,15 +112,7 @@ namespace Kopra.ViewModel
 		}
 
 		public Interest LoanInterest { get; set; }
-		//{
-		//    get { return _loanInterest; }
-		//    set
-		//    {
-		//        _loanInterest = value;
-		//        NotifyPropertyChanged(nameof(LoanInterest));
-		//    }
-		//}
-
+		
 		public List<Interest> LoanInterests
 		{
 			get { return _loanInterests; }
@@ -141,42 +134,7 @@ namespace Kopra.ViewModel
 		}
 
 		public List<LoanPeriod> LoanPeriods { get; set; }
-
-		//public string Okres
-		//{
-		//    get { return _okres; }
-		//    set
-		//    {
-		//        _okres = value;
-		//        NotifyPropertyChanged();
-		//    }
-		//}
-
-		//public List<string> OkresList
-		//{
-		//    get { return _okresList; }
-		//    set
-		//    {
-		//        _okresList = value;
-		//        NotifyPropertyChanged(nameof(OkresList));
-		//    }
-		//}
-
-		//public string Oprocentowanie { get; }
-
-		//public List<string> OprocentowanieList
-		//{
-		//    get
-		//    {
-		//        return _oprocentowanieList;
-		//    }
-		//    set
-		//    {
-		//        _oprocentowanieList = value;
-		//        NotifyPropertyChanged(nameof(OprocentowanieList));
-		//    }
-		//}
-
+		
 		public Completion Completion
 		{
 			get
@@ -215,17 +173,7 @@ namespace Kopra.ViewModel
 				NotifyPropertyChanged("Status");
 			}
 		}
-
-		//public Dictionary<int, string> StatusDictionary
-		//{
-		//	get { return _statusDictionary; }
-		//	set
-		//	{
-		//		_statusDictionary = value;
-		//		NotifyPropertyChanged(nameof(StatusDictionary));
-		//	}
-		//}
-
+		
 		public string TitleSearch
 		{
 			get
@@ -256,7 +204,6 @@ namespace Kopra.ViewModel
 
 		internal async void AddFilter()
 		{
-			//GetTitle - zapisz filtr jako nazwę pliku.
 			char[] filterLink = CreateLinkFromFields();
 			try
 			{
@@ -279,6 +226,16 @@ namespace Kopra.ViewModel
 				await msgDial.ShowAsync();
 				throw;
 			}
+			finally
+			{
+				string content = string.Empty;
+				var readingStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(FilterName);
+				using (StreamReader reader = new StreamReader(readingStream))
+				{
+					content = await reader.ReadToEndAsync();
+				}
+				Debug.WriteLine(content);
+			}
 		}
 
 		private char[] CreateLinkFromFields()
@@ -295,7 +252,7 @@ namespace Kopra.ViewModel
 			if (LoanAmount != null)
 			{
 				link.Append("&valueFrom=" + LoanAmount.StartRange);
-				link.Append("&valueFrom=" + LoanAmount.EndRange);
+				link.Append("&valueTo=" + LoanAmount.EndRange);
 			}
 			if (LoanPeriod != null)
 			{
@@ -341,17 +298,11 @@ namespace Kopra.ViewModel
 		private string _kwota;
 		private List<string> _kwotaList;
 		private LoanAmount _loanAmount;
-		//private LoanAmount _loanAmounts;
-		private Interest _loanInterest;
 		private List<Interest> _loanInterests;
 		private LoanPeriod _loanPeriod;
-		private string _okres;
-		private List<string> _okresList;
-		private List<string> _oprocentowanieList;
 		private Completion _completion;
 		private List<Completion> _completions;
 		private Status _status;
-		private Dictionary<int, string> _statusDictionary;
 		private string _titleSearch;
 		private string _filterName;
 
@@ -418,9 +369,6 @@ namespace Kopra.ViewModel
 				new Completion() {Description = "Co najmniej 75%", Percentage = 75}
 			};
 		}
-
-
-
 
 		private void InicjalizujStatusyPożyczek()
 		{
