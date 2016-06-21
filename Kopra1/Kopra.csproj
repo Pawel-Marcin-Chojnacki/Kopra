@@ -79,19 +79,18 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Common\FileManager.cs" />
     <Compile Include="Model\ComboBoxFiltr.cs" />
     <Compile Include="Common\ConnectionManager.cs" />
     <Compile Include="Common\Information.cs" />
-    <Compile Include="Model\InterestModel.cs" />
-    <Compile Include="Model\InvestorsModel.cs" />
+    <Compile Include="Model\Completion.cs" />
+    <Compile Include="Model\Interest.cs" />
+    <Compile Include="Model\Investor.cs" />
     <Compile Include="Model\KwotaPożyczkiModel.cs" />
     <Compile Include="Model\LoanAmount.cs" />
-    <Compile Include="Model\LoanAmountModel.cs" />
-    <Compile Include="Model\LoanPeriodsModel.cs" />
+    <Compile Include="Model\LoanPeriod.cs" />
     <Compile Include="Model\Status.cs" />
     <Compile Include="Properties\Annotations1.cs" />
-    <Compile Include="ViewModel\AddFilterFieldsViewModel.cs" />
-    <Compile Include="ViewModel\AddFilterInitsViewModel.cs" />
     <Compile Include="ViewModel\AddFilterViewModel.cs" />
     <Compile Include="ViewModel\LoginPageViewModel.cs" />
     <Compile Include="ViewModel\SearchViewModel.cs" />

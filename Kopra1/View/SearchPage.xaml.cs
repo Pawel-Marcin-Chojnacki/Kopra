@@ -122,10 +122,7 @@ namespace Kopra
 
         private void Szukaj_OnClick(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine(vm.TitleSearch);
-            //Debug.WriteLine(vm.LoanInterest);
-            Debug.WriteLine(vm.Realizacja);
-            Debug.WriteLine(vm.Investor);
+
         }
     }
 }

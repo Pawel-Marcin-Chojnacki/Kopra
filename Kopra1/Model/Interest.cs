@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Kopra1.Model
 {
-    public class LoanAmount
+    class Interest
     {
-        public string RangeDescription { get; set;  }
+        public string Description { get; set; }
         public int StartRange { get; set; }
         public int EndRange { get; set; }
     }

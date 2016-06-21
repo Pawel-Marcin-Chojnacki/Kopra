@@ -4,6 +4,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Kopra.Common;
 using Kopra.ViewModel;
+using System.Text;
+using Windows.UI.Popups;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -98,40 +100,52 @@ namespace Kopra
 
         #endregion
 
-        private void DodajAppBarButton_OnClick(object sender, RoutedEventArgs e)
+        private async void DodajAppBarButton_OnClick(object sender, RoutedEventArgs e)
         {
-            //StringBuilder filtr= new StringBuilder();
-            //foreach (var child in Formularz.Children)
-            //{
-            //    if (child.GetType() == typeof (ComboBox))
-            //    {
-            //        var combo = child as ComboBox;
-            //        if (combo?.SelectedValue != null)
-            //        {
-            //            filtr.Append(combo.Name + "=");
-            //            filtr.Append(combo.SelectedValue);
-            //            filtr.Append("&");
-            //        }
-            //    }
-            //    if (child.GetType() != typeof (CheckBox)) continue;
-            //    var check = child as CheckBox;
-            //    if (check == null) continue;
-            //    if (check.IsChecked == true)
-            //    {
-            //        filtr.Append(check.Name + "=");
-            //        filtr.Append("1");
-            //        filtr.Append("&");
-            //    }
-            //    //else //Można tego nie stosować ponieważ jeśli nie podam parametru false, jest on z góry przewidywany jako nieprawdziwy
-            //    //{
-            //    //    filtr.Append(check.Name + "=");
-            //    //    filtr.Append("0");
-            //    //    filtr.Append("&");
-            //    //}
-            //}
-            //string f = filtr.ToString();
-            //_viewModel.DodajFiltr(f);
-        }
+			if (FilterName.Text == string.Empty)
+			{
+				MessageDialog msgBox = new MessageDialog("Musisz wpisać nazwę filtru!");
+				await msgBox.ShowAsync();
+				return;
+			}
+			_viewModel.AddFilter();
+			//_viewModel.DodajFiltr(f);
+
+			//StringBuilder filtr = new StringBuilder();
+			//foreach (var child in ContentRoot.Children)
+			//{
+			//	if (child.GetType() == typeof(ComboBox))
+			//	{
+			//		var combo = child as ComboBox;
+			//		if (combo?.SelectedValue != null)
+			//		{
+			//			filtr.Append(combo.Name + "=");
+			//			filtr.Append(combo.SelectedValue);
+			//			filtr.Append("&");
+			//		}
+			//	}
+			//	else if(child.GetType() == typeof(TextBox))
+			//	{
+			//		(TextBox)child.GetValue
+			//	}
+			//	if (child.GetType() != typeof(CheckBox)) continue;
+			//	var check = child as CheckBox;
+			//	if (check == null) continue;
+			//	if (check.IsChecked == true)
+			//	{
+			//		filtr.Append(check.Name + "=");
+			//		filtr.Append("1");
+			//		filtr.Append("&");
+			//	}
+				//else //Można tego nie stosować ponieważ jeśli nie podam parametru false, jest on z góry przewidywany jako nieprawdziwy
+				//{
+				//    filtr.Append(check.Name + "=");
+				//    filtr.Append("0");
+				//    filtr.Append("&");
+				//}
+			//}
+			//string f = filtr.ToString();
+		}
 
         private void WyczyśćAppBarButton_Click(object sender, RoutedEventArgs e)
         {
