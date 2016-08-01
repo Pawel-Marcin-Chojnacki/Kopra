@@ -107,7 +107,13 @@ namespace Kopra
             Frame.Navigate(typeof(AddFilterPage));
         }
 
-        private void searchAuctionButton_Click(object sender, RoutedEventArgs e)
+
+		private void ShowFilters(object sender, RoutedEventArgs e)
+		{
+			Frame.Navigate(typeof(ShowFiltersPage));
+		}
+
+		private void searchAuctionButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(SearchPage));
         }
@@ -145,9 +151,5 @@ namespace Kopra
             Frame.Navigate(typeof(InvestorReportPage));
         }
 
-        private void ShowFilters(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(ShowFiltersPage));
-        }
     }
 }

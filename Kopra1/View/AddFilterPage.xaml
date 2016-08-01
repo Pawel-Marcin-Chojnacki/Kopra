@@ -81,7 +81,7 @@
                     ItemsSource="{Binding Path=LoanInterests }" 
                     PlaceholderText="Oprocentowanie"
                     DisplayMemberPath="Description"
-                    SelectedValue="{Binding LoanInterest, Mode=TwoWay}"></ComboBox>
+                    SelectedValue="{Binding Path=LoanInterest, Mode=TwoWay}"></ComboBox>
 
 					<TextBlock>Realizacja</TextBlock>
 					<ComboBox 

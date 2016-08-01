@@ -41,8 +41,14 @@
         <Grid Grid.Row="1">
             <!--<StackPanel Children="{Binding FiltryList}">-->
                 <!-- Wyświetl listę filtrów-->
-                
-            <!--</StackPanel>-->
+			<ListView Name="filterList" SelectionMode="Single" >
+				<ListView.ItemTemplate>
+					<DataTemplate >
+						<TextBlock Name="filtr" Text="{Binding Path=FileName}"></TextBlock>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+			<!--</StackPanel>-->
         </Grid>
     </Grid>
 

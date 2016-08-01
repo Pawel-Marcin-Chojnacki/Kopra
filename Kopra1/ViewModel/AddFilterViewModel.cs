@@ -16,7 +16,6 @@ namespace Kopra.ViewModel
     {
 		public AddFilterViewModel()
 		{
-
 			InicjalizujKwotęPożyczek();
 			InicjalizujRealizację();
 			InicjalizujStatusyPożyczek();
@@ -47,7 +46,10 @@ namespace Kopra.ViewModel
 		public List<Status> StatusyPozyczek { get; set; }
 		public Investor Investor
 		{
-			get { return _investor; }
+			get
+			{
+				return _investor;
+			}
 			set
 			{
 				_investor = value;
@@ -110,8 +112,18 @@ namespace Kopra.ViewModel
 				NotifyPropertyChanged(nameof(WybranaKwota));
 			}
 		}
-
-		public Interest LoanInterest { get; set; }
+		private Interest _loanInterest;
+		public Interest LoanInterest {
+			get
+			{
+				return _loanInterest;
+			}
+			set
+			{
+				_loanInterest = value;
+				NotifyPropertyChanged(nameof(LoanInterest));
+			}
+	}
 		
 		public List<Interest> LoanInterests
 		{
@@ -133,7 +145,20 @@ namespace Kopra.ViewModel
 			}
 		}
 
-		public List<LoanPeriod> LoanPeriods { get; set; }
+		private List<LoanPeriod> _loanPeriods;
+		public List<LoanPeriod> LoanPeriods
+		{
+			get
+
+			{
+				return _loanPeriods;
+			}
+			set
+			{
+				_loanPeriods = value;
+				NotifyPropertyChanged(nameof(LoanPeriods));
+			}
+		}
 		
 		public Completion Completion
 		{
@@ -222,7 +247,7 @@ namespace Kopra.ViewModel
 			}
 			catch (Exception)
 			{
-				MessageDialog msgDial = new MessageDialog("No i dupa!");
+				MessageDialog msgDial = new MessageDialog("Nie można zapisać filtru: ");
 				await msgDial.ShowAsync();
 				throw;
 			}
@@ -234,7 +259,6 @@ namespace Kopra.ViewModel
 				{
 					content = await reader.ReadToEndAsync();
 				}
-				Debug.WriteLine(content);
 			}
 		}
 
