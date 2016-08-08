@@ -6,30 +6,54 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:vm="using:Kopra.ViewModel"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <Grid x:Name="LayoutRoot">
-
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!-- Title Panel -->
-        <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock Text="KOPRA" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-            <TextBlock Text="Aukcja" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
-        </StackPanel>
-
-        <!--TODO: Content should be placed within the following grid-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-
-        </Grid>
-    </Grid>
+	<Page.DataContext>
+		<vm:AuctionDataViewModel/>
+	</Page.DataContext>
+	<Pivot>
+		<PivotItem x:Name="AuctionSummary" >
+			<PivotItem.Header>
+				<TextBlock Foreground="Black" Text="Podsumowanie" Style="{ThemeResource HeaderTextBlockStyle}"></TextBlock>
+			</PivotItem.Header>
+			<StackPanel>
+				<Grid><TextBlock Foreground="Black" Text="{Binding Path=Auction.value, Mode=TwoWay}"></TextBlock></Grid>
+			</StackPanel>
+		</PivotItem>
+		<PivotItem x:Name="Borrower" >
+			<PivotItem.Header>
+				<TextBlock Foreground="Black" Style="{ThemeResource HeaderTextBlockStyle}" Text="Pożyczkobiorca"></TextBlock>
+			</PivotItem.Header>
+			<StackPanel>
+			</StackPanel>
+		</PivotItem>
+		<PivotItem x:Name="FinancialStatus" >
+			<PivotItem.Header>
+				<TextBlock Foreground="Black" Style="{ThemeResource HeaderTextBlockStyle}" Text="Finanse"></TextBlock>
+			</PivotItem.Header>
+			<StackPanel>
+			</StackPanel>
+		</PivotItem>
+		<PivotItem x:Name="Recomendations" >
+			<PivotItem.Header>
+				<TextBlock Foreground="Black" Style="{ThemeResource HeaderTextBlockStyle}" Text="Rekomendacje"></TextBlock>
+			</PivotItem.Header>
+			<StackPanel>
+			</StackPanel>
+		</PivotItem>
+		<PivotItem x:Name="Offers" >
+			<PivotItem.Header>
+				<TextBlock  Foreground="Black" Style="{ThemeResource HeaderTextBlockStyle}" Text="Inwestorzy"></TextBlock>
+			</PivotItem.Header>
+			<StackPanel>
+			</StackPanel>
+		</PivotItem>
+		<PivotItem x:Name="Comments" >
+			<PivotItem.Header>
+				<TextBlock Foreground="Black"  Style="{ThemeResource HeaderTextBlockStyle}" Text="Komentarze"></TextBlock>
+			</PivotItem.Header>
+			<StackPanel>
+			</StackPanel>
+		</PivotItem>
+	</Pivot>
 </Page>

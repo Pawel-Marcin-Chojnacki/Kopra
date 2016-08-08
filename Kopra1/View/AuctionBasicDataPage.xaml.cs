@@ -2,6 +2,7 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Kopra.Common;
+using Kopra.ViewModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -19,7 +20,7 @@ namespace Kopra
         {
             InitializeComponent();
 
-            _navigationHelper = new NavigationHelper(this);
+			_navigationHelper = new NavigationHelper(this);
             _navigationHelper.LoadState += NavigationHelper_LoadState;
             _navigationHelper.SaveState += NavigationHelper_SaveState;
         }
@@ -54,6 +55,10 @@ namespace Kopra
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+	        Auction selectedAuction = (Auction) e.NavigationParameter;
+	        AuctionDataViewModel vm = (AuctionDataViewModel)this.DataContext;
+	        vm.Id = selectedAuction.id;
+			vm.GetAuctionData();
         }
 
         /// <summary>

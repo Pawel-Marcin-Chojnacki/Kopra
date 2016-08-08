@@ -4,6 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.Web.Http;
 using Windows.Web.Http.Headers;
+using Kopra.Model;
+using Kopra.Model.Auction;
 using Newtonsoft.Json;
 
 namespace Kopra
@@ -97,11 +99,8 @@ namespace Kopra
        
         public static void GenerateApiKeyFromService()
         {
-
             Uri apiGeneratorAddress = new Uri("https://kokos.pl/webapiinfo/key/webapiinfo/generate-key");
             HttpMultipartFormDataContent form = new HttpMultipartFormDataContent();
-            
-
            // response = await httpClient.GetAsync(apiGeneratorAddress).AsTask(cts.Token);
             Debug.WriteLine(_response.Content);
             GetWebApiKeyFromService();
@@ -110,7 +109,6 @@ namespace Kopra
         public static async Task<SearchAuctionResult> SendRestRequest(Uri address)
         {
             await Task.Delay(TimeSpan.FromSeconds(1)); //Change for Timestamp
-            Debug.WriteLine("SendRESTRequest");
             _response = await HttpClient.GetAsync(address).AsTask(_cts.Token);
             var auctionsJson = new SearchAuctionResult();
             Debug.WriteLine(address);
@@ -126,5 +124,25 @@ namespace Kopra
             return auctionsJson;
         }
 
-    }
+		public static async Task<Model.Auction.Auction> GetAuctionDataRequest(Uri address)
+		{
+			await Task.Delay(TimeSpan.FromSeconds(1));
+			_response = await HttpClient.GetAsync(address).AsTask(_cts.Token);
+			var auctionJson = new GetAuctionDataRoot();
+			var response = _response.Content.ToString();
+			try
+			{
+				auctionJson = JsonConvert.DeserializeObject<GetAuctionDataRoot>(response, new JsonSerializerSettings
+				{
+					MissingMemberHandling = MissingMemberHandling.Ignore,
+					NullValueHandling = NullValueHandling.Ignore,
+				});
+			}
+			catch (Exception exception)
+			{
+				throw exception;
+			}
+			return auctionJson.response.auction;
+		}
+	}
 }

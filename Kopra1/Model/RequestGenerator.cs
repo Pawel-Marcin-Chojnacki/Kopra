@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using Kopra1.Model.Auction;
 
 namespace Kopra
 {
@@ -12,9 +14,14 @@ namespace Kopra
         private const string DataType = "type=json";
         private const string Search = "search?";
         private const string RecentAuctions = "get-recent-auctions?";
-        private const string Records = "records=";
+	    private const string AuctionData = "get-auction-data?";
+	    private const string Comments = "comments=1";
+		private const string Records = "records=";
         private const string Key = "key=";
-        private const string SearchQuery = BaseAddress + Search + Key;
+	    private const string Id = "id=";
+	    private const string Type = "type=";
+
+		private const string SearchQuery = BaseAddress + Search + Key;
 
         public Uri SearchAuction(Dictionary<string, string> search)
         {
@@ -59,5 +66,24 @@ namespace Kopra
             var result = new Uri(requestAddress);
             return result;
         }
+
+	    public Uri GetAuctionData(GetAuctionDataParameters parameters)
+	    {
+			SettingsManager settingsManager = new SettingsManager();
+			StringBuilder reqBuilder = new StringBuilder();
+		    reqBuilder.Append(BaseAddress);
+		    reqBuilder.Append(AuctionData);
+		    reqBuilder.Append(Key);
+		    reqBuilder.Append(settingsManager.KokosWebApiKey);
+		    reqBuilder.Append("&");
+		    reqBuilder.Append(Id);
+		    reqBuilder.Append(parameters.Id);
+		    reqBuilder.Append("&");
+		    reqBuilder.Append(Comments);
+		    reqBuilder.Append("&");
+		    reqBuilder.Append(Type);
+		    reqBuilder.Append(parameters.DataType);
+			return new Uri(reqBuilder.ToString());
+	    }
     }
 }

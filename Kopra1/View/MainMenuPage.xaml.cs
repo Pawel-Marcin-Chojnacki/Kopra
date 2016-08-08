@@ -5,6 +5,7 @@ using Windows.UI.Xaml.Navigation;
 using Kopra.Common;
 using Kopra.Theme;
 using Kopra.View;
+using Kopra.ViewModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -115,7 +116,7 @@ namespace Kopra
 
 		private void searchAuctionButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(SearchPage));
+            Frame.Navigate(typeof(View.SearchPage));
         }
 
         private void settingsButton_Click(object sender, RoutedEventArgs e)
@@ -151,5 +152,16 @@ namespace Kopra
             Frame.Navigate(typeof(InvestorReportPage));
         }
 
-    }
+		/// <summary>
+		/// Load auction details view.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void LoadAuction(object sender, ItemClickEventArgs e)
+		{
+			MainMenuViewModel vm = (MainMenuViewModel) this.DataContext;
+		    var selectedItem = (ListView) sender;
+			Frame.Navigate(typeof(AuctionBasicDataPage), e.ClickedItem);
+		}
+	}
 }

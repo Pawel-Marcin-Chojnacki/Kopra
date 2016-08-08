@@ -140,9 +140,4 @@ namespace Kopra
         public Paging paging { get; set; }
         public Auctions auctions { get; set; }
     }
-
-    //public class RootObject
-    //{
-        
-    //}
 }
