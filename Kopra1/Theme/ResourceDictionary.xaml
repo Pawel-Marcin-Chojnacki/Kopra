@@ -90,7 +90,7 @@
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="Background" Value="{ThemeResource PhoneChromeBrush}"></Setter>
         <Setter Property="Width" Value="56"></Setter>
-        <Setter Property="Height" Value="56"></Setter>
+        <Setter Property="Height" Value="56"></Setter> 
     </Style>
 
     <Style x:Key="PercentageTextBlockStyle" BasedOn="{StaticResource ListViewItemContentTextBlockStyle}" TargetType="TextBlock">
@@ -98,5 +98,17 @@
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         <Setter Property="FontWeight" Value="Bold"></Setter>
     </Style>
+	
+	<Style x:Key="TextBlockTest" BasedOn="{StaticResource BodyTextBlockStyle}" TargetType="TextBlock">
+		<Setter Property="FontSize" Value="24"></Setter>
+		<Setter Property="LineHeight" Value="30"></Setter>
+		<Setter Property="Foreground" Value="Black"></Setter>
+	</Style>
+
+	<Style x:Key="TextBlockCommentResponse" BasedOn="{StaticResource BodyTextBlockStyle}" TargetType="TextBlock">
+		<Setter Property="FontSize" Value="12"></Setter>
+		<Setter Property="LineHeight" Value="14"></Setter>
+		<Setter Property="Foreground" Value="DarkGreen"></Setter>
+	</Style>
 
 </ResourceDictionary>

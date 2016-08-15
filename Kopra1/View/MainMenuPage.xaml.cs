@@ -58,7 +58,7 @@ namespace Kopra
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            SetUserName();
+            UserCredentials.SetUserName(userNameTitle);
             StatusBarManager.SetStyle();
             Frame.BackStack.Clear();
         }
@@ -122,24 +122,6 @@ namespace Kopra
         private void settingsButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(SettingsPage));
-        }
-
-        /// <summary>
-        /// Sets username in localSettings device memory.
-        /// </summary>
-        private void SetUserName()
-        {
-            //Debug.WriteLine("SetUserName");
-            // Odczytaj z ustawień nazwę użytkownika, lub jeśli jej nie ma to wyciągnij ją z maila.
-            SettingsManager loadUserName = new SettingsManager();
-            if (loadUserName.Username != null)
-                userNameTitle.Text = loadUserName.Username;
-            else
-            {
-                var uc = new UserCredentials();
-                loadUserName.Username = uc.EmailToUserName(loadUserName.Email);
-                userNameTitle.Text = loadUserName.Username;
-            }
         }
 
         /// <summary>

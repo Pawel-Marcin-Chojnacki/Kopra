@@ -9,27 +9,43 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     RequestedTheme="Light">
 
-    <Grid x:Name="LayoutRoot">
+	<Grid x:Name="LayoutRoot" DataContext="{Binding Mode=TwoWay}">
 
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+		</Grid.RowDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+		<!-- Page header -->
+		<Grid Grid.Row="0" Background="{StaticResource AppPaletteMainAccentBrush}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="1*"></ColumnDefinition>
+				<ColumnDefinition Width="1*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
 
-        <!-- Title Panel -->
-        <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock Text="KOPRA" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+			<Image Source="/Assets/LogoTheme.png"
+                   Height="40"
+                   Grid.Column="0"
+                   HorizontalAlignment="Left"
+                   Margin="15,0,5,5"></Image>
+
+			<TextBlock x:Name="userNameTitle"
+                Grid.Column="1"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       RequestedTheme="Dark"
+                       Margin="0,0,19,9"
+                       Padding="0,0,0,0"
+                       Style="{ThemeResource TitleTextBlockStyle}"
+                        />
+		</Grid>
+		<!-- Title Panel -->
+        <StackPanel Grid.Row="1" Margin="19,0,0,0">
             <TextBlock Text="Ustawienia" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
 
-        <!--TODO: Content should be placed within the following grid-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+        <Grid Grid.Row="2" x:Name="ContentRoot" Margin="19,9.5,19,0">
             <StackPanel>
                 <Button x:Name="button" Content="Odśwież &quot;Web Key&quot;" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="342" Height="89" Click="button_Click"/>
                 <CheckBox HorizontalAlignment="Center" x:Uid="CkeckBoxWeryfikacjaPracodawcy" Content="Notyfikacje PUSH" IsChecked="{Binding WeryfikacjaPracodawcy, Mode=TwoWay}"/>

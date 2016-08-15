@@ -1,17 +1,21 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Kopra.Annotations;
+using Kopra.Common;
 
 namespace Kopra.ViewModel
 {
-    class SearchAuctionViewModel : INotifyPropertyChanged
+    public class SearchAuctionViewModel : MainViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+		public NotifyTaskCompletion<ObservableCollection<Auction>> Auctions { get; set; }
+		private DataService dataService = new DataService();
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
+		public void SearchAuction(Uri request )
+		{
+			Auctions =  new NotifyTaskCompletion<ObservableCollection<Auction>>(dataService.GetAuctionsByParameters(request));
+		}
+
+	}
 }

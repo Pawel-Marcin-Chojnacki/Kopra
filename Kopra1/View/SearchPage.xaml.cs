@@ -61,6 +61,7 @@ namespace Kopra.View
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+			UserCredentials.SetUserName(userNameTitle);
         }
 
         /// <summary>
@@ -105,16 +106,13 @@ namespace Kopra.View
         private void search(object sender, RoutedEventArgs e)
         {
             //Przykładowe wyszkukiwanie.
-            var rg = new RequestGenerator();
-            var auctionsResult = new SearchAuctionResult();
-            auctionsResult = KokosConnectionManager.SendRestRequest(rg.SearchAuction(searchDictionary())).Result;
-            //Debug.WriteLine(auctionsResult.Auction.id.ToString());
+			//var auctionsearchResult = this.vm.SearchAuction();
+	        //Debug.WriteLine(auctionsResult.Auction.id.ToString());
         }
 
         private Dictionary<string, string> searchDictionary()
         {
             var sm = new SettingsManager();
-
             var sd = new Dictionary<string, string>();
             sd.Add("key", sm.KokosWebApiKey);
             return sd;
@@ -122,7 +120,8 @@ namespace Kopra.View
 
         private void Szukaj_OnClick(object sender, RoutedEventArgs e)
         {
+			Frame.Navigate(typeof(SearchResultPage), this.vm.SearchUri());
 
-        }
-    }
+		}
+	}
 }

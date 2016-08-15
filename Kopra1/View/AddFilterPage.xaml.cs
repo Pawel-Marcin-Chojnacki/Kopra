@@ -58,18 +58,20 @@ namespace Kopra
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {
-        }
+		{
+			UserCredentials.SetUserName(userNameTitle);
 
-        /// <summary>
-        /// Preserves state associated with this page in case the application is suspended or the
-        /// page is discarded from the navigation cache.  Values must conform to the serialization
-        /// requirements of <see cref="SuspensionManager.SessionState"/>.
-        /// </summary>
-        /// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/></param>
-        /// <param name="e">Event data that provides an empty dictionary to be populated with
-        /// serializable state.</param>
-        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
+		}
+
+		/// <summary>
+		/// Preserves state associated with this page in case the application is suspended or the
+		/// page is discarded from the navigation cache.  Values must conform to the serialization
+		/// requirements of <see cref="SuspensionManager.SessionState"/>.
+		/// </summary>
+		/// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/></param>
+		/// <param name="e">Event data that provides an empty dictionary to be populated with
+		/// serializable state.</param>
+		private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
         }
 

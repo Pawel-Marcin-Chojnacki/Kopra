@@ -9,7 +9,7 @@ namespace Kopra1.Model
     class Investor
     {
         public string Description { get; set; }
-        public int StartRange { get; set; }
-        public int EndRange { get; set; }
+        public int investorsFrom { get; set; }
+        public int investorsTo { get; set; }
     }
 }

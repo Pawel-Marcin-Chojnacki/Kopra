@@ -39,6 +39,7 @@ namespace Kopra.Model.Auction
 		public Financialverifies financialverifies { get; set; }
 		[JsonConverter(typeof(SingleValueArrayConverter<Investments>))]
 		public List<Investments> investments { get; set; }
+		[JsonConverter(typeof(SingleValueArrayConverter<Comments>))]
 		public List<Comments> comments { get; set; }
 		[JsonConverter(typeof(SingleValueArrayConverter<Connections>))]
 		public List<Connections> connections { get; set; }

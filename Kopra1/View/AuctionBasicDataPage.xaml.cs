@@ -55,6 +55,7 @@ namespace Kopra
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+			UserCredentials.SetUserName(userNameTitle);
 	        Auction selectedAuction = (Auction) e.NavigationParameter;
 	        AuctionDataViewModel vm = (AuctionDataViewModel)this.DataContext;
 	        vm.Id = selectedAuction.id;

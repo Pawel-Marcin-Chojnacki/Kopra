@@ -32,5 +32,17 @@ namespace Kopra.Common
 		    result = await KokosConnectionManager.GetAuctionDataRequest(requestAddress);
 		    return result;
 	    }
+
+	    public async Task<ObservableCollection<Auction>> GetAuctionsByParameters(Uri urlAddress)
+	    {
+		    var result = new ObservableCollection<Auction>();
+			var request = new RequestGenerator();
+			SearchAuctionResult foundedAuctions = await KokosConnectionManager.SendRestRequest(urlAddress);
+		    foreach (var auction in foundedAuctions.response.auctions.auction)
+		    {
+			    result.Add(auction);
+		    }
+		    return result;
+	    }
     }
 }

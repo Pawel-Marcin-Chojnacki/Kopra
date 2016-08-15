@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Kopra.Common;
+using Kopra.ViewModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -54,7 +56,11 @@ namespace Kopra
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-        }
+			UserCredentials.SetUserName(userNameTitle);
+			var foundAuctions = (Uri)e.NavigationParameter;
+			SearchAuctionViewModel vm = (SearchAuctionViewModel)this.DataContext;
+			vm.SearchAuction(foundAuctions);
+		}
 
         /// <summary>
         /// Preserves state associated with this page in case the application is suspended or the
@@ -66,6 +72,7 @@ namespace Kopra
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
+
         }
 
         #region NavigationHelper registration
@@ -94,5 +101,12 @@ namespace Kopra
         }
 
         #endregion
+
+	    private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
+	    {
+			SearchAuctionViewModel vm = (SearchAuctionViewModel)this.DataContext;
+			var selectedItem = (ListView)sender;
+			Frame.Navigate(typeof(AuctionBasicDataPage), e.ClickedItem);
+		}
     }
 }

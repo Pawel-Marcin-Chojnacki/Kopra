@@ -43,7 +43,9 @@ namespace Kopra
         public Uri ComposeSearchAuctionQuery(Dictionary<string, string> search)
         {
             string requestAddress = SearchQuery;
-            foreach (var item in search)
+			var sm = new SettingsManager();
+			requestAddress += sm.KokosWebApiKey + "&";
+			foreach (var item in search)
             {
                 requestAddress += item.Key + "=" + item.Value + "&";
             }

@@ -2,12 +2,11 @@
 
 namespace Kopra.Model.Auction
 {
-	[JsonObject]
 	public class Investment
 	{
 		public string investmentId { get; set; }
 		public string user { get; set; }
-		public string  userId { get; set; }
+		public string userId { get; set; }
 		public string amount { get; set; }
 		public string percent { get; set; }
 		public string date { get; set; }

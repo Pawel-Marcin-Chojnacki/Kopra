@@ -7,53 +7,255 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:vm="using:Kopra.ViewModel"
+    xmlns:converter="using:Kopra.Converter"
+    RequestedTheme="Light"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 	<Page.DataContext>
 		<vm:AuctionDataViewModel/>
 	</Page.DataContext>
-	<Pivot>
+	<Page.Resources>
+		<ResourceDictionary>
+			<converter:AuctionNumberConverter x:Key="AuctionNumberConverter" />
+		</ResourceDictionary>
+	</Page.Resources>
+
+	<Grid x:Name="LayoutRoot" DataContext="{Binding Mode=TwoWay}">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<!-- Page header -->
+		<Grid Grid.Row="0" Background="{StaticResource AppPaletteMainAccentBrush}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="1*"></ColumnDefinition>
+				<ColumnDefinition Width="1*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+
+			<Image Source="/Assets/LogoTheme.png"
+                   Height="40"
+                   Grid.Column="0"
+                   HorizontalAlignment="Left"
+                   Margin="15,0,5,5"></Image>
+
+			<TextBlock x:Name="userNameTitle"
+                Grid.Column="1"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       RequestedTheme="Dark"
+                       Margin="0,0,19,9"
+                       Padding="0,0,0,0"
+                       Style="{ThemeResource TitleTextBlockStyle}"
+                        />
+		</Grid>
+		<Pivot Grid.Row="1">
 		<PivotItem x:Name="AuctionSummary" >
 			<PivotItem.Header>
-				<TextBlock Foreground="Black" Text="Podsumowanie" Style="{ThemeResource HeaderTextBlockStyle}"></TextBlock>
+				<TextBlock  Text="Podsumowanie" Style="{ThemeResource HeaderTextBlockStyle}"></TextBlock>
 			</PivotItem.Header>
-			<StackPanel>
-				<Grid><TextBlock Foreground="Black" Text="{Binding Path=Auction.value, Mode=TwoWay}"></TextBlock></Grid>
-			</StackPanel>
+			<ScrollViewer>
+				<StackPanel>
+					<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.id, Converter={StaticResource AuctionNumberConverter}, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.title, Mode=TwoWay}"/>
+				<TextBlock 
+					Style="{ThemeResource TextBlockTest}" 
+					Text="{Binding Path=Auction.description1, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.value, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.period, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.percent, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.timeToEnd, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.numberOfOffers, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.firstPayData, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.description2, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.description3, Mode=TwoWay}"/>
+				</StackPanel>
+			</ScrollViewer>
 		</PivotItem>
 		<PivotItem x:Name="Borrower" >
 			<PivotItem.Header>
-				<TextBlock Foreground="Black" Style="{ThemeResource HeaderTextBlockStyle}" Text="Pożyczkobiorca"></TextBlock>
+				<TextBlock Style="{ThemeResource HeaderTextBlockStyle}" Text="Pożyczkobiorca"></TextBlock>
 			</PivotItem.Header>
+			<ScrollViewer>
 			<StackPanel>
-			</StackPanel>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.PB.user, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.PB.type, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.PB.startDate, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.PB.city, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.PB.province, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.PB.condition, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.PB.age, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.PB.lastLoginDate, Mode=TwoWay}"/>
+				</StackPanel>
+			</ScrollViewer>
 		</PivotItem>
 		<PivotItem x:Name="FinancialStatus" >
 			<PivotItem.Header>
-				<TextBlock Foreground="Black" Style="{ThemeResource HeaderTextBlockStyle}" Text="Finanse"></TextBlock>
+				<TextBlock  Style="{ThemeResource HeaderTextBlockStyle}" Text="Finanse"/>
 			</PivotItem.Header>
 			<StackPanel>
+				
 			</StackPanel>
 		</PivotItem>
 		<PivotItem x:Name="Recomendations" >
 			<PivotItem.Header>
-				<TextBlock Foreground="Black" Style="{ThemeResource HeaderTextBlockStyle}" Text="Rekomendacje"></TextBlock>
+				<TextBlock  Style="{ThemeResource HeaderTextBlockStyle}" Text="Rekomendacje"></TextBlock>
 			</PivotItem.Header>
+			<ScrollViewer>
 			<StackPanel>
-			</StackPanel>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.PB.income, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.PB.expenses, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.PB.credits, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.PB.maxMonthlyInstallment, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.PB.maxVerifyMonthlyInstallment, Mode=TwoWay}"/>
+				<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=Auction.PB.maxMonthlyInstallment, Mode=TwoWay}"/>
+				</StackPanel>
+			</ScrollViewer>
 		</PivotItem>
 		<PivotItem x:Name="Offers" >
 			<PivotItem.Header>
-				<TextBlock  Foreground="Black" Style="{ThemeResource HeaderTextBlockStyle}" Text="Inwestorzy"></TextBlock>
+				<TextBlock Style="{ThemeResource HeaderTextBlockStyle}" Text="Inwestorzy"></TextBlock>
 			</PivotItem.Header>
-			<StackPanel>
+			<ScrollViewer>
+				<StackPanel>
+				<ItemsControl Name="investorsCollection" ItemsSource="{Binding Auction.investments}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<StackPanel Orientation="Horizontal"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							
+							<ItemsControl Name="investor" ItemsSource="{Binding investment}" >
+								<ItemsControl.ItemsPanel>
+									<ItemsPanelTemplate>
+										<StackPanel Orientation="Vertical"/>
+									</ItemsPanelTemplate>
+								</ItemsControl.ItemsPanel>
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<StackPanel>
+										<TextBlock 
+								Style="{ThemeResource TextBlockTest}"
+								Text="{Binding Path=user}"/>
+
+										<TextBlock 
+								Style="{ThemeResource TextBlockTest}"
+								Text="{Binding Path=amount}"/>
+
+										<TextBlock 
+								Style="{ThemeResource TextBlockTest}"
+								Text="{Binding Path=percent}"/>
+
+											<TextBlock 
+								Style="{ThemeResource TextBlockTest}"
+								Text="{Binding Path=isPaid}"/>
+
+											<TextBlock 
+								Style="{ThemeResource TextBlockTest}"
+								Text="{Binding Path=date}"/>
+										</StackPanel>
+									</DataTemplate>
+									</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
 			</StackPanel>
+			</ScrollViewer>
 		</PivotItem>
 		<PivotItem x:Name="Comments" >
 			<PivotItem.Header>
-				<TextBlock Foreground="Black"  Style="{ThemeResource HeaderTextBlockStyle}" Text="Komentarze"></TextBlock>
+				<TextBlock Style="{ThemeResource HeaderTextBlockStyle}" Text="Komentarze"/>
 			</PivotItem.Header>
+			<ScrollViewer>
 			<StackPanel>
-			</StackPanel>
+					<ItemsControl Name="CommentsCollection" ItemsSource="{Binding Auction.comments}">
+						<ItemsControl.ItemsPanel>
+							<ItemsPanelTemplate>
+								<StackPanel Orientation="Vertical"></StackPanel>
+							</ItemsPanelTemplate>
+						</ItemsControl.ItemsPanel>
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<ItemsControl Name="Comment" ItemsSource="{Binding comment}">
+									<ItemsControl.ItemsPanel>
+										<ItemsPanelTemplate>
+											<StackPanel Orientation="Vertical"></StackPanel>
+										</ItemsPanelTemplate>
+									</ItemsControl.ItemsPanel>
+									<ItemsControl.ItemTemplate>
+										<DataTemplate>
+											<Grid>
+												<Grid.ColumnDefinitions>
+													<ColumnDefinition />
+													<ColumnDefinition />
+													<ColumnDefinition />
+													<ColumnDefinition />
+												</Grid.ColumnDefinitions>
+												<TextBlock  Grid.Column="0" Text="{Binding Path=date}" Style="{ThemeResource TextBlockTest}" />
+												<TextBlock  Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Path=description}" Style="{ThemeResource TextBlockTest}" />
+												<TextBlock Grid.Column="2" HorizontalAlignment="Right"  Text="{Binding Path=answerData}" Style="{ThemeResource TextBlockTest}" />
+												<TextBlock  Grid.Column="3"  HorizontalAlignment="Right" Text="{Binding Path=answerDescription}" Style="{ThemeResource TextBlockCommentResponse}" />
+											</Grid>
+										</DataTemplate></ItemsControl.ItemTemplate>
+								</ItemsControl>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+						
+					</ItemsControl>
+				</StackPanel>
+			</ScrollViewer>
 		</PivotItem>
 	</Pivot>
+		</Grid>
 </Page>

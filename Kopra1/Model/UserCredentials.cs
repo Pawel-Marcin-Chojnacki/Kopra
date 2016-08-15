@@ -1,16 +1,18 @@
 ﻿using System;
+using Windows.UI.Notifications;
+using Windows.UI.Xaml.Controls;
 
 namespace Kopra
 {
-    class UserCredentials
+    public static class UserCredentials
     {
-        public string Email { get; set; }
+        public static string Email { get; set; }
 
-        public string Password { get; set; }
+        public static string Password { get; set; }
 
-        public string UserName { get; set; }
+        public static string UserName { get; set; }
 
-        public string EmailToUserName(string mail)
+        public static string EmailToUserName(string mail)
         {
             try
             {
@@ -26,5 +28,20 @@ namespace Kopra
             UserName = mail;
             return mail;
         }
-    }
+
+		/// <summary>
+		/// Sets username in localSettings device memory.
+		/// </summary>
+		public static void SetUserName(TextBlock textBlock)
+		{
+			SettingsManager loadUserName = new SettingsManager();
+			if (loadUserName.Username != null)
+				textBlock.Text = loadUserName.Username;
+			else
+			{
+				EmailToUserName(loadUserName.Email);
+				textBlock.Text = UserName;
+			}
+		}
+	}
 }

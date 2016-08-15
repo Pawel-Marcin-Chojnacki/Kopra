@@ -53,9 +53,18 @@ namespace Kopra.View
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-        }
 
-        /// <summary>
+			SetUserName();
+		}
+
+	    private void SetUserName()
+	    {
+			SettingsManager loadUserName = new SettingsManager();
+			if (loadUserName.Username != null)
+				userNameTitle.Text = loadUserName.Username;
+		}
+
+	    /// <summary>
         /// Preserves state associated with this page in case the application is suspended or the
         /// page is discarded from the navigation cache.  Values must conform to the serialization
         /// requirements of <see cref="SuspensionManager.SessionState"/>.

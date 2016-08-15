@@ -275,19 +275,19 @@ namespace Kopra.ViewModel
 			}
 			if (LoanAmount != null)
 			{
-				link.Append("&valueFrom=" + LoanAmount.StartRange);
-				link.Append("&valueTo=" + LoanAmount.EndRange);
+				link.Append("&valueFrom=" + LoanAmount.valueFrom);
+				link.Append("&valueTo=" + LoanAmount.valueTo);
 			}
 			if (LoanPeriod != null)
 			{
-				link.Append("&periodFrom=" + LoanPeriod.StartRange);
-				link.Append("&periodTo=" + LoanPeriod.EndRange);
+				link.Append("&periodFrom=" + LoanPeriod.periodFrom);
+				link.Append("&periodTo=" + LoanPeriod.periodTo);
 			}
 
 			if (LoanInterest != null)
 			{
-				link.Append("&percentFrom=" + LoanInterest.StartRange);
-				link.Append("&percentTo=" + LoanInterest.EndRange);
+				link.Append("&percentFrom=" + LoanInterest.percentFrom);
+				link.Append("&percentTo=" + LoanInterest.percentTo);
 			}
 			if (Completion != null)
 			{
@@ -296,8 +296,8 @@ namespace Kopra.ViewModel
 
 			if (Investor != null)
 			{
-				link.Append("&investorsFrom=" + Investor.StartRange);
-				link.Append("&investorsTo=" + Investor.EndRange);
+				link.Append("&investorsFrom=" + Investor.investorsFrom);
+				link.Append("&investorsTo=" + Investor.investorsTo);
 			}
 			return link.ToString().ToCharArray();
 		}
@@ -336,12 +336,12 @@ namespace Kopra.ViewModel
 		{
 			Investors = new List<Investor>()
 			{
-				new Investor() {Description = "Brak inwestorów", StartRange = 0, EndRange = 0},
-				new Investor() {Description = "1 - 5 inwestorów", StartRange = 1, EndRange = 5},
-				new Investor() {Description = "6 - 10 inwestorów", StartRange = 6, EndRange = 10},
-				new Investor() {Description = "11 - 20 inwestorów", StartRange = 11, EndRange = 20},
-				new Investor() {Description = "21 - 50 inwestorów", StartRange = 21, EndRange = 50},
-				new Investor() {Description = "Powyżej 50 inwestorów", StartRange = 50, EndRange = 999},
+				new Investor() {Description = "Brak inwestorów", investorsFrom = 0, investorsTo = 0},
+				new Investor() {Description = "1 - 5 inwestorów", investorsFrom = 1, investorsTo = 5},
+				new Investor() {Description = "6 - 10 inwestorów", investorsFrom = 6, investorsTo = 10},
+				new Investor() {Description = "11 - 20 inwestorów", investorsFrom = 11, investorsTo = 20},
+				new Investor() {Description = "21 - 50 inwestorów", investorsFrom = 21, investorsTo = 50},
+				new Investor() {Description = "Powyżej 50 inwestorów", investorsFrom = 50, investorsTo = 999},
 			};
 
 		}
@@ -350,12 +350,12 @@ namespace Kopra.ViewModel
 		{
 			LoanAmounts = new List<LoanAmount>()
 			{
-				new LoanAmount() {StartRange = 0, EndRange = int.MaxValue, RangeDescription = "Dowolna kwota"},
-				new LoanAmount() {StartRange = 500, EndRange = 1000, RangeDescription = "Od 500 do 1000 zł"},
-				new LoanAmount() {StartRange = 1100, EndRange = 2500, RangeDescription = "Od 1100 do 2500 zł"},
-				new LoanAmount() {StartRange = 2600, EndRange = 5000, RangeDescription = "Od 2600 do 5000 zł"},
-				new LoanAmount() {StartRange = 5100, EndRange = 10000, RangeDescription = "Od 5100 do 10000 zł"},
-				new LoanAmount() {StartRange = 10100, EndRange = 25000, RangeDescription = "Od 10100 do 25000 zł"}
+				new LoanAmount() {valueFrom = 0, valueTo = int.MaxValue, RangeDescription = "Dowolna kwota"},
+				new LoanAmount() {valueFrom = 500, valueTo = 1000, RangeDescription = "Od 500 do 1000 zł"},
+				new LoanAmount() {valueFrom = 1100, valueTo = 2500, RangeDescription = "Od 1100 do 2500 zł"},
+				new LoanAmount() {valueFrom = 2600, valueTo = 5000, RangeDescription = "Od 2600 do 5000 zł"},
+				new LoanAmount() {valueFrom = 5100, valueTo = 10000, RangeDescription = "Od 5100 do 10000 zł"},
+				new LoanAmount() {valueFrom = 10100, valueTo = 25000, RangeDescription = "Od 10100 do 25000 zł"}
 			};
 		}
 
@@ -363,11 +363,11 @@ namespace Kopra.ViewModel
 		{
 			LoanPeriods = new List<LoanPeriod>()
 			{
-				new LoanPeriod() {Description = "Dowolny okres",StartRange = 0, EndRange = int.MaxValue},
-				new LoanPeriod() {Description = "Do pół roku",StartRange = 1, EndRange = 6},
-				new LoanPeriod() {Description = "Do 1 roku",StartRange = 6, EndRange = 12},
-				new LoanPeriod() {Description = "Od 1 do 2 lat",StartRange = 12, EndRange = 24},
-				new LoanPeriod() {Description = "Od 2 do 3 lat",StartRange = 24, EndRange = 36},
+				new LoanPeriod() {Description = "Dowolny okres",periodFrom = 0, periodTo = int.MaxValue},
+				new LoanPeriod() {Description = "Do pół roku",periodFrom = 1, periodTo = 6},
+				new LoanPeriod() {Description = "Do 1 roku",periodFrom = 6, periodTo = 12},
+				new LoanPeriod() {Description = "Od 1 do 2 lat",periodFrom = 12, periodTo = 24},
+				new LoanPeriod() {Description = "Od 2 do 3 lat",periodFrom = 24, periodTo = 36},
 
 			};
 		}
@@ -376,11 +376,11 @@ namespace Kopra.ViewModel
 		{
 			LoanInterests = new List<Interest>()
 			{
-				new Interest() {Description = "Dowolny %", StartRange = 0, EndRange = int.MaxValue},
-				new Interest() {Description = "Od 1 do 10%", StartRange = 1, EndRange = 10},
-				new Interest() {Description = "Od 11 do 20%", StartRange = 11, EndRange = 20},
-				new Interest() {Description = "Od 21 do 25%", StartRange = 21, EndRange = 25},
-				new Interest() {Description = "Powyżej 25%", StartRange = 25, EndRange = int.MaxValue}
+				new Interest() {Description = "Dowolny %", percentFrom = 0, percentTo = int.MaxValue},
+				new Interest() {Description = "Od 1 do 10%", percentFrom = 1, percentTo = 10},
+				new Interest() {Description = "Od 11 do 20%", percentFrom = 11, percentTo = 20},
+				new Interest() {Description = "Od 21 do 25%", percentFrom = 21, percentTo = 25},
+				new Interest() {Description = "Powyżej 25%", percentFrom = 25, percentTo = int.MaxValue}
 			};
 		}
 
