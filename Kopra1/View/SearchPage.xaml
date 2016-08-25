@@ -107,5 +107,6 @@
     </Grid>
     <Page.BottomAppBar><CommandBar>
         <AppBarButton Name="Szukaj" Click="Szukaj_OnClick" Icon="Find" Label="Szukaj"></AppBarButton>
-    </CommandBar></Page.BottomAppBar>
+			<AppBarButton x:Name="CzyśćAppBarButton" Label="Wyczyść" Icon="Clear" Click="WyczyśćAppBarButton_Click" />
+		</CommandBar></Page.BottomAppBar>
 </Page>

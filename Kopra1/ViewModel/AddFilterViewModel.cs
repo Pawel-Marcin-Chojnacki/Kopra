@@ -230,6 +230,7 @@ namespace Kopra.ViewModel
 		internal async void AddFilter()
 		{
 			char[] filterLink = CreateLinkFromFields();
+
 			try
 			{
 				StorageFolder folder = ApplicationData.Current.LocalFolder;

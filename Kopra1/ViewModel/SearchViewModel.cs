@@ -14,6 +14,17 @@ namespace Kopra.ViewModel
     {
         #region Constructors
 
+	    public void ClearFilter()
+	    {
+		    TitleSearch = " ";
+		    Status = null;
+		    LoanAmount = null;
+		    LoanPeriod = null;
+		    LoanInterest = null;
+		    Completion = null;
+		    Investor = null;
+
+	    }
         public SearchViewModel()
         {
             InicjalizujKwotęPożyczek();
@@ -39,7 +50,7 @@ namespace Kopra.ViewModel
 
         #region Events
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion Events
 
@@ -200,7 +211,7 @@ namespace Kopra.ViewModel
             set
             {
                 _titleSearch = value;
-                NotifyPropertyChanged(nameof(TitleSearch));
+                NotifyPropertyChanged("TitleSearch");
             }
         }
 
@@ -208,11 +219,11 @@ namespace Kopra.ViewModel
 
         #region Methods
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        //[NotifyPropertyChangedInvocator]
+        //protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //}
 
         #endregion Methods
 

@@ -2,6 +2,7 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Kopra.Common;
+using Kopra.ViewModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -14,10 +15,12 @@ namespace Kopra.View
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+	    private ShowFiltersViewModel vm;
 
         public ShowFiltersPage()
         {
             InitializeComponent();
+			vm = DataContext as ShowFiltersViewModel;
             navigationHelper = new NavigationHelper(this);
             navigationHelper.LoadState += NavigationHelper_LoadState;
             navigationHelper.SaveState += NavigationHelper_SaveState;
@@ -53,9 +56,9 @@ namespace Kopra.View
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-
-			SetUserName();
-		}
+			UserCredentials.SetUserName(userNameTitle);
+	        //var filelist = vm.GetStoredFiles().Result;
+        }
 
 	    private void SetUserName()
 	    {

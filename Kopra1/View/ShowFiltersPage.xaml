@@ -4,30 +4,35 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:Kopra.ViewModel"
     mc:Ignorable="d"
     RequestedTheme="Light"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid x:Name="LayoutRoot" DataContext="{Binding Mode=TwoWay}">
+	<Page.DataContext>
+		<viewModel:ShowFiltersViewModel/>
+	</Page.DataContext>
+	<Grid x:Name="LayoutRoot" DataContext="{Binding Mode=TwoWay}">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+		</Grid.RowDefinitions>
 
-        <!-- Page header -->
-        <Grid Grid.Row="0" Background="{StaticResource AppPaletteMainAccentBrush}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+		<!-- Page header -->
+		<Grid Grid.Row="0" Background="{StaticResource AppPaletteMainAccentBrush}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="1*"></ColumnDefinition>
+				<ColumnDefinition Width="1*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
 
-            <Image Source="/Assets/LogoTheme.png"
+			<Image Source="/Assets/LogoTheme.png"
                    Height="40"
                    Grid.Column="0"
                    HorizontalAlignment="Left"
                    Margin="15,0,5,5"></Image>
 
-            <TextBlock x:Name="userNameTitle"
+			<TextBlock x:Name="userNameTitle"
                 Grid.Column="1"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Bottom"
@@ -36,20 +41,15 @@
                        Padding="0,0,0,0"
                        Style="{ThemeResource TitleTextBlockStyle}"
                         />
-        </Grid>
-        <!-- Body -->
-        <Grid Grid.Row="1">
-            <!--<StackPanel Children="{Binding FiltryList}">-->
-                <!-- Wyświetl listę filtrów-->
-			<ListView Name="filterList" SelectionMode="Single" >
-				<ListView.ItemTemplate>
-					<DataTemplate >
-						<TextBlock Name="filtr" Text="{Binding Path=FileName}"></TextBlock>
-					</DataTemplate>
-				</ListView.ItemTemplate>
-			</ListView>
-			<!--</StackPanel>-->
-        </Grid>
-    </Grid>
+		</Grid>
+		<!-- Title Panel -->
+		<StackPanel Grid.Row="1" Margin="19,0,0,0">
+			<TextBlock Text="Filtry" Margin="0,0,0,5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+		</StackPanel>
+		<Grid Grid.Row="2">
+			
+			
+		</Grid>
+		</Grid>
 
 </Page>

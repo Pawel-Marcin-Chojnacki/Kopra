@@ -114,6 +114,7 @@
     <Compile Include="ViewModel\AddFilterViewModel.cs" />
     <Compile Include="ViewModel\LoginPageViewModel.cs" />
     <Compile Include="ViewModel\SearchViewModel.cs" />
+    <Compile Include="ViewModel\ShowFiltersViewModel.cs" />
     <Compile Include="View\AddFilterPage.xaml.cs">
       <DependentUpon>AddFilterPage.xaml</DependentUpon>
     </Compile>
