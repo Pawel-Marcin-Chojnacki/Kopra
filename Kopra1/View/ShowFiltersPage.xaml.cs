@@ -2,6 +2,7 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Kopra.Common;
+using Kopra.Model;
 using Kopra.ViewModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -54,13 +55,14 @@ namespace Kopra.View
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
 			UserCredentials.SetUserName(userNameTitle);
-	        //var filelist = vm.GetStoredFiles().Result;
-        }
+			vm.StoredFiles = await vm.GetStoredFiles();
+			vm.Filters = await vm.ReadFilters();
+		}
 
-	    private void SetUserName()
+		private void SetUserName()
 	    {
 			SettingsManager loadUserName = new SettingsManager();
 			if (loadUserName.Username != null)
@@ -105,5 +107,14 @@ namespace Kopra.View
         }
 
         #endregion
+
+	    private void SearchAuctions(object sender, ItemClickEventArgs e)
+	    {
+		    var filter = (SearchFilter) e.ClickedItem;
+			RequestGenerator rg = new RequestGenerator();
+		    Uri filterUri  = rg.FilteredAuction(filter.Parameteres);
+			Frame.Navigate(typeof(SearchResultPage), filterUri);
+		}
+
     }
 }

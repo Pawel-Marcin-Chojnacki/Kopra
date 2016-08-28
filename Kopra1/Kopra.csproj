@@ -109,6 +109,7 @@
     <Compile Include="Model\KwotaPożyczkiModel.cs" />
     <Compile Include="Model\LoanAmount.cs" />
     <Compile Include="Model\LoanPeriod.cs" />
+    <Compile Include="Model\SearchFilter.cs" />
     <Compile Include="Model\Status.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="ViewModel\AddFilterViewModel.cs" />

@@ -118,31 +118,12 @@ namespace Kopra
             {
                 auctionsJson = JsonConvert.DeserializeObject<SearchAuctionResult>(_response.Content.ToString());
             }
-            catch (Exception)
+            catch (Exception exception)
             {
                 return null;
             }
             return auctionsJson;
         }
-
-		//public static async Task<ObservableCollection<Model.Auction.Auction>> SearchAuctionRequestTask(Uri address)
-		//{
-		//	await Task.Delay(TimeSpan.FromSeconds(1)); //Change for Timestamp
-		//	_response = await HttpClient.GetAsync(address).AsTask(_cts.Token);
-		//	var auctionsJson = new ObservableCollection<Model.Auction.Auction>();
-		//	Debug.WriteLine(address);
-		//	Debug.WriteLine(_response.Content);
-		//	try
-		//	{
-		//		auctionsJson = JsonConvert.DeserializeObject<SearchAuctionResult>(_response.Content.ToString());
-		//	}
-		//	catch (Exception)
-		//	{
-		//		return null;
-		//	}
-		//	return auctionsJson;
-		//}
-
 
 		public static async Task<Model.Auction.Auction> GetAuctionDataRequest(Uri address)
 		{

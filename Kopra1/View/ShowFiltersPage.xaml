@@ -47,8 +47,28 @@
 			<TextBlock Text="Filtry" Margin="0,0,0,5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
 		</StackPanel>
 		<Grid Grid.Row="2">
-			
-			
+			<ListView 
+				Grid.Row="0" 
+                ItemContainerStyle="{StaticResource ListItemStyle}"
+				ItemsSource="{Binding Path=Filters, Mode=TwoWay}"
+				IsItemClickEnabled="True"
+				 ItemClick="SearchAuctions">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition></ColumnDefinition>
+								<ColumnDefinition></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<TextBlock Grid.Column="0" Text="{Binding Path=Name}"></TextBlock>
+							<TextBlock Grid.Column="1" Text="{Binding Path=Parameters}"></TextBlock>
+						</Grid>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+				
+			</ListView>
+
+
 		</Grid>
 		</Grid>
 

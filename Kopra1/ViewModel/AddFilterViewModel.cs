@@ -240,6 +240,7 @@ namespace Kopra.ViewModel
 					byte[] fileContent = Encoding.UTF8.GetBytes(filterLink);
 					Stream fileStream = await file.OpenStreamForWriteAsync();
 					fileStream.Write(fileContent, 0, fileContent.Length);
+					
 					fileStream.Flush();
 					fileStream.Dispose();
 					MessageDialog msgDial = new MessageDialog("Filtr został zapisany");
@@ -260,7 +261,9 @@ namespace Kopra.ViewModel
 				{
 					content = await reader.ReadToEndAsync();
 				}
+
 			}
+
 		}
 
 		private char[] CreateLinkFromFields()
@@ -294,7 +297,6 @@ namespace Kopra.ViewModel
 			{
 				link.Append("&completedFrom=" + Completion.Percentage);
 			}
-
 			if (Investor != null)
 			{
 				link.Append("&investorsFrom=" + Investor.investorsFrom);
@@ -302,7 +304,6 @@ namespace Kopra.ViewModel
 			}
 			return link.ToString().ToCharArray();
 		}
-
 
 		#endregion Properties
 

@@ -23,6 +23,22 @@ namespace Kopra
 
 		private const string SearchQuery = BaseAddress + Search + Key;
 
+	    public Uri FilteredAuction(string filter)
+	    {
+		    StringBuilder webRequest = new StringBuilder();
+		    webRequest.Append(BaseAddress);
+		    webRequest.Append(Search);
+		    webRequest.Append("&");
+		    webRequest.Append(DataType);
+			webRequest.Append("&");
+
+			var sm = new SettingsManager();
+			webRequest.Append(Key + sm.KokosWebApiKey);
+		    webRequest.Append(filter);
+
+		    return new Uri(webRequest.ToString());
+	    }
+
         public Uri SearchAuction(Dictionary<string, string> search)
         {
             string requestAddress = BaseAddress + "search?";

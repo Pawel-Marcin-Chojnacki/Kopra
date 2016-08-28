@@ -6,57 +6,69 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 using Windows.Storage;
 using Windows.UI.Popups;
+using Kopra.Common;
+using Kopra.Model;
 using Kopra1.Annotations;
 
 namespace Kopra.ViewModel
 {
-    class ShowFiltersViewModel: MainViewModel
-    {
-	    public ShowFiltersViewModel()
-	    {
-		    StoredFiles = GetStoredFiles().Result;
-			ICustomFormatter formatter = new BinaryFo 
-	    }
+	class ShowFiltersViewModel : MainViewModel
+	{
+		public List<SearchFilter> _filters;
 
-	    private IReadOnlyList<StorageFile> StoredFiles { get; set; }
-		
-	    private async Task<IReadOnlyList<StorageFile>> GetStoredFiles()
-	    {
+		public ShowFiltersViewModel()
+		{
+			//StoredFiles = GetStoredFiles();
+			//Filters = ReadFilters().Result;
+		}
+
+		public IReadOnlyList<StorageFile> StoredFiles { get; set; }
+		public List<SearchFilter> Filters
+		{
+			get
+			{
+				return _filters; 
+				
+			}
+			set
+			{
+				_filters = value;
+				NotifyPropertyChanged(nameof(Filters));
+			}
+				
+		}
+
+		public async Task<IReadOnlyList<StorageFile>> GetStoredFiles()
+		{
 			// Get the app's installation folder.
 			StorageFolder appFolder =
-				ApplicationData.Current.LocalFolder; 
+				ApplicationData.Current.LocalFolder;
 
 			// Get the files in the current folder.
 			IReadOnlyList<StorageFile> filesInFolder =
-					  await appFolder.GetFilesAsync();
+				await appFolder.GetFilesAsync();
 
-			// Iterate over the results and print the list of files
-			// to the Visual Studio Output window.
-			//foreach (StorageFile file in filesInFolder)
-			//	Debug.WriteLine(file.Name + ", " + file.DateCreated);
-
-		    return filesInFolder;
-	    }
-
-
-
-
-
-		internal async void ReadFilter(string filterName)
-	    {
-
-			
-
-			//StorageFolder folder = ApplicationData.Current.LocalFolder;
-		 //   if (folder != null)
-		 //   {
-			//    StorageFile file = await folder.GetFileAsync(filterName);
-		 //   }
-			  
-	    }
-
+			return filesInFolder;
 		}
+
+		public async Task<List<SearchFilter>> ReadFilters()
+		{
+			var content = new List<SearchFilter>();
+			foreach (var file in StoredFiles)
+			{
+				var readingStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(file.Name);
+				using (var reader = new StreamReader(readingStream))
+				{
+					content.Add(new SearchFilter() { Name = file.Name, Parameteres = reader.ReadToEnd() } );
+				}
+			}
+			return content;
+		}
+
 	}
+}
 

@@ -58,7 +58,7 @@ namespace Kopra
         {
 			UserCredentials.SetUserName(userNameTitle);
 			var foundAuctions = (Uri)e.NavigationParameter;
-			SearchAuctionViewModel vm = (SearchAuctionViewModel)this.DataContext;
+			var vm = (SearchAuctionViewModel)this.DataContext;
 			vm.SearchAuction(foundAuctions);
 		}
 
