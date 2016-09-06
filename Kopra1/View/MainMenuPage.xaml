@@ -11,23 +11,19 @@
     xmlns:cv="using:Kopra.Converter"
     RequestedTheme="Light"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Page.DataContext>
-        <vm:MainMenuViewModel />
-    </Page.DataContext>
-
-    <Page.Resources>
+	<Page.DataContext>
+		<vm:MainMenuViewModel />
+	</Page.DataContext>
+	<Page.Resources>
         <ResourceDictionary>
             <cv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </Page.Resources>
-
     <Grid x:Name="LayoutRoot" DataContext="{Binding Mode=TwoWay}">
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-
         <!-- Page header -->
         <Grid Grid.Row="0" Background="{StaticResource AppPaletteMainAccentBrush}">
             <Grid.ColumnDefinitions>
@@ -60,95 +56,93 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!-- Tile-like buttons -->
-                    <Grid Grid.Row="0" 
+					<Grid Grid.Row="0" 
                           VerticalAlignment="Top" 
                           x:Name="Buttons"
                           Margin="19,19,19,19">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"></ColumnDefinition>
-                            <ColumnDefinition Width="9.5"></ColumnDefinition>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                            <ColumnDefinition Width="9.5"></ColumnDefinition>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="9.5"></RowDefinition>
-                            <RowDefinition Height="1*"></RowDefinition>
-                        </Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="2*"></ColumnDefinition>
+							<ColumnDefinition Width="9.5"></ColumnDefinition>
+							<ColumnDefinition Width="1*"></ColumnDefinition>
+							<ColumnDefinition Width="9.5"></ColumnDefinition>
+							<ColumnDefinition Width="1*"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="1*"></RowDefinition>
+							<RowDefinition Height="9.5"></RowDefinition>
+							<RowDefinition Height="1*"></RowDefinition>
+						</Grid.RowDefinitions>
 
 
-                        <Button 
+						<Button 
                             x:Name="addFilterButton"
                             Grid.Row="0"
                             Grid.Column="0"
                             Grid.RowSpan="3"
                             Style="{StaticResource AddFilterButtonStyle}" Click="addFilterButton_Click">
-                            <Grid Height="{Binding ActualHeight, ElementName=Buttons}"
+							<Grid Height="{Binding ActualHeight, ElementName=Buttons}"
                                   Width="{Binding ActualWidth, ElementName=addFilterButton}"
                                   Margin="-10,-10,-10,-10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition Height="auto"/>
-                                </Grid.RowDefinitions>
+								<Grid.RowDefinitions>
+									<RowDefinition />
+									<RowDefinition Height="auto"/>
+								</Grid.RowDefinitions>
 
-                                <TextBlock Grid.Row="0" Style="{StaticResource AddFilterIconStyle}"/>
+								<TextBlock Grid.Row="0" Style="{StaticResource AddFilterIconStyle}"/>
 
-                                <TextBlock Width="{Binding Width, ElementName=addFilterButton}"  
+								<TextBlock Width="{Binding Width, ElementName=addFilterButton}"  
                                                Grid.Row="1" 
                                                Style="{StaticResource SquareButtonDescriptionStyle}">
                                         Dodaj filtr
-                                </TextBlock>
-                            </Grid>
-                        </Button>
+								</TextBlock>
+							</Grid>
+						</Button>
 
-                        <theme:SquareGrid
+						<theme:SquareGrid
                             x:Name="searchAuctionButton"
                             Grid.Row="0"
                             Grid.Column="2"
                             >
-                            <Button Style="{StaticResource AddFilterButtonStyle}" Click="searchAuctionButton_Click">
-                                <Grid HorizontalAlignment="Center" Height="{Binding Height, ElementName=searchAuctionButton}">
-                                    <TextBlock Style="{StaticResource SearchIconStyle}"/>
-                                </Grid>
-                            </Button>
-                        </theme:SquareGrid>
-                        <theme:SquareGrid
+							<Button Style="{StaticResource AddFilterButtonStyle}" Click="searchAuctionButton_Click">
+								<Grid HorizontalAlignment="Center" Height="{Binding Height, ElementName=searchAuctionButton}">
+									<TextBlock Style="{StaticResource SearchIconStyle}"/>
+								</Grid>
+							</Button>
+						</theme:SquareGrid>
+						<theme:SquareGrid
                             x:Name="settingsButton"
                             Grid.Row="2"
                             Grid.Column="2">
-                            <Button Style="{StaticResource AddFilterButtonStyle}" Click="settingsButton_Click">
-                                <Grid HorizontalAlignment="Center" Height="{Binding Height, ElementName=settingsButton}">
-                                    <TextBlock Style="{StaticResource SettingsIconStyle}"/>
-                                </Grid>
-                            </Button>
-                        </theme:SquareGrid>
+							<Button Style="{StaticResource AddFilterButtonStyle}" Click="settingsButton_Click">
+								<Grid HorizontalAlignment="Center" Height="{Binding Height, ElementName=settingsButton}">
+									<TextBlock Style="{StaticResource SettingsIconStyle}"/>
+								</Grid>
+							</Button>
+						</theme:SquareGrid>
 
-                        <theme:SquareGrid
+						<theme:SquareGrid
                             x:Name="listFilteredAuctionsButton"
                             Grid.Row="0"
                             Grid.Column="4">
-                            <Button Style="{StaticResource AddFilterButtonStyle}" Click="ShowFilters">
-                                <Grid HorizontalAlignment="Center" Height="{Binding Height, ElementName=listFilteredAuctionsButton}">
-                                    <TextBlock Style="{StaticResource BrowserIconStyle}"/>
-                                </Grid>
-                            </Button>
-                        </theme:SquareGrid>
+							<Button Style="{StaticResource AddFilterButtonStyle}" Click="ShowFilters">
+								<Grid HorizontalAlignment="Center" Height="{Binding Height, ElementName=listFilteredAuctionsButton}">
+									<TextBlock Style="{StaticResource BrowserIconStyle}"/>
+								</Grid>
+							</Button>
+						</theme:SquareGrid>
 
-                        <theme:SquareGrid
+						<theme:SquareGrid
                             x:Name="inverstorReportButton"
                             Grid.Row="2"
                             Grid.Column="4">
-                            <Button Style="{StaticResource AddFilterButtonStyle}" Click="inverstorReportButton_Click">
-                                <Grid HorizontalAlignment="Center" Height="{Binding Height, ElementName=inverstorReportButton}">
-                                    <TextBlock Style="{StaticResource ReportIconStyle}"/>
-                                </Grid>
-                            </Button>
-                        </theme:SquareGrid>
-
-                    </Grid>
-
-                    <!-- Page content -->
+							<Button Style="{StaticResource AddFilterButtonStyle}" Click="inverstorReportButton_Click">
+								<Grid HorizontalAlignment="Center" Height="{Binding Height, ElementName=inverstorReportButton}">
+									<TextBlock Style="{StaticResource ReportIconStyle}"/>
+								</Grid>
+							</Button>
+						</theme:SquareGrid>
+					</Grid>
+					<!-- Page content -->
                     <Grid Grid.Row="1" Margin="19,19,19,19" DataContext="{Binding RecentAuctions}">
 
                         <Grid.RowDefinitions>

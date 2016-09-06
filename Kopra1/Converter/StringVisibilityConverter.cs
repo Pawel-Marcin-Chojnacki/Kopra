@@ -5,23 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
-using Kopra1.Model.Auction;
 
 namespace Kopra.Converter
 {
-	public class AuctionNumberConverter : IValueConverter
+	public class StringVisibilityConverter : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, string language)
 		{
-			return GetAuction(value);
-		}
-
-		private object GetAuction(object value)
-		{
-			if (!(value is string))
-				return value;
-			string objValue = (string)value;
-			return $"Aukcja nr {objValue}";
+			string str = value as string;
+			return string.IsNullOrEmpty(str) ? Visibility.Collapsed : Visibility.Visible;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, string language)

@@ -10,7 +10,7 @@ namespace Kopra.ViewModel
         #endregion
 
         #region properties
-        public string UserName { get { return "Hakerpawel"; } }
+        public string UserName { get { return "Użytkownik"; } }
         #endregion
 
         public void NotifyPropertyChanged(string propertyName)

@@ -142,7 +142,6 @@ namespace Kopra
 		private void LoadAuction(object sender, ItemClickEventArgs e)
 		{
 			MainMenuViewModel vm = (MainMenuViewModel) this.DataContext;
-		    var selectedItem = (ListView) sender;
 			Frame.Navigate(typeof(AuctionBasicDataPage), e.ClickedItem);
 		}
 	}

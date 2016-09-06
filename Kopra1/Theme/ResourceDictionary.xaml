@@ -105,10 +105,20 @@
 		<Setter Property="Foreground" Value="Black"></Setter>
 	</Style>
 
+	<Style x:Key="TextBlockHeader" BasedOn="{StaticResource GroupHeaderTextBlockStyle}" TargetType="TextBlock">
+		<Setter Property="Margin" Value="0,15,0,0"></Setter>
+	</Style>
+
 	<Style x:Key="TextBlockCommentResponse" BasedOn="{StaticResource BodyTextBlockStyle}" TargetType="TextBlock">
 		<Setter Property="FontSize" Value="12"></Setter>
 		<Setter Property="LineHeight" Value="14"></Setter>
 		<Setter Property="Foreground" Value="DarkGreen"></Setter>
+	</Style>
+
+	<Style x:Key="TextBlockLabel" BasedOn="{StaticResource BodyTextBlockStyle}" TargetType="TextBlock">
+		<Setter Property="FontSize" Value="24"></Setter>
+		<Setter Property="LineHeight" Value="30"></Setter>
+		<Setter Property="Foreground" Value="Green"></Setter>
 	</Style>
 
 </ResourceDictionary>

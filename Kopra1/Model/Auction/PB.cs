@@ -8,6 +8,11 @@ namespace Kopra1.Model.Auction
 {
 	public class PB
 	{
+		private string _maxMonthlyInstallment;
+		private string _maxVerifyMonthlyInstallment;
+		private string _income;
+		private string _expenses;
+		private string _credits;
 		public string userId { get; set; }
 		public string isRemoved { get; set; }
 		public string user { get; set; }
@@ -20,9 +25,43 @@ namespace Kopra1.Model.Auction
 		public string profession { get; set; }
 		public string employer { get; set; }
 		public string lastLoginDate { get; set; }
-		public string income { get; set; }
-		public string expenses { get; set; }
-		public string credits { get; set; }
+
+		public string income	
+		{
+			get {
+				if (string.IsNullOrWhiteSpace(_income))
+				{
+					return "0.00 zł";
+				}
+				return _income + " zł";
+			}
+			set { _income = value; }
+		}
+
+		public string expenses	
+		{
+			get {
+				if (string.IsNullOrWhiteSpace(_expenses))
+				{
+					return "0.00 zł";
+				}
+				return _expenses + " zł";
+			}
+			set { _expenses = value; }
+		}
+
+		public string credits
+		{
+			get {
+				if (string.IsNullOrWhiteSpace(_credits))
+				{
+					return "0.00 zł";
+				}
+				return _credits + " zł";
+			}
+			set { _credits = value; }
+		}
+
 		public string rating { get; set; }
 		public string phoneVerificationDate { get; set; }
 		public string phoneVerificationDescription { get; set; }
@@ -74,8 +113,33 @@ namespace Kopra1.Model.Auction
 		public string profilSLOther { get; set; }
 		public string overdueDays { get; set; }
 		public string beforeDays { get; set; }
-		public string maxMonthlyInstallment { get; set; }
-		public string maxVerifyMonthlyInstallment { get; set; }
+
+		public string maxMonthlyInstallment
+		{
+			get
+			{
+				if (string.IsNullOrWhiteSpace(_maxMonthlyInstallment))
+				{
+					return "0.00 zł";
+				}
+				return _maxMonthlyInstallment + " zł";
+			}
+			set { _maxMonthlyInstallment = value; }
+		}
+
+		public string maxVerifyMonthlyInstallment	
+		{
+			get
+			{
+				if (string.IsNullOrWhiteSpace(_maxVerifyMonthlyInstallment))
+				{
+					return "0.00 zł";
+				}
+				return _maxVerifyMonthlyInstallment +  " zł";
+			}
+			set { _maxVerifyMonthlyInstallment = value; }
+		}
+
 		public string positiveRecomendations { get; set; }
 		public string neutralRecomendations { get; set; }
 		public string negativeRecomendations { get; set; }

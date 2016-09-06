@@ -16,10 +16,11 @@
 	<Page.Resources>
 		<ResourceDictionary>
 			<converter:AuctionNumberConverter x:Key="AuctionNumberConverter" />
+			<converter:StringVisibilityConverter x:Key="StringVisibilityConverter" />
 		</ResourceDictionary>
 	</Page.Resources>
 
-	<Grid x:Name="LayoutRoot" DataContext="{Binding Mode=TwoWay}">
+	<Grid x:Name="LayoutRoot" DataContext="{Binding Auction, Mode=TwoWay}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"></RowDefinition>
@@ -56,39 +57,71 @@
 			</PivotItem.Header>
 			<ScrollViewer>
 				<StackPanel>
-					<TextBlock  
+						<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.id, Converter={StaticResource AuctionNumberConverter}, Mode=TwoWay}"/>
-				<TextBlock  
+							FontStyle="Italic"
+							FontSize="20"
+					Text="{Binding Path=id, Converter={StaticResource AuctionNumberConverter}, Mode=TwoWay}"
+						/>
+						<TextBlock  FontWeight="Bold"
 					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.title, Mode=TwoWay}"/>
+					Text="{Binding Path=title, Mode=TwoWay}"/>
+						<TextBlock Style="{StaticResource TextBlockHeader}"
+						   Visibility="{Binding Path=description1, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+						   Text="Opis"></TextBlock>
 				<TextBlock 
 					Style="{ThemeResource TextBlockTest}" 
-					Text="{Binding Path=Auction.description1, Mode=TwoWay}"/>
+					Text="{Binding Path=description1, Mode=TwoWay}"/>
+
+						<TextBlock Style="{StaticResource TextBlockHeader}"
+						   Visibility="{Binding Path=value, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+						   Text="Ile?"></TextBlock>
+						<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=value, Mode=TwoWay}"/>
+
+						<TextBlock Style="{StaticResource TextBlockHeader}"
+						   Visibility="{Binding Path=period, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+						   Text="Okres spłaty"></TextBlock>
+						<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=period, Mode=TwoWay}"/>
+
+						<TextBlock Style="{StaticResource TextBlockHeader}"
+						   Visibility="{Binding Path=percent, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+						   Text="Oprocentowanie"></TextBlock>
+
+						<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=percent, Mode=TwoWay}"/>
+
+						<TextBlock Style="{StaticResource TextBlockHeader}"
+						   Visibility="{Binding Path=timeToEnd, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+						   Text="Ile czasu do końca aukcji"></TextBlock>
+						<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=timeToEnd, Mode=TwoWay}"/>
+
+
+						<TextBlock Style="{StaticResource TextBlockHeader}"
+						   Visibility="{Binding Path=numberOfOffers, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+						   Text="Ilość ofert"></TextBlock>
+
+						<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=numberOfOffers, Mode=TwoWay}"/>
+						<TextBlock Style="{StaticResource TextBlockHeader}"
+						   Visibility="{Binding Path=firstPayData, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+						   Text="Data pierwszej spłaty"></TextBlock>
 				<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.value, Mode=TwoWay}"/>
+					Text="{Binding Path=firstPayData, Mode=TwoWay}"/>
 				<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.period, Mode=TwoWay}"/>
+					Text="{Binding Path=description2, Mode=TwoWay}"/>
 				<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.percent, Mode=TwoWay}"/>
-				<TextBlock  
-					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.timeToEnd, Mode=TwoWay}"/>
-				<TextBlock  
-					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.numberOfOffers, Mode=TwoWay}"/>
-				<TextBlock  
-					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.firstPayData, Mode=TwoWay}"/>
-				<TextBlock  
-					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.description2, Mode=TwoWay}"/>
-				<TextBlock  
-					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.description3, Mode=TwoWay}"/>
+					Text="{Binding Path=description3, Mode=TwoWay}"/>
 				</StackPanel>
 			</ScrollViewer>
 		</PivotItem>
@@ -97,68 +130,156 @@
 				<TextBlock Style="{ThemeResource HeaderTextBlockStyle}" Text="Pożyczkobiorca"></TextBlock>
 			</PivotItem.Header>
 			<ScrollViewer>
-			<StackPanel>
-				<TextBlock  
+					<StackPanel Margin="0,0,0,20">
+						<TextBlock Style="{StaticResource TextBlockHeader}"
+						   Visibility="{Binding Path=PB.user, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+						   Text="Użytkownik"></TextBlock>
+						<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.PB.user, Mode=TwoWay}"/>
-				<TextBlock  
+					Text="{Binding Path=PB.user, Mode=TwoWay}"/>
+						<TextBlock Style="{StaticResource TextBlockHeader}"
+						   Visibility="{Binding Path=PB.type, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+						   Text="Typ"></TextBlock>
+						<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.PB.type, Mode=TwoWay}"/>
-				<TextBlock  
+					Text="{Binding Path=PB.type, Mode=TwoWay}"/>
+						<TextBlock Style="{StaticResource TextBlockHeader}"
+						   Visibility="{Binding Path=PB.startDate, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+						   Text="W Kokosie od..."></TextBlock>
+						<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.PB.startDate, Mode=TwoWay}"/>
-				<TextBlock  
+					Text="{Binding Path=PB.startDate, Mode=TwoWay}"/>
+						<TextBlock Style="{StaticResource TextBlockHeader}"
+						   Visibility="{Binding Path=PB.city, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+						   Text="Miejscowość"></TextBlock>
+						<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.PB.city, Mode=TwoWay}"/>
-				<TextBlock  
+					Text="{Binding Path=PB.city, Mode=TwoWay}"/>
+						<TextBlock Style="{StaticResource TextBlockHeader}"
+						   Visibility="{Binding Path=PB.province, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+						   Text="Prowincja (gmina? wojewodztwo?)"></TextBlock>
+						<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.PB.province, Mode=TwoWay}"/>
-				<TextBlock  
+					Text="{Binding Path=PB.province, Mode=TwoWay}"/>
+						<TextBlock Style="{StaticResource TextBlockHeader}"
+						   Visibility="{Binding Path=PB.condition, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+						   Text="Kondycja"></TextBlock>
+						<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.PB.condition, Mode=TwoWay}"/>
-				<TextBlock  
+					Text="{Binding Path=PB.condition, Mode=TwoWay}"/>
+						<TextBlock Style="{StaticResource TextBlockHeader}"
+						   Visibility="{Binding Path=PB.age, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+						   Text="Wiek"></TextBlock>
+						<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.PB.age, Mode=TwoWay}"/>
-				<TextBlock  
+					Text="{Binding Path=PB.age, Mode=TwoWay}"/>
+						<TextBlock Style="{StaticResource TextBlockHeader}"
+						   Visibility="{Binding Path=PB.lastLoginDate, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+						   Text="Ostatnie logowanie"></TextBlock>
+						<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.PB.lastLoginDate, Mode=TwoWay}"/>
+					Text="{Binding Path=PB.lastLoginDate, Mode=TwoWay}"/>
 				</StackPanel>
 			</ScrollViewer>
-		</PivotItem>
-		<PivotItem x:Name="FinancialStatus" >
-			<PivotItem.Header>
-				<TextBlock  Style="{ThemeResource HeaderTextBlockStyle}" Text="Finanse"/>
-			</PivotItem.Header>
-			<StackPanel>
-				
-			</StackPanel>
 		</PivotItem>
 		<PivotItem x:Name="Recomendations" >
 			<PivotItem.Header>
-				<TextBlock  Style="{ThemeResource HeaderTextBlockStyle}" Text="Rekomendacje"></TextBlock>
+				<TextBlock  Style="{ThemeResource HeaderTextBlockStyle}" Text="Rekomendacje"/>
 			</PivotItem.Header>
-			<ScrollViewer>
 			<StackPanel>
-				<TextBlock  
-					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.PB.income, Mode=TwoWay}"/>
-				<TextBlock  
-					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.PB.expenses, Mode=TwoWay}"/>
-				<TextBlock  
-					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.PB.credits, Mode=TwoWay}"/>
-				<TextBlock  
-					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.PB.maxMonthlyInstallment, Mode=TwoWay}"/>
-				<TextBlock  
-					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.PB.maxVerifyMonthlyInstallment, Mode=TwoWay}"/>
-				<TextBlock  
-					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=Auction.PB.maxMonthlyInstallment, Mode=TwoWay}"/>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+						<TextBlock Grid.Row="0" TextAlignment="Left" Margin="5,0,0,0"
+					Text="👍 Rekomendacje pozytywne" Style="{ThemeResource TextBlockLabel}" Foreground="Black"/>
+						<TextBlock  Grid.Row="1"
+			Style="{ThemeResource TextBlockTest}" Foreground="DarkGreen"
+			Text="{Binding Path=PB.positiveRecomendations, Mode=TwoWay}"/>
+					</Grid>
+
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+						<TextBlock Grid.Row="0" TextAlignment="Left" Margin="5,0,0,0"
+					Text="✊ Rekomendacje neutralne" Foreground="Black" Style="{ThemeResource TextBlockLabel}"/>
+						<TextBlock  Grid.Row="1" 
+			Style="{ThemeResource TextBlockTest}"
+			Text="{Binding Path=PB.neutralRecomendations, Mode=TwoWay}"/>
+					</Grid>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+						<TextBlock Grid.Row="0" TextAlignment="Left" Margin="5,0,0,0"
+					Text="👎 Rekomendacje negatywne" Foreground="Black" Style="{ThemeResource TextBlockLabel}"/>
+						<TextBlock  
+			Style="{ThemeResource TextBlockTest}" Grid.Row="1" Foreground="DarkRed" 
+			Text="{Binding Path=PB.negativeRecomendations, Mode=TwoWay}"/>
+					</Grid>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+						<TextBlock Grid.Row="0" TextAlignment="Left" Margin="5,0,0,0"
+					Text="☺ Przedterminowe spłaty" Style="{ThemeResource TextBlockLabel}" Foreground="Black"/>
+						<TextBlock  Grid.Row="1" Foreground="DarkGreen" 
+			Style="{ThemeResource TextBlockTest}" 
+			Text="{Binding Path=PB.beforeDays, Mode=TwoWay}"/>
+					</Grid>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+						<TextBlock Grid.Row="0" TextAlignment="Left" Margin="5,0,0,0"
+					Text="☹ Opóźnienia spłat" Style="{ThemeResource TextBlockLabel}" Foreground="Black"/>
+						<TextBlock  Grid.Row="1" Foreground="DarkRed"
+			Style="{ThemeResource TextBlockTest}" Margin="45,0,0,10"
+			Text="{Binding Path=PB.overdueDays, Mode=TwoWay}"/>
+					</Grid>
 				</StackPanel>
-			</ScrollViewer>
+		</PivotItem>
+		<PivotItem x:Name="FinancialStatus" >
+			<PivotItem.Header>
+				<TextBlock  Style="{ThemeResource HeaderTextBlockStyle}" Text="Finanse"></TextBlock>
+			</PivotItem.Header>
+				<ScrollViewer>
+					<StackPanel Margin="0,0,0,20">
+							<TextBlock  Visibility="{Binding Path=PB.income, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+					Text="Dochody" Style="{ThemeResource TextBlockHeader}"/>
+							<TextBlock 
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=PB.income, Mode=TwoWay}"/>
+						<TextBlock  Visibility="{Binding Path=PB.expenses, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+			Text="Wydatki" Style="{ThemeResource TextBlockHeader}"/>
+							<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=PB.expenses, Mode=TwoWay}"/>
+
+						<TextBlock  Visibility="{Binding Path=PB.credits, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+		Text="Kredyty" Style="{ThemeResource TextBlockHeader}"/>
+							<TextBlock  
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=PB.credits, Mode=TwoWay}"/>
+						<TextBlock   Visibility="{Binding Path=PB.maxMonthlyInstallment, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+					Text="Limit raty miesięcznej" Style="{ThemeResource TextBlockHeader}"/>
+							<TextBlock 
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=PB.maxMonthlyInstallment, Mode=TwoWay}"/>
+
+						<TextBlock  Visibility="{Binding Path=PB.maxVerifyMonthlyInstallment, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
+					Text="Limit raty miesięcznej z weryfikacji finansowej/dochodu" Style="{ThemeResource TextBlockHeader}"/>
+							<TextBlock 
+					Style="{ThemeResource TextBlockTest}"
+					Text="{Binding Path=PB.maxVerifyMonthlyInstallment, Mode=TwoWay}"/>
+						</StackPanel>
+				</ScrollViewer>
 		</PivotItem>
 		<PivotItem x:Name="Offers" >
 			<PivotItem.Header>
@@ -166,7 +287,7 @@
 			</PivotItem.Header>
 			<ScrollViewer>
 				<StackPanel>
-				<ItemsControl Name="investorsCollection" ItemsSource="{Binding Auction.investments}">
+				<ItemsControl Name="investorsCollection" ItemsSource="{Binding investments}">
 					<ItemsControl.ItemsPanel>
 						<ItemsPanelTemplate>
 							<StackPanel Orientation="Horizontal"/>
@@ -219,7 +340,7 @@
 			</PivotItem.Header>
 			<ScrollViewer>
 			<StackPanel>
-					<ItemsControl Name="CommentsCollection" ItemsSource="{Binding Auction.comments}">
+					<ItemsControl Name="CommentsCollection" ItemsSource="{Binding comments}">
 						<ItemsControl.ItemsPanel>
 							<ItemsPanelTemplate>
 								<StackPanel Orientation="Vertical"></StackPanel>

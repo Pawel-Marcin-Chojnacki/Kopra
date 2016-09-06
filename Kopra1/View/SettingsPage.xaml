@@ -47,9 +47,8 @@
 
         <Grid Grid.Row="2" x:Name="ContentRoot" Margin="19,9.5,19,0">
             <StackPanel>
-                <Button x:Name="button" Content="Odśwież &quot;Web Key&quot;" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="342" Height="89" Click="button_Click"/>
-                <CheckBox HorizontalAlignment="Center" x:Uid="CkeckBoxWeryfikacjaPracodawcy" Content="Notyfikacje PUSH" IsChecked="{Binding WeryfikacjaPracodawcy, Mode=TwoWay}"/>
-                <Button x:Name="logoutButton" Content="Wyloguj"  Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="logoutButton_Click"/>
+				<Button x:Name="button" Content="Odśwież API" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top"  Click="button_Click"/>
+				<Button x:Name="logoutButton" Content="Wyloguj"  Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="logoutButton_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

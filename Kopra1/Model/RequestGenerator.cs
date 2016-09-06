@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Kopra1.Model.Auction;
 
@@ -11,7 +12,7 @@ namespace Kopra
     public class RequestGenerator
     {
         private const string BaseAddress = "https://kokos.pl/webapi/";
-        private const string DataType = "type=json";
+        private const string DataType = "&type=json";
         private const string Search = "search?";
         private const string RecentAuctions = "get-recent-auctions?";
 	    private const string AuctionData = "get-auction-data?";
@@ -28,14 +29,14 @@ namespace Kopra
 		    StringBuilder webRequest = new StringBuilder();
 		    webRequest.Append(BaseAddress);
 		    webRequest.Append(Search);
-		    webRequest.Append("&");
-		    webRequest.Append(DataType);
+
 			webRequest.Append("&");
 
 			var sm = new SettingsManager();
 			webRequest.Append(Key + sm.KokosWebApiKey);
 		    webRequest.Append(filter);
-
+			webRequest.Append(DataType);
+			Debug.WriteLine(webRequest.ToString());
 		    return new Uri(webRequest.ToString());
 	    }
 
@@ -60,14 +61,16 @@ namespace Kopra
         {
             string requestAddress = SearchQuery;
 			var sm = new SettingsManager();
-			requestAddress += sm.KokosWebApiKey + "&";
+			requestAddress += sm.KokosWebApiKey;
 			foreach (var item in search)
             {
-                requestAddress += item.Key + "=" + item.Value + "&";
+                requestAddress += "&" + item.Key + "=" + item.Value;
             }
             requestAddress += DataType;
             var result = new Uri(requestAddress);
-            return result;
+
+			Debug.WriteLine(result.ToString());
+			return result;
         }
 
         /// <summary>
@@ -78,11 +81,12 @@ namespace Kopra
         {
             var requestAddress = BaseAddress + RecentAuctions;
             var sm = new SettingsManager();
-            requestAddress += Key + sm.KokosWebApiKey + "&";
-            requestAddress += DataType + "&";
-            requestAddress += Records + "3";
-            var result = new Uri(requestAddress);
-            return result;
+            requestAddress += Key + sm.KokosWebApiKey;
+			requestAddress += DataType + "&";
+			requestAddress += Records + "3";
+			var result = new Uri(requestAddress);
+			Debug.WriteLine(result.ToString());
+			return result;
         }
 
 	    public Uri GetAuctionData(GetAuctionDataParameters parameters)

@@ -82,6 +82,7 @@
     <Compile Include="Common\FileManager.cs" />
     <Compile Include="Converter\AuctionNumberConverter.cs" />
     <Compile Include="Converter\SingleValueArrayConverter.cs" />
+    <Compile Include="Converter\StringVisibilityConverter.cs" />
     <Compile Include="Model\Auction\Auction.cs" />
     <Compile Include="Model\Auction\Comment.cs" />
     <Compile Include="Model\Auction\Comments.cs" />

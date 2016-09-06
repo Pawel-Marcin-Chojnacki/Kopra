@@ -46,8 +46,8 @@ namespace Kopra
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
             internetConnected = _connectionManager.CheckInternetConnection();
-            Email.Text = "hakerpawel@gmail.com";
-            Password.Password = "KopraTest";
+            Email.Text = "kopratest@gmail.com";
+            Password.Password = "Kopratest1";
         }
 
 

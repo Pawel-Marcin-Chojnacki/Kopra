@@ -64,27 +64,27 @@ namespace Kopra
 
         private static void SaveNewCredentials(string email, string password)
         {
-            //Debug.WriteLine("SaveNewCredentials");
-            SettingsManager credentials = new SettingsManager {Email = email};
+			Debug.WriteLine("SaveNewCredentials");
+			SettingsManager credentials = new SettingsManager {Email = email};
             Debug.WriteLine(credentials.Email);
             credentials.Password = password;
         }
 
         public static void GetWebApiKeyFromService()
         {
-            //Debug.WriteLine("GetWebAPIKeyFromService");
-            var credentials = new SettingsManager();
+			Debug.WriteLine("GetWebAPIKeyFromService");
+			var credentials = new SettingsManager();
             if (credentials.KokosWebApiKey != null)
             {
-                //Debug.WriteLine("Kokos webapiKEy " + credentials.KokosWebApiKey);
-            }
+				Debug.WriteLine("Kokos webapiKEy " + credentials.KokosWebApiKey);
+			}
             else
             {
                 var apiAccessAdress = new Uri("https://kokos.pl/webapiinfo/key");
                 _response = HttpClient.GetAsync(apiAccessAdress).AsTask(_cts.Token).Result;
                 string key = _response.Content.ToString();
-                //Debug.WriteLine(key);
-                if (key.Contains("klucz to: <strong>"))
+				Debug.WriteLine(key);
+				if (key.Contains("klucz to: <strong>"))
                 { 
                     key = key.Substring(key.IndexOf("klucz to: <strong>")+18, 32);
                     Debug.WriteLine(key);
@@ -127,7 +127,7 @@ namespace Kopra
 
 		public static async Task<Model.Auction.Auction> GetAuctionDataRequest(Uri address)
 		{
-			await Task.Delay(TimeSpan.FromSeconds(1));
+			//await Task.Delay(TimeSpan.FromSeconds(1));
 			_response = await HttpClient.GetAsync(address).AsTask(_cts.Token);
 			var auctionJson = new GetAuctionDataRoot();
 			var response = _response.Content.ToString();

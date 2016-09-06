@@ -10,7 +10,14 @@ namespace Kopra.Model.Auction
 	public class Auction
 	{
 		public string id { get; set; }
-		public string title { get; set; }
+		private string _title = string.Empty;
+
+		public string title
+		{
+			get { return _title.Trim(); }
+			set { _title = value; }
+		}
+
 		public string value { get; set; }
 		public string period { get; set; }
 		public string percent { get; set; }
