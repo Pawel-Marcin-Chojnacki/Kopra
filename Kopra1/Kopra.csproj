@@ -83,6 +83,7 @@
     <Compile Include="Converter\AuctionNumberConverter.cs" />
     <Compile Include="Converter\SingleValueArrayConverter.cs" />
     <Compile Include="Converter\StringVisibilityConverter.cs" />
+    <Compile Include="Model\ApiKeyGenerate.cs" />
     <Compile Include="Model\Auction\Auction.cs" />
     <Compile Include="Model\Auction\Comment.cs" />
     <Compile Include="Model\Auction\Comments.cs" />
@@ -115,7 +116,9 @@
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="ViewModel\AddFilterViewModel.cs" />
     <Compile Include="ViewModel\LoginPageViewModel.cs" />
+    <Compile Include="ViewModel\InvestorReportPage.cs" />
     <Compile Include="ViewModel\SearchViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\ShowFiltersViewModel.cs" />
     <Compile Include="View\AddFilterPage.xaml.cs">
       <DependentUpon>AddFilterPage.xaml</DependentUpon>
@@ -252,6 +255,9 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.Core">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft SDKs\WindowsPhoneApp\v8.1\ExtensionSDKs\TestPlatform\14.0\References\CommonConfiguration\neutral\Microsoft.VisualStudio.TestPlatform.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>

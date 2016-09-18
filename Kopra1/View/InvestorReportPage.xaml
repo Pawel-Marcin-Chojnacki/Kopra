@@ -7,11 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     RequestedTheme="Light"
-	
+	xmlns:vm="using:Kopra.ViewModel"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.DataContext>
+        <vm:InvestorReportPage/>
+    </Page.DataContext>
 	<Grid x:Name="LayoutRoot" DataContext="{Binding Mode=TwoWay}">
-
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>

@@ -112,7 +112,7 @@ namespace Kopra
         public string paid { get; set; }
         public string monthlyInstallment { get; set; }
         public string firstPayData { get; set; }
-        public object status { get; set; }
+        public string status { get; set; }
         public string rating { get; set; }
         public string gg { get; set; }
         public string skype { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading;
@@ -19,19 +20,11 @@ namespace Kopra
         private const string LoginAddress = "https://kokos.pl/uzytkownik/dane-osobowe";
         private static readonly Uri _resourceAddress = new Uri(LoginAddress);
         private static HttpResponseMessage _response;
-
-        public static void FillLoginData()
-        {
-            
-        }
+        private static SettingsManager settingsManager = new SettingsManager();
 
         public static  async Task<HttpResponseMessage> LoginToService(string text, string password)
         {
             Debug.WriteLine("LoginToService");
-            //if (IsEmailValid(text) && IsPasswordValid(password))
-            //    return null;
-            //if (!(text.Contains("@") && password.Length >= 5))
-            //    return null;
             HttpClient.DefaultRequestHeaders.UserAgent.Add(new HttpProductInfoHeaderValue("Kopra","1"));
             var form = new HttpMultipartFormDataContent
             {
@@ -49,7 +42,6 @@ namespace Kopra
         {
             if (password.Length >= 5) return true;
             return false;
-            //password.Length >= 5 ? true : false;
         }
 
         /// <summary>
@@ -74,7 +66,7 @@ namespace Kopra
         {
 			Debug.WriteLine("GetWebAPIKeyFromService");
 			var credentials = new SettingsManager();
-            if (credentials.KokosWebApiKey != null)
+            if (!string.IsNullOrWhiteSpace(credentials.KokosWebApiKey) && !string.IsNullOrWhiteSpace(credentials.KokosWebApiValid))
             {
 				Debug.WriteLine("Kokos webapiKEy " + credentials.KokosWebApiKey);
 			}
@@ -89,6 +81,9 @@ namespace Kopra
                     key = key.Substring(key.IndexOf("klucz to: <strong>")+18, 32);
                     Debug.WriteLine(key);
                     credentials.KokosWebApiKey = key;
+                    string valid = _response.Content.ToString();
+                    valid = valid.Substring(valid.IndexOf("Data waÅ¼noÅci: <strong>")+25, 19);
+                    credentials.KokosWebApiValid = valid;
                 }
                 else
                 {
@@ -96,15 +91,61 @@ namespace Kopra
                 }
             }
         }
-        
        
-        public static void GenerateApiKeyFromService()
+        public static async Task<ApiKeyGenerate> GenerateApiKeyFromService()
         {
-            Uri apiGeneratorAddress = new Uri("https://kokos.pl/webapiinfo/key/webapiinfo/generate-key");
+            ApiKeyGenerate result = new ApiKeyGenerate();
+            Uri apiGeneratorAddress = new Uri("https://kokos.pl/webapiinfo/generate-key");
             HttpMultipartFormDataContent form = new HttpMultipartFormDataContent();
-           // response = await httpClient.GetAsync(apiGeneratorAddress).AsTask(cts.Token);
+            form.Add(new HttpFormUrlEncodedContent(new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("","")}));
+            var response = HttpClient.PostAsync(apiGeneratorAddress, form).AsTask(_cts.Token).Result;
+            await Task.Delay(10000);
             Debug.WriteLine(_response.Content);
-            GetWebApiKeyFromService();
+            var apiAccessAdress = new Uri("https://kokos.pl/webapiinfo/key");
+            _response = HttpClient.GetAsync(apiAccessAdress).AsTask(_cts.Token).Result;
+            //Task.Delay(2000);
+            string key = _response.Content.ToString();
+            Debug.WriteLine(key);
+            var credentials = new SettingsManager();
+            if (key.Contains("klucz to: <strong>"))
+            {
+                key = key.Substring(key.IndexOf("klucz to: <strong>") + 18, 32);
+                Debug.WriteLine(key);
+                credentials.KokosWebApiKey = key;
+
+                string valid = _response.Content.ToString();
+                valid = valid.Substring(valid.IndexOf("Data waÅ¼noÅci: <strong>") + 25, 19);
+
+                credentials.KokosWebApiValid = valid;
+                result.ValidTime = valid;
+                result.Message = "Wygenerowano nowy klucz, będzie ważny przez rok!\n";
+            }
+            else
+            {
+                Debug.WriteLine(_response.Content);
+            }
+            //GetWebApiKeyFromService();
+            if (result.ValidTime != null)
+            {
+                return result;
+                //return SetApiKeyMessage(, result.ValidTime);
+            }
+            else
+            {
+                result.ValidTime = "Błąd pobierania daty.";
+                result.Message = "Nie można wygenerować klucza z nieznanej przyczyny!\n";
+                return result;
+            }
+        }
+
+        private static ApiKeyGenerate SetApiKeyMessage(string message, string date)
+        {
+            var result = new ApiKeyGenerate
+            {
+                Message = message
+                , ValidTime = date
+            };
+            return result;
         }
 
         public static async Task<SearchAuctionResult> SendRestRequest(Uri address)

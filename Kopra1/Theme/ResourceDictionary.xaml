@@ -121,4 +121,9 @@
 		<Setter Property="Foreground" Value="Green"></Setter>
 	</Style>
 
+    <Style x:Key="ButtonSettings" TargetType="Button">
+        <Setter Property="FontSize" Value="24"></Setter>
+        <Setter Property="Foreground" Value="Black"></Setter>
+    </Style>
+
 </ResourceDictionary>

@@ -13,7 +13,8 @@ namespace Kopra
         private const string PasswordKey = "password";
         private const string UserNameKey = "userName";
         private const string FiltersListKey = "filters";
-        
+        private const string KokosWebApiValidKey = "kokosWebApiValid";
+
         public void ClearData()
         {
             _values.Clear();
@@ -50,6 +51,21 @@ namespace Kopra
             set
             {
                 _values[KokosWebApiKeyKey] = value;
+            }
+        }
+
+        public string KokosWebApiValid
+        {
+            get
+            {
+                if (_values.ContainsKey(KokosWebApiValidKey))
+                    return (string)_values[KokosWebApiValidKey];
+                return null;
+            }
+
+            set
+            {
+                _values[KokosWebApiValidKey] = value;
             }
         }
 

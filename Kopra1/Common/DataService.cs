@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Kopra1.Model.Auction;
+using System.Collections.Generic;
 
 namespace Kopra.Common
 {
@@ -52,7 +53,15 @@ namespace Kopra.Common
 			if (foundedAuctions != null)
 				foreach (var auction in foundedAuctions.response.auctions.auction)
 				{
-					result.Add(auction);
+                    if (auction.status == "110" || auction.status == "100")
+                        continue;
+                    List<string> statusesToCheck = new List<string> { "1500", "1400", "1300" };
+                    foreach (var stats in statusesToCheck)
+                    {
+                        if (auction.status == stats)
+                            Debugger.Break();
+                                            }
+                    result.Add(auction);
 				}
 		    return result;
 	    }

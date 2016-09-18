@@ -4,6 +4,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http;
 using Kopra.Common;
+using Kopra.ViewModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -16,11 +17,11 @@ namespace Kopra
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-
+        private SettingsViewModel vm;
         public SettingsPage()
         {
             InitializeComponent();
-
+            vm = DataContext as SettingsViewModel;
             navigationHelper = new NavigationHelper(this);
             navigationHelper.LoadState += NavigationHelper_LoadState;
             navigationHelper.SaveState += NavigationHelper_SaveState;
@@ -100,7 +101,7 @@ namespace Kopra
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            KokosConnectionManager.GenerateApiKeyFromService();
+            vm.GenerateApiKey();
         }
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)
