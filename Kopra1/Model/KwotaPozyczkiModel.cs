@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kopra1.Model
 {
-    class KwotaPożyczkiModel
+    class KwotaPozyczkiModel
     {
         public string KwotaOd { get; set; }
         public string KwotaDo { get; set; }

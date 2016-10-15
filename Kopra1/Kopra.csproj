@@ -80,6 +80,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Common\FileManager.cs" />
+    <Compile Include="Common\ParserService.cs" />
     <Compile Include="Converter\AuctionNumberConverter.cs" />
     <Compile Include="Converter\SingleValueArrayConverter.cs" />
     <Compile Include="Converter\StringVisibilityConverter.cs" />
@@ -108,7 +109,7 @@
     <Compile Include="Model\Completion.cs" />
     <Compile Include="Model\Interest.cs" />
     <Compile Include="Model\Investor.cs" />
-    <Compile Include="Model\KwotaPożyczkiModel.cs" />
+    <Compile Include="Model\KwotaPozyczkiModel.cs" />
     <Compile Include="Model\LoanAmount.cs" />
     <Compile Include="Model\LoanPeriod.cs" />
     <Compile Include="Model\SearchFilter.cs" />
@@ -255,6 +256,10 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.Core">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft SDKs\WindowsPhoneApp\v8.1\ExtensionSDKs\TestPlatform\14.0\References\CommonConfiguration\neutral\Microsoft.VisualStudio.TestPlatform.Core.dll</HintPath>
     </Reference>

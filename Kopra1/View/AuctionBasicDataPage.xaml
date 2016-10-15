@@ -75,9 +75,8 @@
 
 						<TextBlock Style="{StaticResource TextBlockHeader}"
 						   Visibility="{Binding Path=value, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
-						   Text="Ile?"></TextBlock>
-						<TextBlock  
-					Style="{ThemeResource TextBlockTest}"
+						   Text="Kwota"></TextBlock>
+						<TextBlock Style="{ThemeResource TextBlockTest}"
 					Text="{Binding Path=value, Mode=TwoWay}"/>
 
 						<TextBlock Style="{StaticResource TextBlockHeader}"
@@ -145,7 +144,7 @@
 					Text="{Binding Path=PB.type, Mode=TwoWay}"/>
 						<TextBlock Style="{StaticResource TextBlockHeader}"
 						   Visibility="{Binding Path=PB.startDate, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
-						   Text="W Kokosie od..."></TextBlock>
+						   Text="W Kokosie od"></TextBlock>
 						<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
 					Text="{Binding Path=PB.startDate, Mode=TwoWay}"/>
@@ -157,7 +156,7 @@
 					Text="{Binding Path=PB.city, Mode=TwoWay}"/>
 						<TextBlock Style="{StaticResource TextBlockHeader}"
 						   Visibility="{Binding Path=PB.province, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
-						   Text="Prowincja (gmina? wojewodztwo?)"></TextBlock>
+						   Text="Województwo"></TextBlock>
 						<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
 					Text="{Binding Path=PB.province, Mode=TwoWay}"/>
@@ -240,7 +239,7 @@
 						<TextBlock Grid.Row="0" TextAlignment="Left" Margin="5,0,0,0"
 					Text="☹ Opóźnienia spłat" Style="{ThemeResource TextBlockLabel}" Foreground="Black"/>
 						<TextBlock  Grid.Row="1" Foreground="DarkRed"
-			Style="{ThemeResource TextBlockTest}" Margin="45,0,0,10"
+			Style="{ThemeResource TextBlockTest}" 
 			Text="{Binding Path=PB.overdueDays, Mode=TwoWay}"/>
 					</Grid>
 				</StackPanel>
@@ -359,14 +358,17 @@
 											<Grid>
 												<Grid.ColumnDefinitions>
 													<ColumnDefinition />
-													<ColumnDefinition />
-													<ColumnDefinition />
-													<ColumnDefinition />
 												</Grid.ColumnDefinitions>
-												<TextBlock  Grid.Column="0" Text="{Binding Path=date}" Style="{ThemeResource TextBlockTest}" />
-												<TextBlock  Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Path=description}" Style="{ThemeResource TextBlockTest}" />
-												<TextBlock Grid.Column="2" HorizontalAlignment="Right"  Text="{Binding Path=answerData}" Style="{ThemeResource TextBlockTest}" />
-												<TextBlock  Grid.Column="3"  HorizontalAlignment="Right" Text="{Binding Path=answerDescription}" Style="{ThemeResource TextBlockCommentResponse}" />
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition/>
+                                                        <RowDefinition/>
+                                                        <RowDefinition/>
+                                                        <RowDefinition/>
+                                                    </Grid.RowDefinitions>
+                                                    <TextBlock  Grid.Column="0" Grid.Row="0" Text="{Binding Path=date}" Style="{ThemeResource TextBlockHeader}" />
+                                                    <TextBlock  Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Text="{Binding Path=description}" Style="{ThemeResource TextBlockTest}" />
+                                                    <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right"  Text="{Binding Path=answerData}" Style="{ThemeResource TextBlockTest}" />
+                                                    <TextBlock  Grid.Column="0"  Grid.Row="3" HorizontalAlignment="Right" Text="{Binding Path=answerDescription}" Style="{ThemeResource TextBlockCommentResponse}" />
 											</Grid>
 										</DataTemplate></ItemsControl.ItemTemplate>
 								</ItemsControl>

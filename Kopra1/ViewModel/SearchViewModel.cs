@@ -108,8 +108,8 @@ namespace Kopra.ViewModel
 
         public List<LoanAmount> LoanAmounts { get; set; }
 
-        private KwotaPożyczkiModel _wybranaKwota;
-        public KwotaPożyczkiModel WybranaKwota
+        private KwotaPozyczkiModel _wybranaKwota;
+        public KwotaPozyczkiModel WybranaKwota
         {
             get
             {
@@ -360,13 +360,13 @@ namespace Kopra.ViewModel
             StatusyPozyczek = new List<Status>()
             {
                 new Status() {Opis = "Nowa pożyczka", StatusLiczbowy = 100},
-                new Status() {Opis = "W trakcie tworzenia", StatusLiczbowy = 110},
+                //new Status() {Opis = "W trakcie tworzenia", StatusLiczbowy = 110},
                 new Status() {Opis = "Trwa spłata", StatusLiczbowy = 500},
                 new Status() {Opis = "Uzbierano poniżej 50% inwestycji", StatusLiczbowy = 1100},
                 new Status() {Opis = "Uzbierano 0% inwestycji", StatusLiczbowy = 1200},
                 new Status() {Opis = "Spłacona w całości", StatusLiczbowy = 1300},
-                new Status() {Opis = "Usunięta przez obsługę", StatusLiczbowy = 1400},
-                new Status() {Opis = "Usunięta przez użytkownika", StatusLiczbowy = 1500}
+                //new Status() {Opis = "Usunięta przez obsługę", StatusLiczbowy = 1400},
+                //new Status() {Opis = "Usunięta przez użytkownika", StatusLiczbowy = 1500}
             };
         }
     }

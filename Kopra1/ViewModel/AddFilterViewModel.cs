@@ -99,8 +99,8 @@ namespace Kopra.ViewModel
 
 		public List<LoanAmount> LoanAmounts { get; set; }
 
-		private KwotaPożyczkiModel _wybranaKwota;
-		public KwotaPożyczkiModel WybranaKwota
+		private KwotaPozyczkiModel _wybranaKwota;
+		public KwotaPozyczkiModel WybranaKwota
 		{
 			get
 			{
@@ -124,8 +124,8 @@ namespace Kopra.ViewModel
 				NotifyPropertyChanged(nameof(LoanInterest));
 			}
 	}
-		
-		public List<Interest> LoanInterests
+
+        public List<Interest> LoanInterests
 		{
 			get { return _loanInterests; }
 			set
@@ -159,8 +159,8 @@ namespace Kopra.ViewModel
 				NotifyPropertyChanged(nameof(LoanPeriods));
 			}
 		}
-		
-		public Completion Completion
+
+        public Completion Completion
 		{
 			get
 			{
@@ -198,7 +198,7 @@ namespace Kopra.ViewModel
 				NotifyPropertyChanged("Status");
 			}
 		}
-		
+
 		public string TitleSearch
 		{
 			get
@@ -211,7 +211,6 @@ namespace Kopra.ViewModel
 				NotifyPropertyChanged(nameof(TitleSearch));
 			}
 		}
-
 
 		public string FilterName
 		{
@@ -240,7 +239,6 @@ namespace Kopra.ViewModel
 					byte[] fileContent = Encoding.UTF8.GetBytes(filterLink);
 					Stream fileStream = await file.OpenStreamForWriteAsync();
 					fileStream.Write(fileContent, 0, fileContent.Length);
-					
 					fileStream.Flush();
 					fileStream.Dispose();
 					MessageDialog msgDial = new MessageDialog("Filtr został zapisany");
@@ -249,15 +247,15 @@ namespace Kopra.ViewModel
 			}
 			catch (Exception)
 			{
-				MessageDialog msgDial = new MessageDialog("Nie można zapisać filtru: ");
+				var msgDial = new MessageDialog("Nie można zapisać filtru: ");
 				await msgDial.ShowAsync();
 				throw;
 			}
 			finally
 			{
-				string content = string.Empty;
+				var content = string.Empty;
 				var readingStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(FilterName);
-				using (StreamReader reader = new StreamReader(readingStream))
+				using (var reader = new StreamReader(readingStream))
 				{
 					content = await reader.ReadToEndAsync();
 				}
@@ -401,13 +399,13 @@ namespace Kopra.ViewModel
 			StatusyPozyczek = new List<Status>()
 			{
 				new Status() {Opis = "Nowa pożyczka", StatusLiczbowy = 100},
-				new Status() {Opis = "W trakcie tworzenia", StatusLiczbowy = 110},
+				//new Status() {Opis = "W trakcie tworzenia", StatusLiczbowy = 110},
 				new Status() {Opis = "Trwa spłata", StatusLiczbowy = 500},
 				new Status() {Opis = "Uzbierano poniżej 50% inwestycji", StatusLiczbowy = 1100},
 				new Status() {Opis = "Uzbierano 0% inwestycji", StatusLiczbowy = 1200},
 				new Status() {Opis = "Spłacona w całości", StatusLiczbowy = 1300},
-				new Status() {Opis = "Usunięta przez obsługę", StatusLiczbowy = 1400},
-				new Status() {Opis = "Usunięta przez użytkownika", StatusLiczbowy = 1500}
+				//new Status() {Opis = "Usunięta przez obsługę", StatusLiczbowy = 1400},
+				//new Status() {Opis = "Usunięta przez użytkownika", StatusLiczbowy = 1500}
 			};
 		}
 

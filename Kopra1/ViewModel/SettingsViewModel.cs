@@ -34,7 +34,7 @@ namespace Kopra.ViewModel
 	    public async void GenerateApiKey()
 	    {
             ApiResponse = await KokosConnectionManager.GenerateApiKeyFromService();
-            Dupa(ApiResponse);
+            CreateNewKey(ApiResponse);
             //ApiKeyValidDate = ApiResponse.ValidTime;
 	    }
 
@@ -58,7 +58,7 @@ namespace Kopra.ViewModel
 	        }
 	    }
 
-        private async void Dupa(ApiKeyGenerate value)
+        private async void CreateNewKey(ApiKeyGenerate value)
         {
             if (value.ValidTime != null)
             {

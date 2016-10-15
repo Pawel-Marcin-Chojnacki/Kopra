@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace Kopra
 {
@@ -29,7 +30,7 @@ namespace Kopra
         public string percent {
             get
             {
-                double a = Convert.ToDouble(_percent);
+                double a = Double.Parse(_percent, CultureInfo.InvariantCulture);
                 return Math.Round(a)+"%";
             }
              set
@@ -39,10 +40,7 @@ namespace Kopra
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string createDate {
+       public string createDate {
             get
             {
                 DateTime niceDate = new DateTime();
@@ -66,9 +64,9 @@ namespace Kopra
             {
                 Debug.WriteLine("localTime: " + localTime);
                 var dt = new DateTime(localTime.Ticks);
-                Debug.WriteLine("dt: " + dt);
+                //Debug.WriteLine("dt: " + dt);
                 utc = dt.ToLocalTime();
-                Debug.WriteLine("utc: " + utc);
+                //Debug.WriteLine("utc: " + utc);
             }
             catch (Exception) { }
             return new TimeSpan(utc.Ticks);
@@ -76,7 +74,7 @@ namespace Kopra
 
         private string FormatDate(DateTime datetimeUTC)
         {
-            var difference = UTCTimeToLocalTime(DateTime.UtcNow.Subtract(datetimeUTC));
+            var difference = UTCTimeToLocalTime(datetimeUTC.TimeOfDay);
             Debug.WriteLine(difference);
             if (difference.TotalDays > 30)
                 return datetimeUTC.ToLocalTime().ToString("yyyy-MM-dd");

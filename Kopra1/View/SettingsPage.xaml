@@ -54,8 +54,8 @@
                 <TextBox x:Name="ApiKeyValue" TextWrapping="Wrap" Text="{Binding Path=ApiKeyValue}"  IsReadOnly="True" Margin="5,0,5,3"/>
                 <TextBlock x:Name="LabelApiKeyValidDate" TextWrapping="Wrap" Text="Data ważności klucza:" Style="{ThemeResource TextBlockTest}" Margin="0,3,0,3"/>
                 <TextBox x:Name="ApiKeyValidDate" TextWrapping="Wrap" Text="{Binding Path=ApiKeyValidDate, Mode=TwoWay}"  IsReadOnly="True" Margin="5,0,5,3"/>
-                <Button x:Name="Button" Content="Odśwież API" HorizontalAlignment="Center" Style="{ThemeResource ButtonSettings}" Margin="10,3,9.667,3" VerticalAlignment="Top"  Click="button_Click" Width="342" Height="70" />
-                <Button x:Name="LogoutButton" Content="Wyloguj"  Margin="10,3,9.667,3"  Style="{ThemeResource ButtonSettings}" VerticalAlignment="Top" HorizontalAlignment="Center" Click="logoutButton_Click" Width="342" Height="70"/>
+                <Button x:Name="Button" Content="Odśwież API" HorizontalAlignment="Center" Style="{ThemeResource ButtonSettings}" Margin="10,3,9.667,3" VerticalAlignment="Top" Click="button_Click" Width="340" Height="70" />
+                <Button x:Name="LogoutButton" Content="Wyloguj" Style="{ThemeResource ButtonSettings}" VerticalAlignment="Top" HorizontalAlignment="Center" Click="logoutButton_Click" Width="340" Height="70"/>
             </StackPanel>
         </Grid>
     </Grid>

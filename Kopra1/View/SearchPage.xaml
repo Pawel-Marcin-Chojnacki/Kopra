@@ -97,6 +97,7 @@
                         SelectedValue="{Binding Completion, Mode=TwoWay}"></ComboBox>
                 <TextBlock>Ilość inwestorów</TextBlock>
                 <ComboBox 
+                    
                         ItemsSource="{Binding Path=Investors}" 
                         PlaceholderText="Ilość inwestorów" 
                         DisplayMemberPath="Description"

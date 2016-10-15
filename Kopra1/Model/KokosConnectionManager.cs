@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Web.Http;
@@ -22,7 +23,7 @@ namespace Kopra
         private static HttpResponseMessage _response;
         private static SettingsManager settingsManager = new SettingsManager();
 
-        public static  async Task<HttpResponseMessage> LoginToService(string text, string password)
+        public static async Task<HttpResponseMessage> LoginToService(string text, string password)
         {
             Debug.WriteLine("LoginToService");
             HttpClient.DefaultRequestHeaders.UserAgent.Add(new HttpProductInfoHeaderValue("Kopra","1"));
@@ -91,7 +92,7 @@ namespace Kopra
                 }
             }
         }
-       
+
         public static async Task<ApiKeyGenerate> GenerateApiKeyFromService()
         {
             ApiKeyGenerate result = new ApiKeyGenerate();
@@ -153,11 +154,13 @@ namespace Kopra
             await Task.Delay(TimeSpan.FromSeconds(1)); //Change for Timestamp
             _response = await HttpClient.GetAsync(address).AsTask(_cts.Token);
             var auctionsJson = new SearchAuctionResult();
+            var acute = new Regex(@"&oacute;");
+            var response = acute.Replace(_response.Content.ToString(), @"ó");
             Debug.WriteLine(address);
-            Debug.WriteLine(_response.Content);
+            Debug.WriteLine(response);
             try
             {
-                auctionsJson = JsonConvert.DeserializeObject<SearchAuctionResult>(_response.Content.ToString());
+                auctionsJson = JsonConvert.DeserializeObject<SearchAuctionResult>(response);
             }
             catch (Exception exception)
             {
@@ -171,8 +174,9 @@ namespace Kopra
 			//await Task.Delay(TimeSpan.FromSeconds(1));
 			_response = await HttpClient.GetAsync(address).AsTask(_cts.Token);
 			var auctionJson = new GetAuctionDataRoot();
-			var response = _response.Content.ToString();
-			try
+            var acute = new Regex(@"&oacute;");
+            var response = acute.Replace(_response.Content.ToString(), @"ó");
+            try
 			{
 				auctionJson = JsonConvert.DeserializeObject<GetAuctionDataRoot>(response, new JsonSerializerSettings
 				{
@@ -186,5 +190,12 @@ namespace Kopra
 			}
 			return auctionJson.response.auction;
 		}
+
+        public static async Task<string> GetWebSource(string address)
+        {
+            var location = new Uri(address);
+            var source = await HttpClient.GetAsync(location).AsTask(_cts.Token);
+            return source.Content.ToString();
+        }
 	}
 }

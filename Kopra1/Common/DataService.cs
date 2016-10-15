@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Kopra1.Model.Auction;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Kopra.Common
 {
@@ -53,14 +54,17 @@ namespace Kopra.Common
 			if (foundedAuctions != null)
 				foreach (var auction in foundedAuctions.response.auctions.auction)
 				{
-                    if (auction.status == "110" || auction.status == "100")
+                    //if (auction.status == "110" || auction.status == "100")
+                    //    continue;
+                    List<string> statusesToCheck = new List<string> {"110", "120", "130", "150", "1500", "1400" };
+                    bool forbiddenStatus = statusesToCheck.Any(s => auction.status.Equals(s));
+                    if (forbiddenStatus)
                         continue;
-                    List<string> statusesToCheck = new List<string> { "1500", "1400", "1300" };
-                    foreach (var stats in statusesToCheck)
-                    {
-                        if (auction.status == stats)
-                            Debugger.Break();
-                                            }
+                    //foreach (var stats in statusesToCheck)
+                    //{
+                    //    if (auction.status == stats)
+                    //        Debugger.Break();
+                    //}
                     result.Add(auction);
 				}
 		    return result;

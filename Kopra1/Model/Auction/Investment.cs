@@ -16,5 +16,5 @@ namespace Kopra.Model.Auction
 		public string isSold { get; set; }
 		public string userMarkAsRepaid { get; set; }
 		public string assigneeMarkAsRepaid { get; set; }
-	}	
+	}
 }
