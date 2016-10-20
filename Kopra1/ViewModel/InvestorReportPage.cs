@@ -138,7 +138,6 @@ namespace Kopra.ViewModel
             PotentialGain = parserService.GetPotentialGain();
             Resources = parserService.GetResources();
             ReturnOfInvestments = parserService.GetReturnOfInvestment();
-            
         }
 
     }

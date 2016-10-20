@@ -49,7 +49,7 @@
 		</Grid>
         <!-- Title Panel -->
         <StackPanel Grid.Row="1" Margin="19,0,0,0">
-            <TextBlock Text="Wyniki wyszukiwania" Margin="0,0,0,5"  Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+            <TextBlock Text="Wyszukane" Margin="0,0,0,5"  Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
 
 		<Grid Grid.Row="2" x:Name="ContentRoot" Margin="19,0,19,0">

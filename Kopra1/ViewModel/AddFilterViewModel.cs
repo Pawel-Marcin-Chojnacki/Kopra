@@ -273,6 +273,11 @@ namespace Kopra.ViewModel
 			}
 			if (Status!= null )
 			{
+			    if (Status.StatusLiczbowy == 0)
+			    {
+			        //link.Append("&status=" + 100)
+
+                }
 				link.Append("&status=" + Status.StatusLiczbowy);
 			}
 			if (LoanAmount != null)
@@ -398,6 +403,7 @@ namespace Kopra.ViewModel
 		{
 			StatusyPozyczek = new List<Status>()
 			{
+                new Status() {Opis = "Brak", StatusLiczbowy = 0},
 				new Status() {Opis = "Nowa pożyczka", StatusLiczbowy = 100},
 				//new Status() {Opis = "W trakcie tworzenia", StatusLiczbowy = 110},
 				new Status() {Opis = "Trwa spłata", StatusLiczbowy = 500},
