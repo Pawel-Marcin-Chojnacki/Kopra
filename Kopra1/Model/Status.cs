@@ -1,4 +1,4 @@
-﻿namespace Kopra1.Model
+﻿namespace Kopra.Model
 {
     internal class Status
     {

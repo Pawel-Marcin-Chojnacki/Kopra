@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kopra1.Model
+namespace Kopra.Model
 {
     class Interest
     {

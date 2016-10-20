@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
+using Windows.ApplicationModel.Background;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http;
 using Kopra.Common;
+using Kopra.NewAuctionNotifier;
 using Kopra.ViewModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -99,7 +103,7 @@ namespace Kopra
 
         #endregion
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void GenerateApiKeyButtonClick(object sender, RoutedEventArgs e)
         {
             vm.GenerateApiKey();
         }
@@ -111,6 +115,26 @@ namespace Kopra
             KokosConnectionManager.HttpClient = new HttpClient();
             KokosConnectionManager.HttpClient.GetAsync(new Uri("https://kokos.pl/uzytkownik/autoryzacja?logout=1"));
             Frame.Navigate(typeof(LoginPage));
+        }
+
+        private async void RegisterBackgroundTaskButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var access = await BackgroundExecutionManager.RequestAccessAsync();
+            if (access == BackgroundAccessStatus.Denied)
+            {
+                Information.ShowFlyoutInfo(this, "System odmówił rejestracji zadania. Sprawdzanie filtru nie zadziała.");
+            }
+
+            var taskBuilder = new BackgroundTaskBuilder
+            {
+                Name = "NewAuctionNotifier",
+                TaskEntryPoint = typeof(NewAuctionsTask).FullName
+            };
+
+            var trigger = new TimeTrigger(15, false);
+            taskBuilder.SetTrigger(trigger);
+            taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+            taskBuilder.Register();
         }
     }
 }

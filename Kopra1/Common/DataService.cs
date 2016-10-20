@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Kopra1.Model.Auction;
+using Kopra.Model.Auction;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,7 +18,7 @@ namespace Kopra.Common
 			var result = new ObservableCollection<Auction>();
 			var rg = new RequestGenerator();
 			KokosConnectionManager.GetWebApiKeyFromService();
-			SearchAuctionResult mostRecentAuctions = await KokosConnectionManager.SendRestRequest(rg.MostRecentAuctions());
+			var mostRecentAuctions = await KokosConnectionManager.SendRestRequest(rg.MostRecentAuctions());
 			Debug.WriteLine(rg.MostRecentAuctions());
 			if (mostRecentAuctions != null)
 				foreach (var auction in mostRecentAuctions.response.auctions.auction)
@@ -34,7 +34,7 @@ namespace Kopra.Common
 			var request = new RequestGenerator();
 			credentials = new SettingsManager();
 			KokosConnectionManager.GetWebApiKeyFromService();
-			Uri requestAddress = request.GetAuctionData(parameters);
+			var requestAddress = request.GetAuctionData(parameters);
 			try
 			{
 				result = await KokosConnectionManager.GetAuctionDataRequest(requestAddress);
@@ -50,21 +50,14 @@ namespace Kopra.Common
 	    {
 		    var result = new ObservableCollection<Auction>();
 			var request = new RequestGenerator();
-			SearchAuctionResult foundedAuctions = await KokosConnectionManager.SendRestRequest(urlAddress);
+			var foundedAuctions = await KokosConnectionManager.SendRestRequest(urlAddress);
 			if (foundedAuctions != null)
 				foreach (var auction in foundedAuctions.response.auctions.auction)
 				{
-                    //if (auction.status == "110" || auction.status == "100")
-                    //    continue;
-                    List<string> statusesToCheck = new List<string> {"110", "120", "130", "150", "1500", "1400" };
-                    bool forbiddenStatus = statusesToCheck.Any(s => auction.status.Equals(s));
+                    var statusesToCheck = new List<string> {"110", "120", "130", "150", "1500", "1400" };
+                    var forbiddenStatus = statusesToCheck.Any(s => auction.status.Equals(s));
                     if (forbiddenStatus)
                         continue;
-                    //foreach (var stats in statusesToCheck)
-                    //{
-                    //    if (auction.status == stats)
-                    //        Debugger.Break();
-                    //}
                     result.Add(auction);
 				}
 		    return result;

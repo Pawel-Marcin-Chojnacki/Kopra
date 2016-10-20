@@ -1,5 +1,5 @@
 ﻿using Kopra.Annotations;
-using Kopra1.Model;
+using Kopra.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Kopra.Common;
+using Kopra.Model;
 
 namespace Kopra.ViewModel
 {
@@ -268,11 +269,12 @@ namespace Kopra.ViewModel
 	    {
 			return PrepareRequest();
 		}
-		public NotifyTaskCompletion<ObservableCollection<Auction>> SearchAuction()
-		{
-			var request = PrepareRequest();
-			return new NotifyTaskCompletion<ObservableCollection<Auction>>(dataService.GetAuctionsByParameters(request));
-		}
+
+		//public NotifyTaskCompletion<ObservableCollection<Auction>> SearchAuction()
+		//{
+		//	var request = PrepareRequest();
+		//	return new NotifyTaskCompletion<ObservableCollection<Auction>>(dataService.GetAuctionsByParameters(request));
+		//}
 
 	    private Uri PrepareRequest()
 	    {

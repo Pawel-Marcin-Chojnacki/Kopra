@@ -2,13 +2,14 @@
 using System.Runtime.CompilerServices;
 using Kopra.Annotations;
 using System.Collections.Generic;
-using Kopra1.Model;
+using Kopra.Model;
 using System;
 using Windows.Storage;
 using System.Text;
 using System.IO;
 using Windows.UI.Popups;
 using System.Diagnostics;
+using Kopra.Model;
 
 namespace Kopra.ViewModel
 {

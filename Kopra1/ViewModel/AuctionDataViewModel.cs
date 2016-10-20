@@ -1,5 +1,5 @@
 ﻿using Kopra.Common;
-using Kopra1.Model.Auction;
+using Kopra.Model.Auction;
 
 namespace Kopra.ViewModel
 {

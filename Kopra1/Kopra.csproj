@@ -82,27 +82,8 @@
     <Compile Include="Common\FileManager.cs" />
     <Compile Include="Common\ParserService.cs" />
     <Compile Include="Converter\AuctionNumberConverter.cs" />
-    <Compile Include="Converter\SingleValueArrayConverter.cs" />
     <Compile Include="Converter\StringVisibilityConverter.cs" />
     <Compile Include="Model\ApiKeyGenerate.cs" />
-    <Compile Include="Model\Auction\Auction.cs" />
-    <Compile Include="Model\Auction\Comment.cs" />
-    <Compile Include="Model\Auction\Comments.cs" />
-    <Compile Include="Model\Auction\Connection.cs" />
-    <Compile Include="Model\Auction\Connections.cs" />
-    <Compile Include="Model\Auction\Financialverifies.cs" />
-    <Compile Include="Model\Auction\GetAuctionDataParameters.cs" />
-    <Compile Include="Model\Auction\GetAuctionDataResponse.cs" />
-    <Compile Include="Model\Auction\GetAuctionDataRoot.cs" />
-    <Compile Include="Model\Auction\Investment.cs" />
-    <Compile Include="Model\Auction\Investments.cs" />
-    <Compile Include="Model\Auction\Payback.cs" />
-    <Compile Include="Model\Auction\PaybackSchedule.cs" />
-    <Compile Include="Model\Auction\PB.cs" />
-    <Compile Include="Model\Auction\Reminder.cs" />
-    <Compile Include="Model\Auction\Reminders.cs" />
-    <Compile Include="Model\Auction\Response.cs" />
-    <Compile Include="Model\Auction\Verify.cs" />
     <Compile Include="Model\ComboBoxFiltr.cs" />
     <Compile Include="Common\ConnectionManager.cs" />
     <Compile Include="Common\Information.cs" />
@@ -114,7 +95,6 @@
     <Compile Include="Model\LoanPeriod.cs" />
     <Compile Include="Model\SearchFilter.cs" />
     <Compile Include="Model\Status.cs" />
-    <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="ViewModel\AddFilterViewModel.cs" />
     <Compile Include="ViewModel\LoginPageViewModel.cs" />
     <Compile Include="ViewModel\InvestorReportPage.cs" />
@@ -270,6 +250,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kopra.SharedLibrary\Kopra.SharedLibrary.csproj">
+      <Project>{e7e2e708-f204-484b-a8c8-f5e27db0d6ce}</Project>
+      <Name>Kopra.SharedLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NewAuctionNotifier\NewAuctionNotifier.csproj">
+      <Project>{0e271a0f-cb9c-4384-8980-4ecd5ee0e2f2}</Project>
+      <Name>NewAuctionNotifier</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

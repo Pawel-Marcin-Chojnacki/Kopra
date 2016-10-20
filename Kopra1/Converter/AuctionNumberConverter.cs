@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
-using Kopra1.Model.Auction;
+using Kopra.Model.Auction;
 
 namespace Kopra.Converter
 {

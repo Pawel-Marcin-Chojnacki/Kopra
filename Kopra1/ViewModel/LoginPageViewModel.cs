@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Kopra1.Annotations;
+using Kopra.Annotations;
 
 namespace Kopra.ViewModel
 {

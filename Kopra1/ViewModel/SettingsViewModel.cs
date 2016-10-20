@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
-using Windows.Storage;
 using Windows.UI.Popups;
-using Kopra.Common;
 using Kopra.Model;
-using Kopra1.Annotations;
 
 namespace Kopra.ViewModel
 {
@@ -38,7 +26,7 @@ namespace Kopra.ViewModel
             //ApiKeyValidDate = ApiResponse.ValidTime;
 	    }
 
-	    public string ApiKeyValue   
+	    public string ApiKeyValue
 	    {
 	        get { return _apiKeyValue; }
 	        set
@@ -48,7 +36,7 @@ namespace Kopra.ViewModel
 	        }
 	    }
 
-	    public string ApiKeyValidDate   
+	    public string ApiKeyValidDate
 	    {
 	        get { return _apiKeyValidDate; }
 	        set

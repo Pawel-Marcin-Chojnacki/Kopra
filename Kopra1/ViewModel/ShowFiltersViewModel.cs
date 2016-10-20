@@ -12,11 +12,11 @@ using Windows.Storage;
 using Windows.UI.Popups;
 using Kopra.Common;
 using Kopra.Model;
-using Kopra1.Annotations;
+using Kopra.Annotations;
 
 namespace Kopra.ViewModel
 {
-	class ShowFiltersViewModel : MainViewModel
+    internal class ShowFiltersViewModel : MainViewModel
 	{
 		public List<SearchFilter> _filters;
 
@@ -31,26 +31,23 @@ namespace Kopra.ViewModel
 		{
 			get
 			{
-				return _filters; 
-				
+				return _filters;
 			}
 			set
 			{
 				_filters = value;
 				NotifyPropertyChanged(nameof(Filters));
 			}
-				
 		}
 
 		public async Task<IReadOnlyList<StorageFile>> GetStoredFiles()
 		{
 			// Get the app's installation folder.
-			StorageFolder appFolder =
+			var appFolder =
 				ApplicationData.Current.LocalFolder;
 
 			// Get the files in the current folder.
-			IReadOnlyList<StorageFile> filesInFolder =
-				await appFolder.GetFilesAsync();
+			var filesInFolder = await appFolder.GetFilesAsync();
 
 			return filesInFolder;
 		}
