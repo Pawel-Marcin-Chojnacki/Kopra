@@ -9,14 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KopraTests", "KopraTests\Ko
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewAuctionNotifier", "NewAuctionNotifier\NewAuctionNotifier.csproj", "{0E271A0F-CB9C-4384-8980-4ECD5EE0E2F2}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Kopra.Shared", "Kopra.Shared\Kopra.Shared.shproj", "{FFE6D8A7-1CD2-4CCA-9699-89BC4E983838}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kopra.SharedLibrary", "Kopra.SharedLibrary\Kopra.SharedLibrary.csproj", "{E7E2E708-F204-484B-A8C8-F5E27DB0D6CE}"
 EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Kopra.Shared\Kopra.Shared.projitems*{ffe6d8a7-1cd2-4cca-9699-89bc4e983838}*SharedItemsImports = 13
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM

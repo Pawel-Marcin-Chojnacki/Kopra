@@ -79,11 +79,33 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Common\AuctionDownloader.cs" />
+    <Compile Include="Common\DataService.cs" />
     <Compile Include="Common\FileManager.cs" />
+    <Compile Include="Common\KokosConnectionManager.cs" />
     <Compile Include="Common\ParserService.cs" />
     <Compile Include="Converter\AuctionNumberConverter.cs" />
+    <Compile Include="Converter\SingleValueArrayConverter.cs" />
     <Compile Include="Converter\StringVisibilityConverter.cs" />
     <Compile Include="Model\ApiKeyGenerate.cs" />
+    <Compile Include="Model\Auction\Auction.cs" />
+    <Compile Include="Model\Auction\Comment.cs" />
+    <Compile Include="Model\Auction\Comments.cs" />
+    <Compile Include="Model\Auction\Connection.cs" />
+    <Compile Include="Model\Auction\Connections.cs" />
+    <Compile Include="Model\Auction\Financialverifies.cs" />
+    <Compile Include="Model\Auction\GetAuctionDataParameters.cs" />
+    <Compile Include="Model\Auction\GetAuctionDataResponse.cs" />
+    <Compile Include="Model\Auction\GetAuctionDataRoot.cs" />
+    <Compile Include="Model\Auction\Investment.cs" />
+    <Compile Include="Model\Auction\Investments.cs" />
+    <Compile Include="Model\Auction\Payback.cs" />
+    <Compile Include="Model\Auction\PaybackSchedule.cs" />
+    <Compile Include="Model\Auction\PB.cs" />
+    <Compile Include="Model\Auction\Reminder.cs" />
+    <Compile Include="Model\Auction\Reminders.cs" />
+    <Compile Include="Model\Auction\Response.cs" />
+    <Compile Include="Model\Auction\Verify.cs" />
     <Compile Include="Model\ComboBoxFiltr.cs" />
     <Compile Include="Common\ConnectionManager.cs" />
     <Compile Include="Common\Information.cs" />
@@ -115,12 +137,10 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Common\DataService.cs" />
-    <Compile Include="Model\KokosConnectionManager.cs" />
     <Compile Include="Common\NotifyTaskCompletion.cs" />
     <Compile Include="Model\RequestGenerator.cs" />
     <Compile Include="Model\SearchAuctionResult.cs" />
-    <Compile Include="Model\SettingsManager.cs" />
+    <Compile Include="Common\SettingsManager.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Model\SearchAuctionFields.cs" />
     <Compile Include="Theme\SquareGrid.cs" />

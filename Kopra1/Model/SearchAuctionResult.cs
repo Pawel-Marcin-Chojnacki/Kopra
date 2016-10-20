@@ -20,7 +20,6 @@ namespace Kopra
 
     public class Auction
     {
-        
         public string id { get; set; }
         public string user_id { get; set; }
         public string user { get; set; }

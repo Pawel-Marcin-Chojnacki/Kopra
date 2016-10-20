@@ -14,7 +14,7 @@ namespace Kopra.ViewModel
 
 		public void SearchAuction(Uri request )
 		{
-			Auctions =  new NotifyTaskCompletion<ObservableCollection<Auction>>(dataService.GetAuctionsByParameters(request));
+			Auctions =  new NotifyTaskCompletion<ObservableCollection<Auction>>(AuctionDownloader.GetAuctionsByParameters(request));
 		}
 
 	}

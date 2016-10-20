@@ -236,13 +236,13 @@ namespace Kopra.ViewModel
 				StorageFolder folder = ApplicationData.Current.LocalFolder;
 				if (folder != null)
 				{
-					StorageFile file = await folder.CreateFileAsync(FilterName, CreationCollisionOption.ReplaceExisting);
+					var file = await folder.CreateFileAsync(FilterName, CreationCollisionOption.ReplaceExisting);
 					byte[] fileContent = Encoding.UTF8.GetBytes(filterLink);
-					Stream fileStream = await file.OpenStreamForWriteAsync();
+					var fileStream = await file.OpenStreamForWriteAsync();
 					fileStream.Write(fileContent, 0, fileContent.Length);
 					fileStream.Flush();
 					fileStream.Dispose();
-					MessageDialog msgDial = new MessageDialog("Filtr został zapisany");
+					var msgDial = new MessageDialog("Filtr został zapisany");
 					await msgDial.ShowAsync();
 				}
 			}

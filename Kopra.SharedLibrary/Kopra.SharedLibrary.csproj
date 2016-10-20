@@ -38,25 +38,6 @@
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Auction\Auction.cs" />
-    <Compile Include="Auction\Comment.cs" />
-    <Compile Include="Auction\Comments.cs" />
-    <Compile Include="Auction\Connection.cs" />
-    <Compile Include="Auction\Connections.cs" />
-    <Compile Include="Auction\Financialverifies.cs" />
-    <Compile Include="Auction\GetAuctionDataParameters.cs" />
-    <Compile Include="Auction\GetAuctionDataResponse.cs" />
-    <Compile Include="Auction\GetAuctionDataRoot.cs" />
-    <Compile Include="Auction\Investment.cs" />
-    <Compile Include="Auction\Investments.cs" />
-    <Compile Include="Auction\Payback.cs" />
-    <Compile Include="Auction\PaybackSchedule.cs" />
-    <Compile Include="Auction\PB.cs" />
-    <Compile Include="Auction\Reminder.cs" />
-    <Compile Include="Auction\Reminders.cs" />
-    <Compile Include="Auction\Response.cs" />
-    <Compile Include="Auction\Verify.cs" />
-    <Compile Include="Converter\SingleValueArrayConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
