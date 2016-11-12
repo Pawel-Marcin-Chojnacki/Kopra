@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kopra.Model
 {
-	class SearchFilter
+	public class SearchFilter
 	{
 		public string Name { get; set; }
 		public string Parameteres { get; set; }

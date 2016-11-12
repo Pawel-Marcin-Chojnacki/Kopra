@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.Storage;
@@ -11,31 +13,65 @@ namespace Kopra.NewAuctionNotifier
 {
     public sealed class NewAuctionsTask : IBackgroundTask
     {
+        private List<Auction> lastAuctions;
+        private RequestGenerator rg = new RequestGenerator();
+        private List<Auction> _auctions = new List<Auction>();
+        private Auction foundAuction;
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
             var deferral = taskInstance.GetDeferral();
-            Debug.WriteLine("Jestem w background tasku!");
             var filterLink = await GetFilter();
-            //var auctions = AuctionDownloader.GetAuctionsByParameters(new Uri(filterLink));
-            Test();
+            if (filterLink == null)
+                return;
+            var link = rg.FilteredAuction(filterLink);
+            var auctions = await AuctionDownloader.GetAuctionsByParameters(link) as List<Auction>;
+            foundAuction = GetNewestAuctions(auctions);
+            if (foundAuction == null)
+                return;
+            Test(foundAuction);
             deferral.Complete();
-            //Auction a = new Auction();
+        }
+
+        private void Test(Auction foundAuction)
+        {
+            SendToastNotification("Title", "Message");
+        }
+
+        /// <summary>
+        /// Check whether there is any new auction since last check.
+        /// </summary>
+        /// <param name="auctions"></param>
+        /// <returns></returns>
+        private Auction GetNewestAuctions(List<Auction> auctions)
+        {
+            if (lastAuctions == null)
+            {
+                lastAuctions = auctions;
+                return lastAuctions.First();
+            }
+            foreach (var auction in auctions)
+            {
+                var newAuction = lastAuctions.Find(a => a.id == auction.id);
+                if (newAuction != null) continue;
+                lastAuctions = auctions;
+                return auction;
+            }
+            return null;
         }
 
         private async Task<string> GetFilter()
         {
-            var readingStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("nf");
-            string filterLink;
-            using (var reader = new StreamReader(readingStream))
+            if (DoesFileExistAsync("BackgroundFilter").Result)
             {
-                filterLink = reader.ReadToEnd();
+                var readingStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("BackgroundFilter");
+                string filterLink;
+                using (var reader = new StreamReader(readingStream))
+                {
+                    filterLink = reader.ReadToEnd();
+                }
+                return filterLink;
             }
-            return filterLink;
-        }
-
-        private static void Test()
-        {
-            SendToastNotification("Jestem tostem", "Bardzo serowy tost dotarł");
+            return null; 
         }
 
         private static void SendToastNotification(string text1, string text2)
@@ -48,6 +84,17 @@ namespace Kopra.NewAuctionNotifier
             ToastNotificationManager.CreateToastNotifier().Show(new ToastNotification(toaxtXml));
         }
 
-
+        static async Task<bool> DoesFileExistAsync(string fileName)
+        {
+            try
+            {
+                await ApplicationData.Current.LocalFolder.GetFileAsync(fileName);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

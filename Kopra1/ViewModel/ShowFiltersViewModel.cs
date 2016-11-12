@@ -18,7 +18,7 @@ namespace Kopra.ViewModel
 {
     internal class ShowFiltersViewModel : MainViewModel
 	{
-		public List<SearchFilter> _filters;
+		private List<SearchFilter> _filters;
 
 		public ShowFiltersViewModel()
 		{
@@ -57,6 +57,8 @@ namespace Kopra.ViewModel
 			var content = new List<SearchFilter>();
 			foreach (var file in StoredFiles)
 			{
+			    if (file.Name == "BackgroundFilter")
+			        continue;
 				var readingStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(file.Name);
 				using (var reader = new StreamReader(readingStream))
 				{

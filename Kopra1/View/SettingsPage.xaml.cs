@@ -59,9 +59,11 @@ namespace Kopra
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
 			UserCredentials.SetUserName(userNameTitle);
+            vm.StoredFiles = await vm.GetStoredFiles();
+            vm.Filters = await vm.ReadFilters();
         }
 
         /// <summary>
