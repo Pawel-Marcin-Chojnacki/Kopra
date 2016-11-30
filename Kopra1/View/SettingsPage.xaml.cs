@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
 using Windows.ApplicationModel.Background;
-using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -112,7 +110,7 @@ namespace Kopra
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
-            SettingsManager sm = new SettingsManager();
+            var sm = new SettingsManager();
             sm.ClearData();
             KokosConnectionManager.HttpClient = new HttpClient();
             KokosConnectionManager.HttpClient.GetAsync(new Uri("https://kokos.pl/uzytkownik/autoryzacja?logout=1"));

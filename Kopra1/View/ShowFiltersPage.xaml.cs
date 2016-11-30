@@ -64,7 +64,7 @@ namespace Kopra.View
 
 		private void SetUserName()
 	    {
-			SettingsManager loadUserName = new SettingsManager();
+			var loadUserName = new SettingsManager();
 			if (loadUserName.Username != null)
 				userNameTitle.Text = loadUserName.Username;
 		}
@@ -111,8 +111,8 @@ namespace Kopra.View
 	    private void SearchAuctions(object sender, ItemClickEventArgs e)
 	    {
 		    var filter = (SearchFilter) e.ClickedItem;
-			RequestGenerator rg = new RequestGenerator();
-		    Uri filterUri  = rg.FilteredAuction(filter.Parameteres);
+			var rg = new RequestGenerator();
+		    var filterUri  = rg.FilteredAuction(filter.Parameteres);
 			Frame.Navigate(typeof(SearchResultPage), filterUri);
 		}
 

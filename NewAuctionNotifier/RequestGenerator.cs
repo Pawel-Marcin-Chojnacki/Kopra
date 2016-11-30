@@ -25,7 +25,7 @@ namespace Kopra.NewAuctionNotifier
 
         public Uri FilteredAuction(string filter)
         {
-            StringBuilder webRequest = new StringBuilder();
+            var webRequest = new StringBuilder();
             webRequest.Append(BaseAddress);
             webRequest.Append(Search);
 
@@ -57,7 +57,7 @@ namespace Kopra.NewAuctionNotifier
         /// <returns>URI with API request.</returns>
         public Uri ComposeSearchAuctionQuery(IDictionary<string, string> search)
         {
-            string requestAddress = SearchQuery;
+            var requestAddress = SearchQuery;
 			var sm = new SettingsManager();
 			requestAddress += sm.KokosWebApiKey;
 			foreach (var item in search)

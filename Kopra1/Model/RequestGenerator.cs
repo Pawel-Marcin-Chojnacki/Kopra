@@ -26,7 +26,7 @@ namespace Kopra
 
 	    public Uri FilteredAuction(string filter)
 	    {
-		    StringBuilder webRequest = new StringBuilder();
+		    var webRequest = new StringBuilder();
 		    webRequest.Append(BaseAddress);
 		    webRequest.Append(Search);
 
@@ -42,7 +42,7 @@ namespace Kopra
 
         public Uri SearchAuction(Dictionary<string, string> search)
         {
-            string requestAddress = BaseAddress + "search?";
+            var requestAddress = BaseAddress + "search?";
             foreach (var item in search)
             {
                 requestAddress += item.Key + "=" + item.Value + "&";
@@ -59,7 +59,7 @@ namespace Kopra
         /// <returns>URI with API request.</returns>
         public Uri ComposeSearchAuctionQuery(Dictionary<string, string> search)
         {
-            string requestAddress = SearchQuery;
+            var requestAddress = SearchQuery;
 			var sm = new SettingsManager();
 			requestAddress += sm.KokosWebApiKey;
 			foreach (var item in search)
@@ -91,8 +91,8 @@ namespace Kopra
 
 	    public Uri GetAuctionData(GetAuctionDataParameters parameters)
 	    {
-			SettingsManager settingsManager = new SettingsManager();
-			StringBuilder reqBuilder = new StringBuilder();
+			var settingsManager = new SettingsManager();
+			var reqBuilder = new StringBuilder();
 		    reqBuilder.Append(BaseAddress);
 		    reqBuilder.Append(AuctionData);
 		    reqBuilder.Append(Key);

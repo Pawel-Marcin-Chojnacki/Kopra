@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kopra.NewAuctionNotifier
 {
@@ -20,7 +16,7 @@ namespace Kopra.NewAuctionNotifier
             {
                 get
                 {
-                    double a = Double.Parse(_percent, CultureInfo.InvariantCulture);
+                    var a = Double.Parse(_percent, CultureInfo.InvariantCulture);
                     return Math.Round(a) + "%";
                 }
                 set
@@ -33,7 +29,7 @@ namespace Kopra.NewAuctionNotifier
             {
                 get
                 {
-                    DateTime niceDate = new DateTime();
+                    var niceDate = new DateTime();
                     niceDate = Convert.ToDateTime(_date).ToUniversalTime();
                     Debug.WriteLine("niceDate: " + niceDate);
                     return FormatDate(niceDate);
@@ -72,7 +68,7 @@ namespace Kopra.NewAuctionNotifier
 
             private TimeSpan UTCTimeToLocalTime(TimeSpan localTime)
             {
-                DateTime utc = new DateTime();
+                var utc = new DateTime();
                 try
                 {
                     Debug.WriteLine("localTime: " + localTime);

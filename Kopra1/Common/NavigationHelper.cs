@@ -321,7 +321,7 @@ namespace Kopra.Common
                 // Clear existing state for forward navigation when adding a new page to the
                 // navigation stack
                 var nextPageKey = _pageKey;
-                int nextPageIndex = Frame.BackStackDepth;
+                var nextPageIndex = Frame.BackStackDepth;
                 while (frameState.Remove(nextPageKey))
                 {
                     nextPageIndex++;

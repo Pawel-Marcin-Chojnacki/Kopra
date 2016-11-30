@@ -141,7 +141,7 @@ namespace Kopra
 		/// <param name="e"></param>
 		private void LoadAuction(object sender, ItemClickEventArgs e)
 		{
-			MainMenuViewModel vm = (MainMenuViewModel) this.DataContext;
+			var vm = (MainMenuViewModel) this.DataContext;
 			Frame.Navigate(typeof(AuctionBasicDataPage), e.ClickedItem);
 		}
 	}

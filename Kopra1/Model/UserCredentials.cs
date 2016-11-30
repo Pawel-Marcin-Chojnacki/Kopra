@@ -1,5 +1,4 @@
 ﻿using System;
-using Windows.UI.Notifications;
 using Windows.UI.Xaml.Controls;
 
 namespace Kopra
@@ -34,7 +33,7 @@ namespace Kopra
 		/// </summary>
 		public static void SetUserName(TextBlock textBlock)
 		{
-			SettingsManager loadUserName = new SettingsManager();
+			var loadUserName = new SettingsManager();
 			if (loadUserName.Username != null)
 				textBlock.Text = loadUserName.Username;
 			else

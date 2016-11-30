@@ -56,8 +56,8 @@ namespace Kopra
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
 			UserCredentials.SetUserName(userNameTitle);
-	        Auction selectedAuction = (Auction) e.NavigationParameter;
-	        AuctionDataViewModel vm = (AuctionDataViewModel)this.DataContext;
+	        var selectedAuction = (Auction) e.NavigationParameter;
+	        var vm = (AuctionDataViewModel)this.DataContext;
 	        vm.Id = selectedAuction.id;
 			vm.GetAuctionData();
         }

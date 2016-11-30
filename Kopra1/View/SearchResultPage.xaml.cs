@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Kopra.Common;
@@ -104,7 +103,7 @@ namespace Kopra
 
 	    private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
 	    {
-			SearchAuctionViewModel vm = (SearchAuctionViewModel)this.DataContext;
+			var vm = (SearchAuctionViewModel)this.DataContext;
 			var selectedItem = (ListView)sender;
 			Frame.Navigate(typeof(AuctionBasicDataPage), e.ClickedItem);
 		}

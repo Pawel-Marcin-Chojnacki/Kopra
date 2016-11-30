@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Windows.Foundation.Collections;
+﻿using Windows.Foundation.Collections;
 using Windows.Storage;
 
 namespace Kopra.NewAuctionNotifier

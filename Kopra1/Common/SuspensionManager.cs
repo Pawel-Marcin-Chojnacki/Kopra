@@ -4,7 +4,6 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Windows.Storage;
-using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -68,13 +67,13 @@ namespace Kopra.Common
 
                 // Serialize the session state synchronously to avoid asynchronous access to shared
                 // state
-                MemoryStream sessionData = new MemoryStream();
-                DataContractSerializer serializer = new DataContractSerializer(typeof(Dictionary<string, object>), _knownTypes);
+                var sessionData = new MemoryStream();
+                var serializer = new DataContractSerializer(typeof(Dictionary<string, object>), _knownTypes);
                 serializer.WriteObject(sessionData, _sessionState);
 
                 // Get an output stream for the SessionState file and write the state asynchronously
-                StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(sessionStateFilename, CreationCollisionOption.ReplaceExisting);
-                using (Stream fileStream = await file.OpenStreamForWriteAsync())
+                var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(sessionStateFilename, CreationCollisionOption.ReplaceExisting);
+                using (var fileStream = await file.OpenStreamForWriteAsync())
                 {
                     sessionData.Seek(0, SeekOrigin.Begin);
                     await sessionData.CopyToAsync(fileStream);
@@ -104,11 +103,11 @@ namespace Kopra.Common
             try
             {
                 // Get the input stream for the SessionState file
-                StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(sessionStateFilename);
-                using (IInputStream inStream = await file.OpenSequentialReadAsync())
+                var file = await ApplicationData.Current.LocalFolder.GetFileAsync(sessionStateFilename);
+                using (var inStream = await file.OpenSequentialReadAsync())
                 {
                     // Deserialize the Session State
-                    DataContractSerializer serializer = new DataContractSerializer(typeof(Dictionary<string, object>), _knownTypes);
+                    var serializer = new DataContractSerializer(typeof(Dictionary<string, object>), _knownTypes);
                     _sessionState = (Dictionary<string, object>)serializer.ReadObject(inStream.AsStreamForRead());
                 }
 

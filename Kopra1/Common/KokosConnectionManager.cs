@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -58,7 +57,7 @@ namespace Kopra
         private static void SaveNewCredentials(string email, string password)
         {
 			Debug.WriteLine("SaveNewCredentials");
-			SettingsManager credentials = new SettingsManager {Email = email};
+			var credentials = new SettingsManager {Email = email};
             Debug.WriteLine(credentials.Email);
             credentials.Password = password;
         }
@@ -75,14 +74,14 @@ namespace Kopra
             {
                 var apiAccessAdress = new Uri("https://kokos.pl/webapiinfo/key");
                 _response = HttpClient.GetAsync(apiAccessAdress).AsTask(_cts.Token).Result;
-                string key = _response.Content.ToString();
+                var key = _response.Content.ToString();
 				Debug.WriteLine(key);
 				if (key.Contains("klucz to: <strong>"))
                 { 
                     key = key.Substring(key.IndexOf("klucz to: <strong>")+18, 32);
                     Debug.WriteLine(key);
                     credentials.KokosWebApiKey = key;
-                    string valid = _response.Content.ToString();
+                    var valid = _response.Content.ToString();
                     valid = valid.Substring(valid.IndexOf("Data waÅ¼noÅci: <strong>")+25, 19);
                     credentials.KokosWebApiValid = valid;
                 }
@@ -95,9 +94,9 @@ namespace Kopra
 
         public static async Task<ApiKeyGenerate> GenerateApiKeyFromService()
         {
-            ApiKeyGenerate result = new ApiKeyGenerate();
-            Uri apiGeneratorAddress = new Uri("https://kokos.pl/webapiinfo/generate-key");
-            HttpMultipartFormDataContent form = new HttpMultipartFormDataContent();
+            var result = new ApiKeyGenerate();
+            var apiGeneratorAddress = new Uri("https://kokos.pl/webapiinfo/generate-key");
+            var form = new HttpMultipartFormDataContent();
             form.Add(new HttpFormUrlEncodedContent(new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("","")}));
             var response = HttpClient.PostAsync(apiGeneratorAddress, form).AsTask(_cts.Token).Result;
             await Task.Delay(10000);
@@ -105,7 +104,7 @@ namespace Kopra
             var apiAccessAdress = new Uri("https://kokos.pl/webapiinfo/key");
             _response = HttpClient.GetAsync(apiAccessAdress).AsTask(_cts.Token).Result;
             //Task.Delay(2000);
-            string key = _response.Content.ToString();
+            var key = _response.Content.ToString();
             Debug.WriteLine(key);
             var credentials = new SettingsManager();
             if (key.Contains("klucz to: <strong>"))
@@ -114,7 +113,7 @@ namespace Kopra
                 Debug.WriteLine(key);
                 credentials.KokosWebApiKey = key;
 
-                string valid = _response.Content.ToString();
+                var valid = _response.Content.ToString();
                 valid = valid.Substring(valid.IndexOf("Data waÅ¼noÅci: <strong>") + 25, 19);
 
                 credentials.KokosWebApiValid = valid;

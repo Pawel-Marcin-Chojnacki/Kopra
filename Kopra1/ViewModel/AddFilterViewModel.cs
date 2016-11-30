@@ -8,8 +8,6 @@ using Windows.Storage;
 using System.Text;
 using System.IO;
 using Windows.UI.Popups;
-using System.Diagnostics;
-using Kopra.Model;
 
 namespace Kopra.ViewModel
 {
@@ -229,15 +227,15 @@ namespace Kopra.ViewModel
 
 		internal async void AddFilter()
 		{
-			char[] filterLink = CreateLinkFromFields();
+			var filterLink = CreateLinkFromFields();
 
 			try
 			{
-				StorageFolder folder = ApplicationData.Current.LocalFolder;
+				var folder = ApplicationData.Current.LocalFolder;
 				if (folder != null)
 				{
 					var file = await folder.CreateFileAsync(FilterName, CreationCollisionOption.ReplaceExisting);
-					byte[] fileContent = Encoding.UTF8.GetBytes(filterLink);
+					var fileContent = Encoding.UTF8.GetBytes(filterLink);
 					var fileStream = await file.OpenStreamForWriteAsync();
 					fileStream.Write(fileContent, 0, fileContent.Length);
 					fileStream.Flush();
@@ -267,7 +265,7 @@ namespace Kopra.ViewModel
 
 		private char[] CreateLinkFromFields()
 		{
-			StringBuilder link = new StringBuilder();
+			var link = new StringBuilder();
 			if (!string.IsNullOrWhiteSpace(_titleSearch))
 			{
 				link.Append("&title=" + _titleSearch);

@@ -1,13 +1,8 @@
-﻿using Kopra.Annotations;
-using Kopra.Model;
+﻿using Kopra.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text;
 using Kopra.Common;
-using Kopra.Model;
 
 namespace Kopra.ViewModel
 {

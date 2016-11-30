@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Kopra.Common;
 //using Kopra1.Model.Auction;
 using Newtonsoft.Json;

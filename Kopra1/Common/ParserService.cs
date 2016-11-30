@@ -1,22 +1,14 @@
-﻿//using HtmlAgilityPack;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace Kopra.Common
 {
     public class ParserService
     {
+        private const string AbsentData = "Brak danych.";
         public string GetMonthAndYear()
         {
-            Regex regex = new Regex("<p class=\"tac green fs13\">(?<monthlyRep>.*)</p>", RegexOptions.None);
-            if (regex.IsMatch(InvestorSource))
-                monthAndYear = regex.Match(InvestorSource).Groups["monthlyRep"].Value;
-            else monthAndYear = "Błąd pobierania danych";
+            var regex = new Regex("<p class=\"tac green fs13\">(?<monthlyRep>.*)</p>", RegexOptions.None);
+            monthAndYear = regex.IsMatch(InvestorSource) ? regex.Match(InvestorSource).Groups["monthlyRep"].Value : AbsentData;
             if (monthAndYear.Contains("Wrzesie"))
             {
                 monthAndYear = "Wrzesień 2016";
@@ -25,70 +17,74 @@ namespace Kopra.Common
             {
                 monthAndYear = "Październik 2016";
             }
+            else if (monthAndYear.Contains("stopad"))
+            {
+                monthAndYear = "Listopad 2016";
+            }
             return monthAndYear;
         }
 
         public string GetInvestmentSum()
         {
-            Regex regex = new Regex(@"aktualizowana raz dziennie"">(?<InvestmentSum>\d+,\d+)", RegexOptions.None);
+            var regex = new Regex(@"aktualizowana raz dziennie"">(?<InvestmentSum>\d+,\d+)", RegexOptions.None);
             if (regex.IsMatch(MyAccountSource))
                 investmentSum = regex.Match(MyAccountSource).Groups["InvestmentSum"].Value + " zł";
-            else investmentSum = "Błąd pobierania danych";
+            else investmentSum = AbsentData;
             return investmentSum;
         }
 
         public string GetCompleteRepayment()
         {
-            Regex regex = new Regex(@"kowita: (?<Repayment>\d+,\d+)", RegexOptions.None);
+            var regex = new Regex(@"kowita: (?<Repayment>\d+,\d+)", RegexOptions.None);
             if (regex.IsMatch(MyAccountSource))
                 completeRepayment = regex.Match(MyAccountSource).Groups["Repayment"].Value + "%";
-            else completeRepayment = "Błąd pobierania danych";
+            else completeRepayment = AbsentData;
             return completeRepayment;
 
         }
 
         public string GetPotentialGain()
         {
-            Regex regex = new Regex(@"zysk<\/span>:\r\n\s*<strong>(?<PotentialGain>\d+,\d+)", RegexOptions.None);
+            var regex = new Regex(@"zysk<\/span>:\r\n\s*<strong>(?<PotentialGain>\d+,\d+)", RegexOptions.None);
             if (regex.IsMatch(MyAccountSource))
                 potentialGain = regex.Match(MyAccountSource).Groups["PotentialGain"].Value + " zł";
-            else potentialGain = "Błąd pobierania danych";
+            else potentialGain = AbsentData;
             return potentialGain;
         }
 
         public string GetAverageInterest()
         {
-            Regex regex = new Regex(@"<td width=""40"" align=""right""><strong>(?<AveragePercentage>\d+,\d+)", RegexOptions.None);
+            var regex = new Regex(@"<td width=""40"" align=""right""><strong>(?<AveragePercentage>\d+,\d+)", RegexOptions.None);
             if (regex.IsMatch(MyAccountSource))
                 averageInterest = regex.Match(MyAccountSource).Groups["AveragePercentage"].Value + "%";
-            else averageInterest = "Błąd pobierania danych";
+            else averageInterest = AbsentData;
             return averageInterest;
         }
 
         public string GetReturnOfInvestment()
         {
-            Regex regex = new Regex("<p class=\"stopa_zwrotu_center\">(?<ROI>.*)</p>", RegexOptions.None);
+            var regex = new Regex("<p class=\"stopa_zwrotu_center\">(?<ROI>.*)</p>", RegexOptions.None);
             if (regex.IsMatch(InvestorSource))
                 returnOfInvestment = regex.Match(InvestorSource).Groups["ROI"].Value;
-            else returnOfInvestment = "Błąd pobierania danych";
+            else returnOfInvestment = AbsentData;
             return returnOfInvestment;
         }
 
         public string GetResources()
         {
-            Regex regex = new Regex(@"mr30"">\n.*i: <strong>(?<Srodki>\d+,\d{2})<\/strong>", RegexOptions.None);
+            var regex = new Regex(@"mr30"">\n.*i: <strong>(?<Srodki>\d+,\d{2})<\/strong>", RegexOptions.None);
             if (regex.IsMatch(InvestorSource))
                 resources = regex.Match(InvestorSource).Groups["Srodki"].Value + " zł";
-            else resources = "Błąd pobierania danych";
+            else resources = AbsentData;
             return resources;
         }
 
         public string GetLoansInRepayment()
         {
-            Regex regex = new Regex(@"<strong>(?<LoansRepayment>\d+)<\/strong>\n.*<\/td>\n.*<\/tr>\n.*<\/table>", RegexOptions.None);
+            var regex = new Regex(@"<strong>(?<LoansRepayment>\d+)<\/strong>\n.*<\/td>\n.*<\/tr>\n.*<\/table>", RegexOptions.None);
             if (regex.IsMatch(InvestorSource))
                 loansInRepayment = regex.Match(InvestorSource).Groups["LoansRepayment"].Value;
-            else loansInRepayment = "Błąd pobierania danych";
+            else loansInRepayment = AbsentData;
             return loansInRepayment;
         }
 

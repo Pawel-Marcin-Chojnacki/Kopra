@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Kopra.Model.Auction
+﻿namespace Kopra.Model.Auction
 {
 	public sealed class Investment
 	{

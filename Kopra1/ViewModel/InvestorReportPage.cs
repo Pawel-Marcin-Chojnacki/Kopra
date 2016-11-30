@@ -1,7 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using Kopra.Common;
-using Kopra.Model;
-using System.Diagnostics;
+﻿using Kopra.Common;
 
 namespace Kopra.ViewModel
 {

@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
-using Kopra.Model.Auction;
 
 namespace Kopra.Converter
 {
@@ -20,7 +14,7 @@ namespace Kopra.Converter
 		{
 			if (!(value is string))
 				return value;
-			string objValue = (string)value;
+			var objValue = (string)value;
 			return $"Aukcja nr {objValue}";
 		}
 

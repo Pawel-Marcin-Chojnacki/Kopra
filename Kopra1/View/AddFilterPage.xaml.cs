@@ -4,7 +4,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Kopra.Common;
 using Kopra.ViewModel;
-using System.Text;
 using Windows.UI.Popups;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -106,7 +105,7 @@ namespace Kopra
         {
 			if (FilterName.Text == string.Empty)
 			{
-				MessageDialog msgBox = new MessageDialog("Musisz wpisać nazwę filtru!");
+				var msgBox = new MessageDialog("Musisz wpisać nazwę filtru!");
 				await msgBox.ShowAsync();
 				return;
 			}

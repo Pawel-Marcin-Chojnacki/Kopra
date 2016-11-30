@@ -138,7 +138,7 @@ namespace Kopra.Common
 
         public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
         {
-            int arraySize = array.Length;
+            var arraySize = array.Length;
             foreach (var pair in _dictionary)
             {
                 if (arrayIndex >= arraySize) break;

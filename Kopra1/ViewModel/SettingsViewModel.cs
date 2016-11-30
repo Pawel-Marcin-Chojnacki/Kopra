@@ -56,7 +56,7 @@ namespace Kopra.ViewModel
             {
                 ApiKeyValidDate = value.ValidTime;
             }
-            MessageDialog msgBox = new MessageDialog(value.Message);
+            var msgBox = new MessageDialog(value.Message);
             await msgBox.ShowAsync();
         }
 

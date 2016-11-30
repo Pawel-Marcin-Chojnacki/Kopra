@@ -29,7 +29,7 @@ namespace Kopra
         public string percent {
             get
             {
-                double a = Double.Parse(_percent, CultureInfo.InvariantCulture);
+                var a = Double.Parse(_percent, CultureInfo.InvariantCulture);
                 return Math.Round(a)+"%";
             }
              set
@@ -42,7 +42,7 @@ namespace Kopra
        public string createDate {
             get
             {
-                DateTime niceDate = new DateTime();
+                var niceDate = new DateTime();
                 niceDate = Convert.ToDateTime(_date).ToUniversalTime();
                 Debug.WriteLine("niceDate: " +niceDate);
                 return FormatDate(niceDate);
@@ -58,7 +58,7 @@ namespace Kopra
 
         private TimeSpan UTCTimeToLocalTime(TimeSpan localTime)
         {
-            DateTime utc = new DateTime();
+            var utc = new DateTime();
             try
             {
                 Debug.WriteLine("localTime: " + localTime);

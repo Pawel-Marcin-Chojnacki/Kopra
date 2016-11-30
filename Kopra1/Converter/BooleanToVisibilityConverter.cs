@@ -10,7 +10,7 @@ namespace Kopra.Converter
         {
             if (!(value is bool))
                 return Visibility.Collapsed;
-            bool objValue = (bool)value;
+            var objValue = (bool)value;
             if (objValue)
             {
                 return Visibility.Visible;
