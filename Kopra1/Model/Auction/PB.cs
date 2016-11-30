@@ -20,7 +20,7 @@
 		public string employer { get; set; }
 		public string lastLoginDate { get; set; }
 
-		public string income	
+		public string income
 		{
 			get {
 				if (string.IsNullOrWhiteSpace(_income))
@@ -32,7 +32,7 @@
 			set { _income = value; }
 		}
 
-		public string expenses	
+		public string expenses
 		{
 			get {
 				if (string.IsNullOrWhiteSpace(_expenses))
@@ -121,7 +121,7 @@
 			set { _maxMonthlyInstallment = value; }
 		}
 
-		public string maxVerifyMonthlyInstallment	
+		public string maxVerifyMonthlyInstallment
 		{
 			get
 			{

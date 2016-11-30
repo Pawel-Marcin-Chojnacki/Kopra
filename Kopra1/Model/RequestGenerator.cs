@@ -53,7 +53,7 @@ namespace Kopra
         }
 
         /// <summary>
-        /// Composes new query for searching. 
+        /// Composes new query for searching.
         /// </summary>
         /// <param name="search">Dictionary with parameters for query.</param>
         /// <returns>URI with API request.</returns>

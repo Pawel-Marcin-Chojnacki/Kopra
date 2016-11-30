@@ -302,7 +302,7 @@ namespace Kopra.ViewModel
                 new Investor() {Description = "Powyżej 50 inwestorów", investorsFrom = 50, investorsTo = 999},
             };
 
-        } 
+        }
 
         private void InicjalizujKwotęPożyczek()
         {

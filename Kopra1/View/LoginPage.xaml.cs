@@ -110,10 +110,10 @@ namespace Kopra
         /// The methods provided in this section are simply used to allow
         /// NavigationHelper to respond to the page's navigation methods.
         /// <para>
-        /// Page specific logic should be placed in event handlers for the  
+        /// Page specific logic should be placed in event handlers for the
         /// <see cref="NavigationHelper.LoadState"/>
         /// and <see cref="NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
+        /// The navigation parameter is available in the LoadState method
         /// in addition to page state preserved during an earlier session.
         /// </para>
         /// </summary>
@@ -169,7 +169,7 @@ namespace Kopra
             DisableLoginForm();
             await LoginToServiceAsync(Email.Text, Password.Password);
             Frame.Navigate(typeof(MainMenuPage));
-            
+
         }
 
         private bool IsPassordValid(string password)
@@ -232,7 +232,7 @@ namespace Kopra
                 LoginButton.Focus(FocusState.Keyboard);
                 loginButton_Click(sender, e);
             }
-                
+
         }
     }
 }

@@ -14,10 +14,8 @@ namespace Kopra.NewAuctionNotifier
         private const string FiltersListKey = "filters";
         private const string KokosWebApiValidKey = "kokosWebApiValid";
 
-        public void ClearData()
-        {
-            _values.Clear();
-        }
+        public void ClearData() => _values.Clear();
+
         public SettingsManager()
         {
             _values = ApplicationData.Current.LocalSettings.Values;
@@ -81,7 +79,7 @@ namespace Kopra.NewAuctionNotifier
             {
                 _values[EmailKey] = value;
             }
-        } 
+        }
 
         public string Password
         {

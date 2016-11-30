@@ -14,7 +14,7 @@ namespace Kopra.ViewModel
         }
 
         private string _email;
-    
+
         public string Email {
             get
             {

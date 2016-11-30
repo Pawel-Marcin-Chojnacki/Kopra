@@ -77,7 +77,7 @@ namespace Kopra
                 var key = _response.Content.ToString();
 				Debug.WriteLine(key);
 				if (key.Contains("klucz to: <strong>"))
-                { 
+                {
                     key = key.Substring(key.IndexOf("klucz to: <strong>")+18, 32);
                     Debug.WriteLine(key);
                     credentials.KokosWebApiKey = key;

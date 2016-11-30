@@ -90,7 +90,7 @@ namespace Kopra
                 return string.Format("{0} godziny temu", difference.TotalHours.ToString("0"));
             if (difference.TotalHours == 1)
                 return "godzinę temu";
-            
+
             if (difference.TotalMinutes >= 2)
             {
                 if (difference.TotalMinutes % 10 >= 5 || difference.TotalMinutes % 10 <= 1)

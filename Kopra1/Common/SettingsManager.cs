@@ -82,7 +82,7 @@ namespace Kopra
             {
                 _values[EmailKey] = value;
             }
-        } 
+        }
 
         public string Password
         {

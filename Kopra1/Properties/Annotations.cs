@@ -204,7 +204,7 @@ namespace Kopra.Annotations
   /// // A method that returns null if the parameter is null,
   /// // and not null if the parameter is not null
   /// [ContractAnnotation("null => null; notnull => notnull")]
-  /// public object Transform(object data) 
+  /// public object Transform(object data)
   /// </code></item>
   /// <item><code>
   /// [ContractAnnotation("s:null=>false; =>true,result:notnull; =>false, result:null")]
@@ -697,7 +697,7 @@ namespace Kopra.Annotations
 
   /// <summary>
   /// ASP.NET MVC attribute. Indicates that a parameter is an MVC display template.
-  /// Use this attribute for custom wrappers similar to 
+  /// Use this attribute for custom wrappers similar to
   /// <c>System.Web.Mvc.Html.DisplayExtensions.DisplayForModel(HtmlHelper, String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
@@ -781,7 +781,7 @@ namespace Kopra.Annotations
 
   /// <summary>
   /// Razor attribute. Indicates that a parameter or a method is a Razor section.
-  /// Use this attribute for custom wrappers similar to 
+  /// Use this attribute for custom wrappers similar to
   /// <c>System.Web.WebPages.WebPageBase.RenderSection(String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
@@ -817,7 +817,7 @@ namespace Kopra.Annotations
 
   /// <summary>
   /// Indicates that the marked method is assertion method, i.e. it halts control flow if
-  /// one of the conditions is satisfied. To set the condition, mark one of the parameters with 
+  /// one of the conditions is satisfied. To set the condition, mark one of the parameters with
   /// <see cref="AssertionConditionAttribute"/> attribute.
   /// </summary>
   [AttributeUsage(AttributeTargets.Method)]

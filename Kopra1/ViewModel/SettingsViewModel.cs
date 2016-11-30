@@ -45,7 +45,7 @@ namespace Kopra.ViewModel
 	        get { return _apiKeyValidDate; }
 	        set
 	        {
-	            _apiKeyValidDate = value; 
+	            _apiKeyValidDate = value;
 	            NotifyPropertyChanged(nameof(ApiKeyValidDate));
 	        }
 	    }
@@ -66,7 +66,7 @@ namespace Kopra.ViewModel
             {
                 return _apiResponse;
             }
-            set 
+            set
             {
                 _apiResponse = value;
                 NotifyPropertyChanged(nameof(ApiResponse));

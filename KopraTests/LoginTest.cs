@@ -8,25 +8,25 @@ namespace KopraTests
         [TestMethod]
         public void InternetConnectionFailedTest()
         {
-            
+
         }
 
         [TestMethod]
         public void InternetConnectionRestoredTest()
         {
-            
+
         }
 
         [TestMethod]
         public void EmailFieldEmpyTest()
         {
-            
+
         }
 
         [TestMethod]
         public void PasswordFieldEmptyTest()
         {
-            
+
         }
 
         [TestMethod]
@@ -38,19 +38,19 @@ namespace KopraTests
         [TestMethod]
         public void PasswordIncorrectTest()
         {
-            
+
         }
 
         [TestMethod]
         public void APIKeyNotGenerated()
         {
-            
+
         }
 
         [TestMethod]
         public void ApiKeyNotValid()
         {
-            
+
         }
     }
 }
