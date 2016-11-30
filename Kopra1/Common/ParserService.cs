@@ -1,4 +1,4 @@
-﻿using HtmlAgilityPack;
+﻿//using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -109,12 +109,12 @@ namespace Kopra.Common
         private string potentialGain;
         private string completeRepayment;
 
-        HtmlDocument document = new HtmlDocument();
+        //HtmlDocument document = new HtmlDocument();
 
-        public void LoadHTMLFromString(string html)
-        {
-            document.LoadHtml(html);
-        }
+        //public void LoadHTMLFromString(string html)
+        //{
+        //    document.LoadHtml(html);
+        //}
 
     }
 }

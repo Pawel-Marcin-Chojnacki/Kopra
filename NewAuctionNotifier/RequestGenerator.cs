@@ -38,7 +38,6 @@ namespace Kopra.NewAuctionNotifier
             Debug.WriteLine(webRequest.ToString());
             return new Uri(webRequest.ToString());
         }
-
         //     public Uri SearchAuction(IDictionary<string, string> search)
         //     {
         //         string requestAddress = BaseAddress + "search?";

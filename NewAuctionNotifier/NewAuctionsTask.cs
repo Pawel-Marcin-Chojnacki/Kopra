@@ -1,34 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.Storage;
 using Windows.UI.Notifications;
-using Kopra;
 
 namespace Kopra.NewAuctionNotifier
 {
     public sealed class NewAuctionsTask : IBackgroundTask
     {
-        private List<Auction> lastAuctions;
-        private RequestGenerator rg = new RequestGenerator();
+        private List<Auction> _lastAuctions;
+        private readonly RequestGenerator _requestGenerator = new RequestGenerator();
         private List<Auction> _auctions = new List<Auction>();
-        private Auction foundAuction;
+        private Auction _foundAuction;
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
             var deferral = taskInstance.GetDeferral();
             var filterLink = await GetFilter();
             if (filterLink == null)
                 return;
-            var link = rg.FilteredAuction(filterLink);
+            var link = _requestGenerator.FilteredAuction(filterLink);
             var auctions = await AuctionDownloader.GetAuctionsByParameters(link) as List<Auction>;
-            foundAuction = GetNewestAuctions(auctions);
-            if (foundAuction == null)
+            _foundAuction = GetNewestAuctions(auctions);
+            if (_foundAuction == null)
                 return;
-            Test(foundAuction);
+            Test(_foundAuction);
             deferral.Complete();
         }
 
@@ -44,16 +42,16 @@ namespace Kopra.NewAuctionNotifier
         /// <returns></returns>
         private Auction GetNewestAuctions(List<Auction> auctions)
         {
-            if (lastAuctions == null)
+            if (_lastAuctions == null)
             {
-                lastAuctions = auctions;
-                return lastAuctions.First();
+                _lastAuctions = auctions;
+                return _lastAuctions.First();
             }
             foreach (var auction in auctions)
             {
-                var newAuction = lastAuctions.Find(a => a.id == auction.id);
+                var newAuction = _lastAuctions.Find(a => a.id == auction.id);
                 if (newAuction != null) continue;
-                lastAuctions = auctions;
+                _lastAuctions = auctions;
                 return auction;
             }
             return null;
@@ -71,7 +69,7 @@ namespace Kopra.NewAuctionNotifier
                 }
                 return filterLink;
             }
-            return null; 
+            return null;
         }
 
         private static void SendToastNotification(string text1, string text2)
