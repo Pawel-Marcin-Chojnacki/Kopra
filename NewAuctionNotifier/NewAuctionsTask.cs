@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
 using Windows.ApplicationModel.Background;
+using Windows.Data.Xml.Dom;
 using Windows.Storage;
 using Windows.UI.Notifications;
 
@@ -76,9 +79,12 @@ namespace Kopra.NewAuctionNotifier
         {
             var toastTemplate = ToastTemplateType.ToastText02;
             var toaxtXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
+            var navigationUriString = "/SearchResultPage.xaml";
             var textElements = toaxtXml.GetElementsByTagName("text");
             textElements[0].AppendChild(toaxtXml.CreateTextNode(text1));
-            textElements[1].AppendChild(toaxtXml.CreateTextNode(text2));
+            textElements[1].AppendChild(toaxtXml.CreateTextNode(navigationUriString));
+            IXmlNode toastNode = toaxtXml.SelectSingleNode("/toast");
+            ((XmlElement)toastNode).SetAttribute("launch", navigationUriString);
             ToastNotificationManager.CreateToastNotifier().Show(new ToastNotification(toaxtXml));
         }
 

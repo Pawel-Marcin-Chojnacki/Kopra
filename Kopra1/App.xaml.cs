@@ -37,6 +37,8 @@ namespace Kopra
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            Debug.WriteLine(e.Arguments);
+
 #if DEBUG
             if (Debugger.IsAttached)
             {
@@ -45,6 +47,7 @@ namespace Kopra
 #endif
 
             var rootFrame = Window.Current.Content as Frame;
+
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -93,7 +96,11 @@ namespace Kopra
                     throw new Exception("Failed to create initial page");
                 }
             }
-
+            if (e.Arguments.Contains("SearchResultPage.xaml"))
+            {
+                string url = e.Arguments.Substring(e.Arguments.IndexOf("="), e.Arguments.Length+1);
+                rootFrame.Navigate(typeof(SearchResultPage),new Uri("https://kokos.pl/webapi/search?key=f7eb6fc7369aaad957b3f2fb8c4b5d92&status=1100&type=json"));
+            }
             // Ensure the current window is active
             Window.Current.Activate();
         }

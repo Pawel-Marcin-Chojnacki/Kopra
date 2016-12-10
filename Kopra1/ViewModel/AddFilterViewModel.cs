@@ -7,12 +7,13 @@ using System;
 using Windows.Storage;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 using Windows.UI.Popups;
 
 namespace Kopra.ViewModel
 {
-    class AddFilterViewModel : INotifyPropertyChanged
-    {
+	class AddFilterViewModel : INotifyPropertyChanged
+	{
 		public AddFilterViewModel()
 		{
 			InicjalizujKwotęPożyczek();
@@ -124,7 +125,7 @@ namespace Kopra.ViewModel
 			}
 	}
 
-        public List<Interest> LoanInterests
+		public List<Interest> LoanInterests
 		{
 			get { return _loanInterests; }
 			set
@@ -159,7 +160,7 @@ namespace Kopra.ViewModel
 			}
 		}
 
-        public Completion Completion
+		public Completion Completion
 		{
 			get
 			{
@@ -227,11 +228,12 @@ namespace Kopra.ViewModel
 
 		internal async void AddFilter()
 		{
+			if (FileExists(FilterName).Result) return;
 			var filterLink = CreateLinkFromFields();
 
 			try
 			{
-				var folder = ApplicationData.Current.LocalFolder;
+				StorageFolder folder = ApplicationData.Current.LocalFolder;
 				if (folder != null)
 				{
 					var file = await folder.CreateFileAsync(FilterName, CreationCollisionOption.ReplaceExisting);
@@ -258,12 +260,29 @@ namespace Kopra.ViewModel
 				{
 					content = await reader.ReadToEndAsync();
 				}
-
 			}
-
 		}
 
-		private char[] CreateLinkFromFields()
+		private async Task<bool> FileExists(string fileName)
+		{
+			try
+			{
+				StorageFolder folder = ApplicationData.Current.LocalFolder;
+				if (folder != null)
+				{
+					await ApplicationData.Current.LocalFolder.GetFileAsync(fileName);
+					return true;
+				}
+			}
+			catch (Exception exception)
+			{
+				return false;
+			}
+			return false;
+		}
+
+		private
+			char[] CreateLinkFromFields()
 		{
 			var link = new StringBuilder();
 			if (!string.IsNullOrWhiteSpace(_titleSearch))
@@ -272,11 +291,11 @@ namespace Kopra.ViewModel
 			}
 			if (Status!= null )
 			{
-			    if (Status.StatusLiczbowy == 0)
-			    {
-			        //link.Append("&status=" + 100)
+				if (Status.StatusLiczbowy == 0)
+				{
+					//link.Append("&status=" + 100)
 
-                }
+				}
 				link.Append("&status=" + Status.StatusLiczbowy);
 			}
 			if (LoanAmount != null)
@@ -402,7 +421,7 @@ namespace Kopra.ViewModel
 		{
 			StatusyPozyczek = new List<Status>()
 			{
-                new Status() {Opis = "Brak", StatusLiczbowy = 0},
+				new Status() {Opis = "Brak", StatusLiczbowy = 0},
 				new Status() {Opis = "Nowa pożyczka", StatusLiczbowy = 100},
 				//new Status() {Opis = "W trakcie tworzenia", StatusLiczbowy = 110},
 				new Status() {Opis = "Trwa spłata", StatusLiczbowy = 500},
