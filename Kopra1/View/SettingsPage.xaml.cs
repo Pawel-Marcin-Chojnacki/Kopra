@@ -1,10 +1,15 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using Windows.ApplicationModel.Background;
+using Windows.Storage;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http;
 using Kopra.Common;
+using Kopra.Model;
 using Kopra.NewAuctionNotifier;
 using Kopra.ViewModel;
 
@@ -59,7 +64,7 @@ namespace Kopra
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-			UserCredentials.SetUserName(userNameTitle);
+            UserCredentials.SetUserName(userNameTitle);
             vm.StoredFiles = await vm.GetStoredFiles();
             vm.Filters = await vm.ReadFilters();
         }
@@ -135,6 +140,41 @@ namespace Kopra
             taskBuilder.SetTrigger(trigger);
             taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
             taskBuilder.Register();
+            SaveBackgroundTaskFile(vm.Filter.Name);
+        }
+
+        internal async void SaveBackgroundTaskFile(string filename)
+        {
+            if (string.IsNullOrEmpty(filename))
+            {
+                var msgDial = new MessageDialog("Nie wybrano filtra .");
+                await msgDial.ShowAsync();
+                return;
+            }
+            try
+            {
+                StorageFolder folder = ApplicationData.Current.LocalFolder;
+                if (folder != null)
+                {
+                    var readingStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(filename);
+                    byte[] fileContent;
+                    using (var reader = new StreamReader(readingStream))
+                    {
+                        fileContent = Encoding.UTF8.GetBytes(reader.ReadToEnd());
+                    }
+                    var file = await folder.CreateFileAsync("BackgroundFilter", CreationCollisionOption.ReplaceExisting);
+                    var fileStream = await file.OpenStreamForWriteAsync();
+                    fileStream.Write(fileContent, 0, fileContent.Length);
+                    fileStream.Flush();
+                    fileStream.Dispose();
+                }
+            }
+            catch (Exception)
+            {
+                var msgDial = new MessageDialog("Nie można uruchomić zadań w tle.");
+                await msgDial.ShowAsync();
+                throw;
+            }
         }
     }
 }

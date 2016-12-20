@@ -4,8 +4,8 @@ using Kopra.Common;
 
 namespace Kopra.ViewModel
 {
-    public class SearchAuctionViewModel : MainViewModel
-    {
+	public class SearchAuctionViewModel : MainViewModel
+	{
 		public NotifyTaskCompletion<ObservableCollection<Auction>> Auctions { get; set; }
 		private DataService dataService = new DataService();
 

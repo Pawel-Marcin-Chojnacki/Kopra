@@ -228,7 +228,7 @@ namespace Kopra.ViewModel
 
 		internal async void AddFilter()
 		{
-			if (FileExists(FilterName).Result) return;
+			//if (FileExists(FilterName).Result) return;
 			var filterLink = CreateLinkFromFields();
 
 			try

@@ -7,7 +7,7 @@ using Kopra.Model;
 
 namespace Kopra.ViewModel
 {
-    internal class ShowFiltersViewModel : MainViewModel
+	internal class ShowFiltersViewModel : MainViewModel
 	{
 		private List<SearchFilter> _filters;
 
@@ -48,12 +48,12 @@ namespace Kopra.ViewModel
 			var content = new List<SearchFilter>();
 			foreach (var file in StoredFiles)
 			{
-			    if (file.Name == "BackgroundFilter")
-			        continue;
+				if (file.Name == "BackgroundFilter")
+					continue;
 				var readingStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(file.Name);
 				using (var reader = new StreamReader(readingStream))
 				{
-					content.Add(new SearchFilter() { Name = file.Name, Parameteres = reader.ReadToEnd() } );
+					content.Add(new SearchFilter { Name = file.Name, Parameteres = reader.ReadToEnd() } );
 				}
 			}
 			return content;
