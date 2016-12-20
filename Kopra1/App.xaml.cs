@@ -18,7 +18,7 @@ namespace Kopra
     public sealed partial class App : Application
     {
         private TransitionCollection transitions;
-
+        private SettingsManager sm = new SettingsManager();
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -99,8 +99,11 @@ namespace Kopra
             if (e.Arguments.Contains("!"))
             {
                 string arguments = e.Arguments;
-                string url = arguments.Substring(1, arguments.Length-1);
-                rootFrame.Navigate(typeof(SearchResultPage),new Uri("https://kokos.pl/webapi/search?key=f7eb6fc7369aaad957b3f2fb8c4b5d92&status=1100&type=json"));
+                string auctionId = arguments.Substring(1, arguments.Length-1);
+                if (!string.IsNullOrWhiteSpace(auctionId))
+                {
+                    rootFrame.Navigate(typeof(AuctionBasicDataPage), auctionId);
+                }
             }
             // Ensure the current window is active
             Window.Current.Activate();

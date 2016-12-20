@@ -43,24 +43,24 @@ namespace Kopra.Common
 			{
 				result = new Model.Auction.Auction();
 			}
-		    return result;
-	    }
+			return result;
+		}
 
-	    public async Task<ObservableCollection<Auction>> GetAuctionsByParameters(Uri urlAddress)
-	    {
-		    var result = new ObservableCollection<Auction>();
+		public async Task<ObservableCollection<Auction>> GetAuctionsByParameters(Uri urlAddress)
+		{
+			var result = new ObservableCollection<Auction>();
 			var request = new RequestGenerator();
 			var foundedAuctions = await KokosConnectionManager.SendRestRequest(urlAddress);
 			if (foundedAuctions != null)
 				foreach (var auction in foundedAuctions.response.auctions.auction)
 				{
-                    var statusesToCheck = new List<string> {"110", "120", "130", "150", "1500", "1400" };
-                    var forbiddenStatus = statusesToCheck.Any(s => auction.status.Equals(s));
-                    if (forbiddenStatus)
-                        continue;
-                    result.Add(auction);
+					var statusesToCheck = new List<string> {"110", "120", "130", "150", "1500", "1400" };
+					var forbiddenStatus = statusesToCheck.Any(s => auction.status.Equals(s));
+					if (forbiddenStatus)
+						continue;
+					result.Add(auction);
 				}
-		    return result;
-	    }
-    }
+			return result;
+		}
+	}
 }

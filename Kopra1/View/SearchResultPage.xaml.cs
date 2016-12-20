@@ -103,9 +103,11 @@ namespace Kopra
 
 		private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
 		{
-			var vm = (SearchAuctionViewModel)this.DataContext;
-			var selectedItem = (ListView)sender;
-			Frame.Navigate(typeof(AuctionBasicDataPage), e.ClickedItem);
+			//var vm = (SearchAuctionViewModel)this.DataContext;
+			//var selectedItem = (ListView)sender;
+		    Auction selectedAuction = (Auction) e.ClickedItem;
+		    var id = selectedAuction.id;
+			Frame.Navigate(typeof(AuctionBasicDataPage), id);
 		}
 	}
 }

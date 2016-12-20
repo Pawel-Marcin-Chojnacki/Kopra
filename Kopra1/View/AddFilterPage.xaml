@@ -1,18 +1,18 @@
 ﻿<Page
-    x:Class="Kopra.AddFilterPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Kopra"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModel="using:Kopra.ViewModel"
-    mc:Ignorable="d"
-    RequestedTheme="Light"
+	x:Class="Kopra.AddFilterPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="using:Kopra"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:viewModel="using:Kopra.ViewModel"
+	mc:Ignorable="d"
+	RequestedTheme="Light"
 
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Page.DataContext>
-        <viewModel:AddFilterViewModel></viewModel:AddFilterViewModel>
-    </Page.DataContext>
+	Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+	<Page.DataContext>
+		<viewModel:AddFilterViewModel></viewModel:AddFilterViewModel>
+	</Page.DataContext>
 	<Grid x:Name="LayoutRoot" DataContext="{Binding Mode=TwoWay}">
 
 		<Grid.RowDefinitions>
@@ -29,20 +29,20 @@
 			</Grid.ColumnDefinitions>
 
 			<Image Source="/Assets/LogoTheme.png"
-                   Height="40"
-                   Grid.Column="0"
-                   HorizontalAlignment="Left"
-                   Margin="15,0,5,5"></Image>
+				   Height="40"
+				   Grid.Column="0"
+				   HorizontalAlignment="Left"
+				   Margin="15,0,5,5"></Image>
 
 			<TextBlock x:Name="userNameTitle"
-                Grid.Column="1"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Bottom"
-                       RequestedTheme="Dark"
-                       Margin="0,0,19,9"
-                       Padding="0,0,0,0"
-                       Style="{ThemeResource TitleTextBlockStyle}"
-                        />
+				Grid.Column="1"
+					   HorizontalAlignment="Right"
+					   VerticalAlignment="Bottom"
+					   RequestedTheme="Dark"
+					   Margin="0,0,19,9"
+					   Padding="0,0,0,0"
+					   Style="{ThemeResource TitleTextBlockStyle}"
+						/>
 		</Grid>
 		<!-- Title Panel -->
 		<StackPanel Grid.Row="1" Margin="19,0,0,0">
@@ -54,72 +54,72 @@
 				<StackPanel>
 					<TextBlock>Nazwa filtru</TextBlock>
 					<TextBox 
-                    x:Name="FilterName" 
-                    PlaceholderText="Wymyśl fajną nazwę." 
-                    Text="{Binding Path=FilterName, Mode=TwoWay}" 
-                    TextWrapping="Wrap"  
-                    Margin="0,10,0,10" />
+					x:Name="FilterName" 
+					PlaceholderText="Wymyśl fajną nazwę." 
+					Text="{Binding Path=FilterName, Mode=TwoWay}" 
+					TextWrapping="Wrap"  
+					Margin="0,10,0,10" />
 					<TextBlock>Tytuł aukcji</TextBlock>
 					<TextBox 
-                    x:Name="AuctionTitle" 
-                    PlaceholderText="Szukaj w tytule aukcji..." 
-                    Text="{Binding Path=TitleSearch, Mode=TwoWay}" 
-                    TextWrapping="Wrap"  
-                    Margin="0,10,0,10" />
+					x:Name="AuctionTitle" 
+					PlaceholderText="Szukaj w tytule aukcji..." 
+					Text="{Binding Path=TitleSearch, Mode=TwoWay}" 
+					TextWrapping="Wrap"  
+					Margin="0,10,0,10" />
 					<TextBlock>Status</TextBlock>
 					<ComboBox 
-                    x:Name="AuctionStatus" 
-                    ItemsSource="{Binding Path=StatusyPozyczek}" 
+					x:Name="AuctionStatus" 
+					ItemsSource="{Binding Path=StatusyPozyczek}" 
 					PlaceholderText="Status pożyczki" 
-                    SelectedValue="{Binding Path=Status, Mode=TwoWay}"
-                    DisplayMemberPath="Opis">
+					SelectedValue="{Binding Path=Status, Mode=TwoWay}"
+					DisplayMemberPath="Opis">
 					</ComboBox>
 					<TextBlock>Kwota</TextBlock>
 					<ComboBox 
-                      x:Name="KwotaPożyczki" 
-                      ItemsSource="{Binding Path=LoanAmounts, Mode=TwoWay}" 
-                      PlaceholderText="Kwota pożyczki" 
-                      SelectedValue="{Binding Path=LoanAmount, Mode=TwoWay}" 
-                      DisplayMemberPath="RangeDescription">
+					  x:Name="KwotaPożyczki" 
+					  ItemsSource="{Binding Path=LoanAmounts, Mode=TwoWay}" 
+					  PlaceholderText="Kwota pożyczki" 
+					  SelectedValue="{Binding Path=LoanAmount, Mode=TwoWay}" 
+					  DisplayMemberPath="RangeDescription">
 					</ComboBox>
 					<TextBlock>Okres pożyczki</TextBlock>
 					<ComboBox 
-                    ItemsSource="{Binding Path=LoanPeriods}" 
-                    PlaceholderText="Okres pożyczki" 
-                    SelectedValue="{Binding Path=LoanPeriod, Mode=TwoWay}"
-                    DisplayMemberPath="Description">
+					ItemsSource="{Binding Path=LoanPeriods}" 
+					PlaceholderText="Okres pożyczki" 
+					SelectedValue="{Binding Path=LoanPeriod, Mode=TwoWay}"
+					DisplayMemberPath="Description">
 					</ComboBox>
 
 					<TextBlock>Oprocentowanie całkowite</TextBlock>
 					<ComboBox
-                    ItemsSource="{Binding Path=LoanInterests }" 
-                    PlaceholderText="Oprocentowanie"
-                    DisplayMemberPath="Description"
-                    SelectedValue="{Binding Path=LoanInterest, Mode=TwoWay}"></ComboBox>
+					ItemsSource="{Binding Path=LoanInterests }" 
+					PlaceholderText="Oprocentowanie"
+					DisplayMemberPath="Description"
+					SelectedValue="{Binding Path=LoanInterest, Mode=TwoWay}"></ComboBox>
 
 					<TextBlock>Realizacja</TextBlock>
 					<ComboBox 
-                        ItemsSource="{Binding Path=Completions}" 
-                        PlaceholderText="Procent realizacji" 
-                        DisplayMemberPath="Description"
-                        SelectedValue="{Binding Completion, Mode=TwoWay}"></ComboBox>
+						ItemsSource="{Binding Path=Completions}" 
+						PlaceholderText="Procent realizacji" 
+						DisplayMemberPath="Description"
+						SelectedValue="{Binding Completion, Mode=TwoWay}"></ComboBox>
 					<TextBlock>Ilość inwestorów</TextBlock>
 					<ComboBox 
-                        ItemsSource="{Binding Path=Investors}" 
-                        PlaceholderText="Ilość inwestorów" 
-                        DisplayMemberPath="Description"
-                        SelectedValue="{Binding Investor, Mode=TwoWay}"></ComboBox>
+						ItemsSource="{Binding Path=Investors}" 
+						PlaceholderText="Ilość inwestorów" 
+						DisplayMemberPath="Description"
+						SelectedValue="{Binding Investor, Mode=TwoWay}"></ComboBox>
 				</StackPanel>
 			</ScrollViewer>
 		</Grid>
 	</Grid>
 	<Page.BottomAppBar>
-        <CommandBar>
-            <AppBarButton x:Name="DodajAppBarButton" Label="Dodaj" Icon="Add" Click="DodajAppBarButton_OnClick" />
-            <AppBarButton x:Name="CzyśćAppBarButton" Label="Wyczyść" Icon="Clear" Click="WyczyśćAppBarButton_Click" />
-        </CommandBar>
-    </Page.BottomAppBar>
+		<CommandBar>
+			<AppBarButton x:Name="DodajAppBarButton" Label="Dodaj" Icon="Add" Click="DodajAppBarButton_OnClick" />
+			<AppBarButton x:Name="CzyśćAppBarButton" Label="Wyczyść" Icon="Clear" Click="WyczyśćAppBarButton_Click" />
+		</CommandBar>
+	</Page.BottomAppBar>
 </Page>
 
 
-    
+	

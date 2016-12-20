@@ -1,17 +1,17 @@
 ﻿<Page
-    x:Class="Kopra.InvestorReportPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Kopra"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    RequestedTheme="Light"
+	x:Class="Kopra.InvestorReportPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="using:Kopra"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	RequestedTheme="Light"
 	xmlns:vm="using:Kopra.ViewModel"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Page.DataContext>
-        <vm:InvestorReportPage></vm:InvestorReportPage>
-    </Page.DataContext>
+	Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+	<Page.DataContext>
+		<vm:InvestorReportPage></vm:InvestorReportPage>
+	</Page.DataContext>
 	<Grid x:Name="LayoutRoot" DataContext="{Binding Mode=TwoWay}">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"></RowDefinition>
@@ -27,76 +27,76 @@
 			</Grid.ColumnDefinitions>
 
 			<Image Source="/Assets/LogoTheme.png"
-                   Height="40"
-                   Grid.Column="0"
-                   HorizontalAlignment="Left"
-                   Margin="15,0,5,5"></Image>
+				   Height="40"
+				   Grid.Column="0"
+				   HorizontalAlignment="Left"
+				   Margin="15,0,5,5"></Image>
 
 			<TextBlock x:Name="userNameTitle"
-                Grid.Column="1"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Bottom"
-                       RequestedTheme="Dark"
-                       Margin="0,0,19,9"
-                       Padding="0,0,0,0"
-                       Style="{ThemeResource TitleTextBlockStyle}"
-                        />
+				Grid.Column="1"
+					   HorizontalAlignment="Right"
+					   VerticalAlignment="Bottom"
+					   RequestedTheme="Dark"
+					   Margin="0,0,19,9"
+					   Padding="0,0,0,0"
+					   Style="{ThemeResource TitleTextBlockStyle}"
+						/>
 		</Grid>
-        <!-- Title Panel -->
-        <StackPanel Grid.Row="1" Margin="19,0,0,0">
-            <TextBlock Text="Raport" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
-        </StackPanel>
-        
-            <Grid Grid.Row="2" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <ScrollViewer>
-            <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <TextBlock x:Name="monthAndYear"  Text="{Binding MonthAndYear, Mode=TwoWay}" 
-                        Grid.Row="0" FontSize="26" HorizontalAlignment="Center"  />
-            <TextBlock x:Name="investmentSum" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Suma inwestycji" 
-                       Style="{StaticResource TextBlockHeader}"  Grid.Row="1" />
-                    <TextBlock x:Name="investmentSumValue"  Text="{Binding InvestmentSum, Mode=TwoWay}" Grid.Row="2" Style="{ThemeResource TextBlockTest}" />
-            <TextBlock x:Name="completeRepayment" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Spłacalność całkowita" 
-                       Style="{StaticResource TextBlockHeader}"  Grid.Row="3" />
-                    <TextBlock x:Name="completeRepaymentValue"  Text="{Binding CompleteRepayment, Mode=TwoWay}" Grid.Row="4" Style="{ThemeResource TextBlockTest}" />
-            <TextBlock x:Name="potentialGain" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Potencjalny zysk" 
-                       Style="{StaticResource TextBlockHeader}"  Grid.Row="5" />
-                    <TextBlock x:Name="potentialGainValue" Text="{Binding PotentialGain, Mode=TwoWay}"  Grid.Row="6" Style="{ThemeResource TextBlockTest}"  />
-            <TextBlock x:Name="averageInterest" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Średnie oprocentowanie"
-                       Style="{StaticResource TextBlockHeader}" Grid.Row="7" />
-                    <TextBlock x:Name="averageInterestValue"  Text="{Binding AverageInterest, Mode=TwoWay}" Grid.Row="8" Style="{ThemeResource TextBlockTest}"   />
-            <TextBlock x:Name="returnOfInvestments" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Zwrot z inwestycji" 
-                       Style="{StaticResource TextBlockHeader}" Grid.Row="9" />
-                    <TextBlock x:Name="returnOfInvestmentsValue"  Text="{Binding ReturnOfInvestments, Mode=TwoWay}" Grid.Row="10" Style="{ThemeResource TextBlockTest}"  />
-            <TextBlock x:Name="resources" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Środki" 
-                       Style="{StaticResource TextBlockHeader}" Grid.Row="11" />
-                    <TextBlock x:Name="resourcesValue"  Text="{Binding Resources, Mode=TwoWay}" Grid.Row="12" Style="{ThemeResource TextBlockTest}"  />
-            <TextBlock x:Name="loansInRepayment" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Liczba pożyczek" 
-                       Style="{StaticResource TextBlockHeader}" Grid.Row="13" />
-                    <TextBlock x:Name="loansInRepaymentValue"  Text="{Binding LoansInRepayment, Mode=TwoWay}" Grid.Row="14" Style="{ThemeResource TextBlockTest}" />
-            </Grid>
-            </ScrollViewer>
-        </Grid>
-            
-    </Grid>
-        
+		<!-- Title Panel -->
+		<StackPanel Grid.Row="1" Margin="19,0,0,0">
+			<TextBlock Text="Raport" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+		</StackPanel>
+		
+			<Grid Grid.Row="2" x:Name="ContentRoot" Margin="19,9.5,19,0">
+			<ScrollViewer>
+			<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<TextBlock x:Name="monthAndYear"  Text="{Binding MonthAndYear, Mode=TwoWay}" 
+						Grid.Row="0" FontSize="26" HorizontalAlignment="Center"  />
+			<TextBlock x:Name="investmentSum" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Suma inwestycji" 
+					   Style="{StaticResource TextBlockHeader}"  Grid.Row="1" />
+					<TextBlock x:Name="investmentSumValue"  Text="{Binding InvestmentSum, Mode=TwoWay}" Grid.Row="2" Style="{ThemeResource TextBlockTest}" />
+			<TextBlock x:Name="completeRepayment" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Spłacalność całkowita" 
+					   Style="{StaticResource TextBlockHeader}"  Grid.Row="3" />
+					<TextBlock x:Name="completeRepaymentValue"  Text="{Binding CompleteRepayment, Mode=TwoWay}" Grid.Row="4" Style="{ThemeResource TextBlockTest}" />
+			<TextBlock x:Name="potentialGain" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Potencjalny zysk" 
+					   Style="{StaticResource TextBlockHeader}"  Grid.Row="5" />
+					<TextBlock x:Name="potentialGainValue" Text="{Binding PotentialGain, Mode=TwoWay}"  Grid.Row="6" Style="{ThemeResource TextBlockTest}"  />
+			<TextBlock x:Name="averageInterest" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Średnie oprocentowanie"
+					   Style="{StaticResource TextBlockHeader}" Grid.Row="7" />
+					<TextBlock x:Name="averageInterestValue"  Text="{Binding AverageInterest, Mode=TwoWay}" Grid.Row="8" Style="{ThemeResource TextBlockTest}"   />
+			<TextBlock x:Name="returnOfInvestments" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Zwrot z inwestycji" 
+					   Style="{StaticResource TextBlockHeader}" Grid.Row="9" />
+					<TextBlock x:Name="returnOfInvestmentsValue"  Text="{Binding ReturnOfInvestments, Mode=TwoWay}" Grid.Row="10" Style="{ThemeResource TextBlockTest}"  />
+			<TextBlock x:Name="resources" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Środki" 
+					   Style="{StaticResource TextBlockHeader}" Grid.Row="11" />
+					<TextBlock x:Name="resourcesValue"  Text="{Binding Resources, Mode=TwoWay}" Grid.Row="12" Style="{ThemeResource TextBlockTest}"  />
+			<TextBlock x:Name="loansInRepayment" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Liczba pożyczek" 
+					   Style="{StaticResource TextBlockHeader}" Grid.Row="13" />
+					<TextBlock x:Name="loansInRepaymentValue"  Text="{Binding LoansInRepayment, Mode=TwoWay}" Grid.Row="14" Style="{ThemeResource TextBlockTest}" />
+			</Grid>
+			</ScrollViewer>
+		</Grid>
+			
+	</Grid>
+		
 </Page>
