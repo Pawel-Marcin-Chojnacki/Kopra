@@ -96,9 +96,10 @@ namespace Kopra
                     throw new Exception("Failed to create initial page");
                 }
             }
-            if (e.Arguments.Contains("SearchResultPage.xaml"))
+            if (e.Arguments.Contains("!"))
             {
-                string url = e.Arguments.Substring(e.Arguments.IndexOf("="), e.Arguments.Length+1);
+                string arguments = e.Arguments;
+                string url = arguments.Substring(1, arguments.Length-1);
                 rootFrame.Navigate(typeof(SearchResultPage),new Uri("https://kokos.pl/webapi/search?key=f7eb6fc7369aaad957b3f2fb8c4b5d92&status=1100&type=json"));
             }
             // Ensure the current window is active
