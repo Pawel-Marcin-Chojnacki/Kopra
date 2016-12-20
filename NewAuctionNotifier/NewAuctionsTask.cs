@@ -20,11 +20,10 @@ namespace Kopra.NewAuctionNotifier
         private Auction _foundAuction;
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
-            var deferral = taskInstance.GetDeferral();
+            BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
             var filterLink = await GetFilter();
-            if (filterLink == null)
-                return;
-            var link = _requestGenerator.FilteredAuction(filterLink);
+            if (filterLink == null) return;
+            Uri link = _requestGenerator.FilteredAuction(filterLink);
             var auctions = await AuctionDownloader.GetAuctionsByParameters(link) as List<Auction>;
             _foundAuction = GetNewestAuctions(auctions);
             if (_foundAuction == null)
@@ -35,7 +34,12 @@ namespace Kopra.NewAuctionNotifier
 
         private void Test(Auction foundAuction)
         {
-            SendToastNotification("Title", "Message");
+            if (foundAuction.value.Contains(".00"))
+            {
+                foundAuction.value = foundAuction.value.Substring(0, foundAuction.value.IndexOf('.'));
+            }
+            var detailedMessage = foundAuction.user + ", " + foundAuction.value + "zł, " + foundAuction.percent;
+            SendToastNotification(foundAuction.title, detailedMessage, foundAuction.id);
         }
 
         /// <summary>
@@ -75,16 +79,16 @@ namespace Kopra.NewAuctionNotifier
             return null;
         }
 
-        private static void SendToastNotification(string text1, string text2)
+        private static void SendToastNotification(string text1, string text2, string id)
         {
             var toastTemplate = ToastTemplateType.ToastText02;
             var toaxtXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
             var navigationUriString = "/SearchResultPage.xaml";
             var textElements = toaxtXml.GetElementsByTagName("text");
             textElements[0].AppendChild(toaxtXml.CreateTextNode(text1));
-            textElements[1].AppendChild(toaxtXml.CreateTextNode(navigationUriString));
+            textElements[1].AppendChild(toaxtXml.CreateTextNode(text2));
             IXmlNode toastNode = toaxtXml.SelectSingleNode("/toast");
-            ((XmlElement)toastNode).SetAttribute("launch", navigationUriString);
+            ((XmlElement)toastNode).SetAttribute("launch","!"+id);
             ToastNotificationManager.CreateToastNotifier().Show(new ToastNotification(toaxtXml));
         }
 
