@@ -14,7 +14,6 @@ namespace Kopra.NewAuctionNotifier
 {
     public sealed class NewAuctionsTask : IBackgroundTask
     {
-        private List<Auction> _lastAuctions;
         private readonly RequestGenerator _requestGenerator = new RequestGenerator();
         private List<Auction> _auctions = new List<Auction>();
         private Auction _foundAuction;
@@ -49,19 +48,22 @@ namespace Kopra.NewAuctionNotifier
         /// <returns></returns>
         private Auction GetNewestAuctions(List<Auction> auctions)
         {
-            if (_lastAuctions == null)
-            {
-                _lastAuctions = auctions;
-                return _lastAuctions.First();
+            var lastFoundAuctionId = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["AuctionId"];
+            if (lastFoundAuctionId == null)
+            { // tutaj dodaj zapisywanie id ostatnio znalezionej aukcji do localstorage.
+                var auction = auctions.First();
+                Windows.Storage.ApplicationData.Current.LocalSettings.Values["AuctionId"] = auction.id;
+                return auctions.First();
             }
-            foreach (var auction in auctions)
+            else if (auctions.First().id == lastFoundAuctionId)
             {
-                var newAuction = _lastAuctions.Find(a => a.id == auction.id);
-                if (newAuction != null) continue;
-                _lastAuctions = auctions;
-                return auction;
+                return null;
             }
-            return null;
+            else
+            {
+                Windows.Storage.ApplicationData.Current.LocalSettings.Values["AuctionId"] = auctions.First().id;
+                return auctions.First();
+            }
         }
 
         private async Task<string> GetFilter()
