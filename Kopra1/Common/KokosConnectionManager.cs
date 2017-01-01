@@ -24,7 +24,7 @@ namespace Kopra
 
         public static async Task<HttpResponseMessage> LoginToService(string text, string password)
         {
-            Debug.WriteLine("LoginToService");
+            //Debug.WriteLine("LoginToService");
             HttpClient.DefaultRequestHeaders.UserAgent.Add(new HttpProductInfoHeaderValue("Kopra","1"));
             var form = new HttpMultipartFormDataContent
             {

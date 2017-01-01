@@ -21,6 +21,10 @@ namespace Kopra.Common
             {
                 monthAndYear = "Listopad 2016";
             }
+            else if (monthAndYear.Contains("Grudzie"))
+            {
+                monthAndYear = "Grudzień 2016";
+            }
             return monthAndYear;
         }
 
