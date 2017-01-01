@@ -109,12 +109,12 @@
 						<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
 					Text="{Binding Path=numberOfOffers, Mode=TwoWay}"/>
-						<TextBlock Style="{StaticResource TextBlockHeader}"
+						<!--<TextBlock Style="{StaticResource TextBlockHeader}"
 						   Visibility="{Binding Path=firstPayData, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
 						   Text="Data pierwszej spłaty"></TextBlock>
 						<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
-					Text="{Binding Path=firstPayData, Mode=TwoWay}"/>
+					Text="{Binding Path=firstPayData, Mode=TwoWay}"/>-->
 						<TextBlock  
 					Style="{ThemeResource TextBlockTest}"
 					Text="{Binding Path=description2, Mode=TwoWay}"/>
