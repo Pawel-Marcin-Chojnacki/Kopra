@@ -50,7 +50,7 @@ namespace Kopra.NewAuctionNotifier
         {
             var lastFoundAuctionId = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["AuctionId"];
             if (lastFoundAuctionId == null)
-            { // tutaj dodaj zapisywanie id ostatnio znalezionej aukcji do localstorage.
+            {
                 var auction = auctions.First();
                 Windows.Storage.ApplicationData.Current.LocalSettings.Values["AuctionId"] = auction.id;
                 return auctions.First();
