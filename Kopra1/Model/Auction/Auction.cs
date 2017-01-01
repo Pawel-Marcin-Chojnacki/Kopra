@@ -9,8 +9,9 @@ namespace Kopra.Model.Auction
 	{
 		public string id { get; set; }
 		private string _title = string.Empty;
+	    private string _firstPayData;
 
-		public string title
+	    public string title
 		{
 			get { return _title.Trim(); }
 			set { _title = value; }
@@ -28,8 +29,14 @@ namespace Kopra.Model.Auction
 		public string isVindicated { get; set; }
 		public string paid { get; set; }
 		public string monthlyInstallment { get; set; }
-		public string firstPayData { get; set; }
-		public string status { get; set; }
+
+	    public string firstPayData
+	    {
+	        get { return _firstPayData; }
+	        set { _firstPayData = value; }
+	    }
+
+	    public string status { get; set; }
 		public string isFromPartner { get; set; }
 		public string description1 { get; set; }
 		public string description2 { get; set; }
