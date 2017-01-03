@@ -8,7 +8,18 @@
 		public string amount { get; set; }
 		public string percent { get; set; }
 		public string date { get; set; }
-		public string isPaid { get; set; }
+	    private string _ispaid = string.Empty;
+
+	    public string isPaid
+	    {
+	        get
+	        {
+	            if (_ispaid.StartsWith("1"))
+	                return "Tak";
+	            return "Nie";
+	        }
+            set { _ispaid = value; }
+	    }
 		public string isGuaranteed { get; set; }
 		public string isAccepted { get; set; }
 		public string isSold { get; set; }

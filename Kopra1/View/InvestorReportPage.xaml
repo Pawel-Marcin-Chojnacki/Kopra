@@ -48,7 +48,7 @@
 		</StackPanel>
 		
 			<Grid Grid.Row="2" x:Name="ContentRoot" Margin="19,9.5,19,0">
-			<ScrollViewer>
+			<ScrollViewer Padding="0,0,0,10">
 			<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
@@ -71,7 +71,7 @@
 				<RowDefinition/>
 			</Grid.RowDefinitions>
 			<TextBlock x:Name="monthAndYear"  Text="{Binding MonthAndYear, Mode=TwoWay}" 
-						Grid.Row="0" FontSize="26" HorizontalAlignment="Center"  />
+						Grid.Row="0" FontSize="26"  />
 			<TextBlock x:Name="investmentSum" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Suma inwestycji" 
 					   Style="{StaticResource TextBlockHeader}"  Grid.Row="1" />
 					<TextBlock x:Name="investmentSumValue"  Text="{Binding InvestmentSum, Mode=TwoWay}" Grid.Row="2" Style="{ThemeResource TextBlockTest}" />

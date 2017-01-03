@@ -94,13 +94,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kopra.SharedLibrary\Kopra.SharedLibrary.csproj">
-      <Project>{e7e2e708-f204-484b-a8c8-f5e27db0d6ce}</Project>
-      <Name>Kopra.SharedLibrary</Name>
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>

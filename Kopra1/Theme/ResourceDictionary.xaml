@@ -102,11 +102,12 @@
 	<Style x:Key="TextBlockTest" BasedOn="{StaticResource BodyTextBlockStyle}" TargetType="TextBlock">
 		<Setter Property="FontSize" Value="24"></Setter>
 		<Setter Property="LineHeight" Value="30"></Setter>
-		<Setter Property="Foreground" Value="Black"></Setter>
-	</Style>
+        <Setter Property="Foreground" Value="Black"></Setter>
+        <Setter Property="Margin" Value="0,0,0,5"></Setter>
+    </Style>
 
 	<Style x:Key="TextBlockHeader" BasedOn="{StaticResource GroupHeaderTextBlockStyle}" TargetType="TextBlock">
-		<Setter Property="Margin" Value="0,15,0,0"></Setter>
+		<Setter Property="Margin" Value="0,8,0,0"></Setter>
 	</Style>
 
 	<Style x:Key="TextBlockCommentResponse" BasedOn="{StaticResource BodyTextBlockStyle}" TargetType="TextBlock">
@@ -122,8 +123,9 @@
 	</Style>
 
     <Style x:Key="ButtonSettings" TargetType="Button">
-        <Setter Property="FontSize" Value="24"></Setter>
-        <Setter Property="Foreground" Value="Black"></Setter>
+        <!--<Setter Property="FontSize" Value="24"></Setter>-->
+        <Setter Property="FontWeight" Value="Bold"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
     </Style>
 
 </ResourceDictionary>

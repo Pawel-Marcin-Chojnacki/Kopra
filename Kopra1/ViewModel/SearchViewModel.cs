@@ -12,7 +12,7 @@ namespace Kopra.ViewModel
 
 		public void ClearFilter()
 		{
-			TitleSearch = " ";
+		    TitleSearch = string.Empty;
 			Status = null;
 			LoanAmount = null;
 			LoanPeriod = null;

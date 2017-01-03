@@ -49,20 +49,33 @@
         </StackPanel>
 
         <Grid Grid.Row="2" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <StackPanel>
-                <TextBlock x:Name="LabelApiKey" TextWrapping="Wrap" Text="Klucz API serwisu:" Style="{ThemeResource TextBlockTest}" Margin="0,0,0,3"/>
-                <TextBox x:Name="ApiKeyValue" TextWrapping="Wrap" Text="{Binding Path=ApiKeyValue}"  IsReadOnly="True" Margin="5,0,5,3"/>
-                <TextBlock x:Name="LabelApiKeyValidDate" TextWrapping="Wrap" Text="Data ważności klucza:" Style="{ThemeResource TextBlockTest}" Margin="0,3,0,3"/>
-                <TextBox x:Name="ApiKeyValidDate" TextWrapping="Wrap" Text="{Binding Path=ApiKeyValidDate, Mode=TwoWay}"  IsReadOnly="True" Margin="5,0,5,3"/>
-                <ComboBox x:Name="BackgroundTaskFilter" 
+            <ScrollViewer>
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel>
+                        <TextBlock x:Name="LabelApiKey" TextWrapping="Wrap" Text="Klucz API serwisu:" Style="{ThemeResource TextBlockHeader}" />
+                        <TextBox x:Name="ApiKeyValue" TextWrapping="Wrap" Text="{Binding Path=ApiKeyValue}"  IsReadOnly="True" />
+                        <TextBlock x:Name="LabelApiKeyValidDate" TextWrapping="Wrap" Text="Data ważności klucza:" Style="{ThemeResource TextBlockHeader}" />
+                        <TextBox x:Name="ApiKeyValidDate" TextWrapping="Wrap" Text="{Binding Path=ApiKeyValidDate, Mode=TwoWay}"  IsReadOnly="True" />
+                        <TextBlock TextWrapping="Wrap" Text="Filtr do powiadomień:" Style="{ThemeResource TextBlockHeader}" />
+                        <ComboBox x:Name="BackgroundTaskFilter" 
                       ItemsSource="{Binding Path=Filters, Mode=TwoWay}" 
-                      PlaceholderText="Filtr z nowymi aukcjami" 
+                      PlaceholderText="Wybierz filtr..." 
                       SelectedValue="{Binding Path=Filter, Mode=TwoWay}" 
                       DisplayMemberPath="Name"/>
-                <Button x:Name="RegisterBackgroundTaskButton" Content="Monitor aukcji" HorizontalAlignment="Center" Style="{ThemeResource ButtonSettings}"  VerticalAlignment="Top" Click="RegisterBackgroundTaskButton_OnClick" Width="340" Height="70" />
-                <Button x:Name="ApiRefreshButton" Content="Odśwież klucz" HorizontalAlignment="Center" Style="{ThemeResource ButtonSettings}" VerticalAlignment="Top" Click="GenerateApiKeyButtonClick" Width="340" Height="70" />
-                <Button x:Name="LogoutButton" Content="Wyloguj" Style="{ThemeResource ButtonSettings}" VerticalAlignment="Top" HorizontalAlignment="Center" Click="logoutButton_Click" Width="340" Height="70"/>
-            </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1">
+                        <Button x:Name="RegisterBackgroundTaskButton" Content="Monitor aukcji" Style="{ThemeResource ButtonSettings}"  Click="RegisterBackgroundTaskButton_OnClick" />
+                        <Button x:Name="ApiRefreshButton" Content="Odśwież klucz" Style="{ThemeResource ButtonSettings}"  Click="GenerateApiKeyButtonClick" />
+                        <Button x:Name="LogoutButton" Content="Wyloguj" Style="{ThemeResource ButtonSettings}" Click="logoutButton_Click"  Margin="0,0,0,10" />
+                    </StackPanel>
+
+                </Grid>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Page>

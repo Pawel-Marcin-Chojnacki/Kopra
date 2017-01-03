@@ -273,10 +273,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kopra.SharedLibrary\Kopra.SharedLibrary.csproj">
-      <Project>{e7e2e708-f204-484b-a8c8-f5e27db0d6ce}</Project>
-      <Name>Kopra.SharedLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NewAuctionNotifier\NewAuctionNotifier.csproj">
       <Project>{0e271a0f-cb9c-4384-8980-4ecd5ee0e2f2}</Project>
       <Name>NewAuctionNotifier</Name>

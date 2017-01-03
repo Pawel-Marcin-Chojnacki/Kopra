@@ -9,7 +9,7 @@ namespace Kopra.Converter
 		public object Convert(object value, Type targetType, object parameter, string language)
 		{
 			var str = value as string;
-			return string.IsNullOrEmpty(str) ? Visibility.Collapsed : Visibility.Visible;
+			return string.IsNullOrWhiteSpace(str) ? Visibility.Collapsed : Visibility.Visible;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, string language)

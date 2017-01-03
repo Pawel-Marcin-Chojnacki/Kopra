@@ -163,7 +163,7 @@
 						<TextBlock Style="{StaticResource TextBlockHeader}"
 						   Visibility="{Binding Path=PB.condition, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
 						   Text="Kondycja"></TextBlock>
-						<TextBlock  
+                        <TextBlock Visibility="{Binding Path=PB.condition, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
 					Style="{ThemeResource TextBlockTest}"
 					Text="{Binding Path=PB.condition, Mode=TwoWay}"/>
 						<TextBlock Style="{StaticResource TextBlockHeader}"
@@ -193,7 +193,7 @@
 						</Grid.RowDefinitions>
 						<TextBlock Grid.Row="0" TextAlignment="Left" Margin="5,0,0,0"
 					Text="👍 Rekomendacje pozytywne" Style="{ThemeResource TextBlockLabel}" Foreground="Black"/>
-						<TextBlock  Grid.Row="1"
+                        <TextBlock  Grid.Row="1"  Margin="35,0,0,5"
 			Style="{ThemeResource TextBlockTest}" Foreground="DarkGreen"
 			Text="{Binding Path=PB.positiveRecomendations, Mode=TwoWay}"/>
 					</Grid>
@@ -205,7 +205,7 @@
 						</Grid.RowDefinitions>
 						<TextBlock Grid.Row="0" TextAlignment="Left" Margin="5,0,0,0"
 					Text="✊ Rekomendacje neutralne" Foreground="Black" Style="{ThemeResource TextBlockLabel}"/>
-						<TextBlock  Grid.Row="1" 
+						<TextBlock  Grid.Row="1" Margin="35,0,0,5"
 			Style="{ThemeResource TextBlockTest}"
 			Text="{Binding Path=PB.neutralRecomendations, Mode=TwoWay}"/>
 					</Grid>
@@ -216,7 +216,7 @@
 						</Grid.RowDefinitions>
 						<TextBlock Grid.Row="0" TextAlignment="Left" Margin="5,0,0,0"
 					Text="👎 Rekomendacje negatywne" Foreground="Black" Style="{ThemeResource TextBlockLabel}"/>
-						<TextBlock  
+                        <TextBlock    Margin="35,0,0,5"
 			Style="{ThemeResource TextBlockTest}" Grid.Row="1" Foreground="DarkRed" 
 			Text="{Binding Path=PB.negativeRecomendations, Mode=TwoWay}"/>
 					</Grid>
@@ -228,7 +228,7 @@
 						<TextBlock Grid.Row="0" TextAlignment="Left" Margin="5,0,0,0"
 					Text="☺ Przedterminowe spłaty" Style="{ThemeResource TextBlockLabel}" Foreground="Black"/>
 						<TextBlock  Grid.Row="1" Foreground="DarkGreen" 
-			Style="{ThemeResource TextBlockTest}" 
+			Style="{ThemeResource TextBlockTest}"  Margin="35,0,0,5"
 			Text="{Binding Path=PB.beforeDays, Mode=TwoWay}"/>
 					</Grid>
 					<Grid>
@@ -239,7 +239,7 @@
 						<TextBlock Grid.Row="0" TextAlignment="Left" Margin="5,0,0,0"
 					Text="☹ Opóźnienia spłat" Style="{ThemeResource TextBlockLabel}" Foreground="Black"/>
 						<TextBlock  Grid.Row="1" Foreground="DarkRed"
-			Style="{ThemeResource TextBlockTest}" 
+			Style="{ThemeResource TextBlockTest}"  Margin="35,0,0,5"
 			Text="{Binding Path=PB.overdueDays, Mode=TwoWay}"/>
 					</Grid>
 				</StackPanel>
@@ -303,24 +303,32 @@
 										</ItemsControl.ItemsPanel>
 										<ItemsControl.ItemTemplate>
 											<DataTemplate>
-												<StackPanel>
-													<TextBlock 
+												<StackPanel Margin="0,0,0,10">
+                                                    <TextBlock   FontWeight="Bold"
 								Style="{ThemeResource TextBlockTest}"
 								Text="{Binding Path=user}"/>
 
-													<TextBlock 
+                                                    <TextBlock Text="Kwota inwestycji" Style="{ThemeResource TextBlockHeader}"/>
+
+                                                    <TextBlock 
 								Style="{ThemeResource TextBlockTest}"
 								Text="{Binding Path=amount}"/>
 
+                                                    <TextBlock Text="Procent" Style="{ThemeResource TextBlockHeader}"/>
+                                                    
 													<TextBlock 
 								Style="{ThemeResource TextBlockTest}"
 								Text="{Binding Path=percent}"/>
 
+                                                    <TextBlock Text="Czy spłacona" Style="{ThemeResource TextBlockHeader}"/>
+                                                    
 													<TextBlock 
 								Style="{ThemeResource TextBlockTest}"
 								Text="{Binding Path=isPaid}"/>
 
-													<TextBlock 
+                                                    <TextBlock Text="Data" Style="{ThemeResource TextBlockHeader}"/>
+
+                                                    <TextBlock 
 								Style="{ThemeResource TextBlockTest}"
 								Text="{Binding Path=date}"/>
 												</StackPanel>
