@@ -16,12 +16,13 @@ namespace Kopra
 	{
 		//private static UserCredentials user;
 		public static HttpClient HttpClient = new HttpClient();
-		private static readonly CancellationTokenSource _cts = new CancellationTokenSource();
+		private static CancellationTokenSource _cts = new CancellationTokenSource();
 		private const string LoginAddress = "https://kokos.pl/uzytkownik/dane-osobowe";
 		private static readonly Uri _resourceAddress = new Uri(LoginAddress);
 		private static HttpResponseMessage _response;
+		private static SettingsManager settingsManager = new SettingsManager();
 
-	    public static async Task<HttpResponseMessage> LoginToService(string text, string password)
+		public static async Task<HttpResponseMessage> LoginToService(string text, string password)
 		{
 			//Debug.WriteLine("LoginToService");
 			HttpClient.DefaultRequestHeaders.UserAgent.Add(new HttpProductInfoHeaderValue("Kopra","1"));

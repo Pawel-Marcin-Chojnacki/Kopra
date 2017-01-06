@@ -35,6 +35,10 @@ namespace Kopra.ViewModel
             LoadData();
         }
 
-        private void LoadData() => RecentAuctions = new NotifyTaskCompletion<ObservableCollection<Auction>>(dataService.GetRecentAuctions());
+        private void LoadData()
+        {
+            RecentAuctions = new NotifyTaskCompletion<ObservableCollection<Auction>>(dataService.GetRecentAuctions());
+        }
+
     }
 }

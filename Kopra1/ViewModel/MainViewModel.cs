@@ -6,10 +6,20 @@ namespace Kopra.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        #region fields
+        #endregion
+
+        #region properties
+        public string UserName { get { return "Użytkownik"; } }
+        #endregion
+
         public void NotifyPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this,
-                new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this,
+                    new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

@@ -118,7 +118,7 @@ namespace Kopra.ViewModel
 				var readingStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(file.Name);
 				using (var reader = new StreamReader(readingStream))
 				{
-					content.Add(new SearchFilter { Name = file.Name, Parameteres = reader.ReadToEnd() });
+					content.Add(new SearchFilter() { Name = file.Name, Parameteres = reader.ReadToEnd() });
 				}
 			}
 			return content;
