@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml;
 using Windows.ApplicationModel.Background;
 using Windows.Data.Xml.Dom;
 using Windows.Storage;
@@ -27,11 +25,11 @@ namespace Kopra.NewAuctionNotifier
             _foundAuction = GetNewestAuctions(auctions);
             if (_foundAuction == null)
                 return;
-            Test(_foundAuction);
+            CreateToastNotification(_foundAuction);
             deferral.Complete();
         }
 
-        private void Test(Auction foundAuction)
+        private void CreateToastNotification(Auction foundAuction)
         {
             if (foundAuction.value.Contains(".00"))
             {

@@ -29,14 +29,11 @@ namespace Kopra
 			var webRequest = new StringBuilder();
 			webRequest.Append(BaseAddress);
 			webRequest.Append(Search);
-
 			webRequest.Append("&");
-
 			var sm = new SettingsManager();
 			webRequest.Append(Key + sm.KokosWebApiKey);
 			webRequest.Append(filter);
 			webRequest.Append(DataType);
-			Debug.WriteLine(webRequest.ToString());
 			return new Uri(webRequest.ToString());
 		}
 

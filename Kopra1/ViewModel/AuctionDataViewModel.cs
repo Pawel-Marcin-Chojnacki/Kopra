@@ -34,7 +34,7 @@ namespace Kopra.ViewModel
 
 		public async void GetAuctionData()
 		{
-			Request = new GetAuctionDataParameters() {Id = Id, DataType = "json"};
+			Request = new GetAuctionDataParameters {Id = Id, DataType = "json"};
 			Auction = await ds.GetAuctionData(Request);
 		}
 
