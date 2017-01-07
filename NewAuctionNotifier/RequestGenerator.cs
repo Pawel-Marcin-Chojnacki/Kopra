@@ -28,27 +28,13 @@ namespace Kopra.NewAuctionNotifier
             var webRequest = new StringBuilder();
             webRequest.Append(BaseAddress);
             webRequest.Append(Search);
-
             webRequest.Append("&");
-
             var sm = new SettingsManager();
             webRequest.Append(Key + sm.KokosWebApiKey);
             webRequest.Append(filter);
             webRequest.Append(DataType);
-            Debug.WriteLine(webRequest.ToString());
             return new Uri(webRequest.ToString());
         }
-        //     public Uri SearchAuction(IDictionary<string, string> search)
-        //     {
-        //         string requestAddress = BaseAddress + "search?";
-        //         foreach (var item in search)
-        //         {
-        //             requestAddress += item.Key + "=" + item.Value + "&";
-        //         }
-        //         requestAddress += DataType;
-        //         var result = new Uri(requestAddress);
-        //         return result;
-        //     }
 
         /// <summary>
         /// Composes new query for searching.
@@ -66,44 +52,7 @@ namespace Kopra.NewAuctionNotifier
             }
             requestAddress += DataType;
             var result = new Uri(requestAddress);
-
-			Debug.WriteLine(result.ToString());
 			return result;
         }
-
-   //     /// <summary>
-   //     /// Composes request to get 3 most recent auctions.
-   //     /// </summary>
-   //     /// <returns>API query to get most recent auctions.</returns>
-   //     public Uri MostRecentAuctions()
-   //     {
-   //         var requestAddress = BaseAddress + RecentAuctions;
-   //         var sm = new SettingsManager();
-   //         requestAddress += Key + sm.KokosWebApiKey;
-			//requestAddress += DataType + "&";
-			//requestAddress += Records + "3";
-			//var result = new Uri(requestAddress);
-			//Debug.WriteLine(result.ToString());
-			//return result;
-   //     }
-
-	  //  public Uri GetAuctionData(GetAuctionDataParameters parameters)
-	  //  {
-			//SettingsManager settingsManager = new SettingsManager();
-			//StringBuilder reqBuilder = new StringBuilder();
-		 //   reqBuilder.Append(BaseAddress);
-		 //   reqBuilder.Append(AuctionData);
-		 //   reqBuilder.Append(Key);
-		 //   reqBuilder.Append(settingsManager.KokosWebApiKey);
-		 //   reqBuilder.Append("&");
-		 //   reqBuilder.Append(Id);
-		 //   reqBuilder.Append(parameters.Id);
-		 //   reqBuilder.Append("&");
-		 //   reqBuilder.Append(Comments);
-		 //   reqBuilder.Append("&");
-		 //   reqBuilder.Append(Type);
-		 //   reqBuilder.Append(parameters.DataType);
-			//return new Uri(reqBuilder.ToString());
-	  //  }
     }
 }

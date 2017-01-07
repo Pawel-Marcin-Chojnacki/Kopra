@@ -31,7 +31,6 @@ namespace Kopra.NewAuctionNotifier
                 {
                     var niceDate = new DateTime();
                     niceDate = Convert.ToDateTime(_date).ToUniversalTime();
-                    Debug.WriteLine("niceDate: " + niceDate);
                     return FormatDate(niceDate);
                 }
                 set
@@ -71,11 +70,8 @@ namespace Kopra.NewAuctionNotifier
                 var utc = new DateTime();
                 try
                 {
-                    Debug.WriteLine("localTime: " + localTime);
                     var dt = new DateTime(localTime.Ticks);
-                    //Debug.WriteLine("dt: " + dt);
                     utc = dt.ToLocalTime();
-                    //Debug.WriteLine("utc: " + utc);
                 }
                 catch (Exception) { }
                 return new TimeSpan(utc.Ticks);
@@ -84,7 +80,6 @@ namespace Kopra.NewAuctionNotifier
             private string FormatDate(DateTime datetimeUTC)
             {
                 var difference = UTCTimeToLocalTime(datetimeUTC.TimeOfDay);
-                Debug.WriteLine(difference);
                 if (difference.TotalDays > 30)
                     return datetimeUTC.ToLocalTime().ToString("yyyy-MM-dd");
                 if (difference.TotalDays > 1)

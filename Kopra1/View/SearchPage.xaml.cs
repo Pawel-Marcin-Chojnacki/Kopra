@@ -106,7 +106,6 @@ namespace Kopra.View
 		{
 			//Przykładowe wyszkukiwanie.
 			//var auctionsearchResult = this.vm.SearchAuction();
-			//Debug.WriteLine(auctionsResult.Auction.id.ToString());
 		}
 
 		private Dictionary<string, string> searchDictionary()

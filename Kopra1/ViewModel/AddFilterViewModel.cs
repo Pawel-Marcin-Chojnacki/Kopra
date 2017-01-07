@@ -236,9 +236,9 @@ namespace Kopra.ViewModel
 				StorageFolder folder = ApplicationData.Current.LocalFolder;
 				if (folder != null)
 				{
-					var file = await folder.CreateFileAsync(FilterName, CreationCollisionOption.ReplaceExisting);
+					var file = folder.CreateFileAsync(FilterName, CreationCollisionOption.ReplaceExisting).GetResults();
 					var fileContent = Encoding.UTF8.GetBytes(filterLink);
-					var fileStream = await file.OpenStreamForWriteAsync();
+					var fileStream = file.OpenStreamForWriteAsync().Result;
 					fileStream.Write(fileContent, 0, fileContent.Length);
 					fileStream.Flush();
 					fileStream.Dispose();
@@ -246,20 +246,20 @@ namespace Kopra.ViewModel
 					await msgDial.ShowAsync();
 				}
 			}
-			catch (Exception)
+			catch (Exception exception)
 			{
 				var msgDial = new MessageDialog("Nie można zapisać filtru: ");
 				await msgDial.ShowAsync();
-				throw;
+				//throw;
 			}
 			finally
 			{
-				var content = string.Empty;
-				var readingStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(FilterName);
-				using (var reader = new StreamReader(readingStream))
-				{
-					content = await reader.ReadToEndAsync();
-				}
+				//var content = string.Empty;
+				//var readingStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(FilterName);
+				//using (var reader = new StreamReader(readingStream))
+				//{
+				//	content = await reader.ReadToEndAsync();
+				//}
 			}
 		}
 

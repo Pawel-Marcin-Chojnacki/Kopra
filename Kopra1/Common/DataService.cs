@@ -19,7 +19,6 @@ namespace Kopra.Common
 			var rg = new RequestGenerator();
 			KokosConnectionManager.GetWebApiKeyFromService();
 			var mostRecentAuctions = await KokosConnectionManager.SendRestRequest(rg.MostRecentAuctions());
-			Debug.WriteLine(rg.MostRecentAuctions());
 			if (mostRecentAuctions != null)
 				foreach (var auction in mostRecentAuctions.response.auctions.auction)
 				{

@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Kopra.Common;
@@ -116,5 +117,10 @@ namespace Kopra.View
 			Frame.Navigate(typeof(SearchResultPage), filterUri);
 		}
 
+        private void MenuFlyoutItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            var dataContext = (SearchFilter) (e.OriginalSource as FrameworkElement).DataContext;
+            vm.DeleteFilter(dataContext);
+        }
     }
 }

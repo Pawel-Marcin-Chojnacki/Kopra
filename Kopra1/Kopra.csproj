@@ -84,6 +84,7 @@
     <Compile Include="Common\DataService.cs" />
     <Compile Include="Common\FileManager.cs" />
     <Compile Include="Common\KokosConnectionManager.cs" />
+    <Compile Include="Common\OpenMenuFlyoutAction.cs" />
     <Compile Include="Common\ParserService.cs" />
     <Compile Include="Converter\AuctionNumberConverter.cs" />
     <Compile Include="Converter\SingleValueArrayConverter.cs" />
@@ -277,6 +278,11 @@
       <Project>{0e271a0f-cb9c-4384-8980-4ecd5ee0e2f2}</Project>
       <Name>NewAuctionNotifier</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
+      <Name>Behaviors SDK %28XAML%29</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

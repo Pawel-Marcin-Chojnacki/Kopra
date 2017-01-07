@@ -36,7 +36,6 @@ namespace Kopra
 			webRequest.Append(Key + sm.KokosWebApiKey);
 			webRequest.Append(filter);
 			webRequest.Append(DataType);
-			Debug.WriteLine(webRequest.ToString());
 			return new Uri(webRequest.ToString());
 		}
 
@@ -69,7 +68,6 @@ namespace Kopra
 			requestAddress += DataType;
 			var result = new Uri(requestAddress);
 
-			Debug.WriteLine(result.ToString());
 			return result;
 		}
 
@@ -85,7 +83,6 @@ namespace Kopra
 			requestAddress += DataType + "&";
 			requestAddress += Records + "3";
 			var result = new Uri(requestAddress);
-			Debug.WriteLine(result.ToString());
 			return result;
 		}
 

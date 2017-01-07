@@ -173,7 +173,7 @@ namespace Kopra
             {
                 var msgDial = new MessageDialog("Nie można uruchomić zadań w tle.");
                 await msgDial.ShowAsync();
-                throw;
+                //throw;
             }
         }
     }

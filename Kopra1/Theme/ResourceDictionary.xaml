@@ -127,5 +127,15 @@
         <Setter Property="FontWeight" Value="Bold"></Setter>
         <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
     </Style>
+    
+    <Style x:Key="FlyoutBackgroundElement" TargetType="MenuFlyoutItem">
+        <!--<Setter Property="Background" Value="White" ></Setter>-->
+        <!--<Setter Property="Foreground" Value="Black" ></Setter>-->
+    </Style>
+
+    <Style x:Key="FlyoutBackground" TargetType="FlyoutPresenter">
+        <Setter Property="Background" Value="White" ></Setter>
+
+    </Style>
 
 </ResourceDictionary>

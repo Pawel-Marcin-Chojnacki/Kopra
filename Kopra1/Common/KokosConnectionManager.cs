@@ -24,7 +24,6 @@ namespace Kopra
 
 		public static async Task<HttpResponseMessage> LoginToService(string text, string password)
 		{
-			//Debug.WriteLine("LoginToService");
 			HttpClient.DefaultRequestHeaders.UserAgent.Add(new HttpProductInfoHeaderValue("Kopra","1"));
 			var form = new HttpMultipartFormDataContent
 			{
@@ -56,38 +55,28 @@ namespace Kopra
 
 		private static void SaveNewCredentials(string email, string password)
 		{
-			Debug.WriteLine("SaveNewCredentials");
 			var credentials = new SettingsManager {Email = email};
-			Debug.WriteLine(credentials.Email);
 			credentials.Password = password;
 		}
 
 		public static void GetWebApiKeyFromService()
 		{
-			Debug.WriteLine("GetWebAPIKeyFromService");
 			var credentials = new SettingsManager();
 			if (!string.IsNullOrWhiteSpace(credentials.KokosWebApiKey) && !string.IsNullOrWhiteSpace(credentials.KokosWebApiValid))
 			{
-				Debug.WriteLine("Kokos webapiKEy " + credentials.KokosWebApiKey);
 			}
 			else
 			{
 				var apiAccessAdress = new Uri("https://kokos.pl/webapiinfo/key");
 				_response = HttpClient.GetAsync(apiAccessAdress).AsTask(_cts.Token).Result;
 				var key = _response.Content.ToString();
-				Debug.WriteLine(key);
 				if (key.Contains("klucz to: <strong>"))
 				{
 					key = key.Substring(key.IndexOf("klucz to: <strong>")+18, 32);
-					Debug.WriteLine(key);
 					credentials.KokosWebApiKey = key;
 					var valid = _response.Content.ToString();
 					valid = valid.Substring(valid.IndexOf("Data waÅ¼noÅci: <strong>")+25, 19);
 					credentials.KokosWebApiValid = valid;
-				}
-				else
-				{
-					Debug.WriteLine(_response.Content);
 				}
 			}
 		}
@@ -100,17 +89,13 @@ namespace Kopra
 			form.Add(new HttpFormUrlEncodedContent(new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("","")}));
 			var response = HttpClient.PostAsync(apiGeneratorAddress, form).AsTask(_cts.Token).Result;
 			await Task.Delay(10000);
-			Debug.WriteLine(_response.Content);
 			var apiAccessAdress = new Uri("https://kokos.pl/webapiinfo/key");
 			_response = HttpClient.GetAsync(apiAccessAdress).AsTask(_cts.Token).Result;
-			//Task.Delay(2000);
 			var key = _response.Content.ToString();
-			Debug.WriteLine(key);
 			var credentials = new SettingsManager();
 			if (key.Contains("klucz to: <strong>"))
 			{
 				key = key.Substring(key.IndexOf("klucz to: <strong>") + 18, 32);
-				Debug.WriteLine(key);
 				credentials.KokosWebApiKey = key;
 
 				var valid = _response.Content.ToString();
@@ -119,10 +104,6 @@ namespace Kopra
 				credentials.KokosWebApiValid = valid;
 				result.ValidTime = valid;
 				result.Message = "Wygenerowano nowy klucz, będzie ważny przez rok!\n";
-			}
-			else
-			{
-				Debug.WriteLine(_response.Content);
 			}
 			//GetWebApiKeyFromService();
 			if (result.ValidTime != null)
@@ -155,8 +136,6 @@ namespace Kopra
 			var auctionsJson = new SearchAuctionResult();
 			var acute = new Regex(@"&oacute;");
 			var response = acute.Replace(_response.Content.ToString(), @"ó");
-			Debug.WriteLine(address);
-			Debug.WriteLine(response);
 			try
 			{
 				auctionsJson = JsonConvert.DeserializeObject<SearchAuctionResult>(response);
