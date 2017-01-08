@@ -333,7 +333,7 @@ namespace Kopra.ViewModel
 		{
 			LoanInterests = new List<Interest>()
 			{
-				new Interest() {Description = "Dowolny %", percentFrom = 0, percentTo = int.MaxValue},
+				new Interest() {Description = "Dowolne", percentFrom = 0, percentTo = int.MaxValue},
 				new Interest() {Description = "Od 1 do 10%", percentFrom = 1, percentTo = 10},
 				new Interest() {Description = "Od 11 do 20%", percentFrom = 11, percentTo = 20},
 				new Interest() {Description = "Od 21 do 25%", percentFrom = 21, percentTo = 25},
@@ -356,7 +356,8 @@ namespace Kopra.ViewModel
 		{
 			StatusyPozyczek = new List<Status>()
 			{
-				new Status() {Opis = "Nowa pożyczka", StatusLiczbowy = 100},
+                new Status() {Opis = "Brak", StatusLiczbowy = 0},
+                new Status() {Opis = "Nowa pożyczka", StatusLiczbowy = 100},
 				//new Status() {Opis = "W trakcie tworzenia", StatusLiczbowy = 110},
 				new Status() {Opis = "Trwa spłata", StatusLiczbowy = 500},
 				new Status() {Opis = "Uzbierano poniżej 50% inwestycji", StatusLiczbowy = 1100},

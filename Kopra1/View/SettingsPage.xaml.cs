@@ -128,6 +128,7 @@ namespace Kopra
             if (access == BackgroundAccessStatus.Denied)
             {
                 Information.ShowFlyoutInfo(this, "System odmówił rejestracji zadania. Sprawdzanie filtru nie zadziała.");
+                return;
             }
 
             var taskBuilder = new BackgroundTaskBuilder
@@ -140,17 +141,20 @@ namespace Kopra
             taskBuilder.SetTrigger(trigger);
             taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
             taskBuilder.Register();
-            SaveBackgroundTaskFile(vm.Filter.Name);
-        }
-
-        internal async void SaveBackgroundTaskFile(string filename)
-        {
-            if (string.IsNullOrEmpty(filename))
+            if (!string.IsNullOrWhiteSpace(vm?.Filter?.Name))
+            {
+                SaveBackgroundTaskFile(vm.Filter.Name);
+            }
+            else
             {
                 var msgDial = new MessageDialog("Nie wybrano filtra .");
                 await msgDial.ShowAsync();
                 return;
             }
+        }
+
+        internal async void SaveBackgroundTaskFile(string filename)
+        {
             try
             {
                 StorageFolder folder = ApplicationData.Current.LocalFolder;

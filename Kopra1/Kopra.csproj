@@ -87,6 +87,7 @@
     <Compile Include="Common\OpenMenuFlyoutAction.cs" />
     <Compile Include="Common\ParserService.cs" />
     <Compile Include="Converter\AuctionNumberConverter.cs" />
+    <Compile Include="Converter\NegatedBooleanToVisibilityConverter.cs" />
     <Compile Include="Converter\SingleValueArrayConverter.cs" />
     <Compile Include="Converter\StringVisibilityConverter.cs" />
     <Compile Include="Model\ApiKeyGenerate.cs" />

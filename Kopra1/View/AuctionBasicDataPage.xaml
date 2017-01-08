@@ -8,50 +8,59 @@
 	mc:Ignorable="d"
 	xmlns:vm="using:Kopra.ViewModel"
 	xmlns:converter="using:Kopra.Converter"
+	xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+	xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+	xmlns:common="using:Kopra.Common"
 	RequestedTheme="Light"
 	Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 	<Page.DataContext>
 		<vm:AuctionDataViewModel/>
 	</Page.DataContext>
-	<Page.Resources>
-		<ResourceDictionary>
-			<converter:AuctionNumberConverter x:Key="AuctionNumberConverter" />
-			<converter:StringVisibilityConverter x:Key="StringVisibilityConverter" />
-		</ResourceDictionary>
-	</Page.Resources>
-
-	<Grid x:Name="LayoutRoot" DataContext="{Binding Auction, Mode=TwoWay}">
-
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>
-		</Grid.RowDefinitions>
-
-		<!-- Page header -->
+    <Page.Resources>
+        <ResourceDictionary>
+            <converter:AuctionNumberConverter x:Key="AuctionNumberConverter" />
+            <converter:StringVisibilityConverter x:Key="StringVisibilityConverter" />
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid x:Name="LayoutRoot" DataContext="{Binding Auction, Mode=TwoWay}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!-- Page header -->
 		<Grid Grid.Row="0" Background="{StaticResource AppPaletteMainAccentBrush}">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="1*"></ColumnDefinition>
-				<ColumnDefinition Width="1*"></ColumnDefinition>
-			</Grid.ColumnDefinitions>
-
-			<Image Source="/Assets/LogoTheme.png"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image Source="/Assets/LogoTheme.png"
 				   Height="40"
 				   Grid.Column="0"
 				   HorizontalAlignment="Left"
 				   Margin="15,0,5,5"></Image>
-
-			<TextBlock x:Name="userNameTitle"
+            <TextBlock x:Name="userNameTitle"
 				Grid.Column="1"
 					   HorizontalAlignment="Right"
 					   VerticalAlignment="Bottom"
 					   RequestedTheme="Dark"
 					   Margin="0,0,19,9"
 					   Padding="0,0,0,0"
-					   Style="{ThemeResource TitleTextBlockStyle}"
-						/>
+					   Style="{ThemeResource TitleTextBlockStyle}" />
 		</Grid>
 		<Pivot Grid.Row="1">
-			<PivotItem x:Name="AuctionSummary" >
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Holding">
+                        <common:OpenMenuFlyoutAction />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Style="{ThemeResource FlyoutBackgroundElement}" 
+                                        Text="Otwórz w przeglądarce" 
+                                        Click="MenuFlyoutItem_OnClick"  />
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
+            <PivotItem x:Name="AuctionSummary" >
 				<PivotItem.Header>
 					<TextBlock  Text="Podsumowanie" Style="{ThemeResource HeaderTextBlockStyle}"></TextBlock>
 				</PivotItem.Header>
@@ -97,16 +106,13 @@
 						<TextBlock Style="{StaticResource TextBlockHeader}"
 						   Visibility="{Binding Path=timeToEnd, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
 						   Text="Ile czasu do końca aukcji"></TextBlock>
-						<TextBlock  
+                        <TextBlock  
 					Style="{ThemeResource TextBlockTest}"
 					Text="{Binding Path=timeToEnd, Mode=TwoWay}"/>
-
-
-						<TextBlock Style="{StaticResource TextBlockHeader}"
+                        <TextBlock Style="{StaticResource TextBlockHeader}"
 						   Visibility="{Binding Path=numberOfOffers, Mode=TwoWay, Converter={StaticResource StringVisibilityConverter}}"
 						   Text="Ilość ofert"></TextBlock>
-
-						<TextBlock  
+                        <TextBlock  
 					Style="{ThemeResource TextBlockTest}"
 					Text="{Binding Path=numberOfOffers, Mode=TwoWay}"/>
 						<!--<TextBlock Style="{StaticResource TextBlockHeader}"

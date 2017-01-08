@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Windows.Web.Http;
 using Windows.Web.Http.Headers;
 using Kopra.Model;
@@ -16,6 +17,9 @@ namespace Kopra
 	{
 		//private static UserCredentials user;
 		public static HttpClient HttpClient = new HttpClient();
+	    public static DispatcherTimer Timer = new DispatcherTimer() {Interval = new TimeSpan(0,0,0,1)};
+	    private static int baseTime = 1;
+	    private static bool canSendAPIRequest = true;
 		private static CancellationTokenSource _cts = new CancellationTokenSource();
 		private const string LoginAddress = "https://kokos.pl/uzytkownik/dane-osobowe";
 		private static readonly Uri _resourceAddress = new Uri(LoginAddress);
@@ -31,10 +35,9 @@ namespace Kopra
 				{new HttpStringContent(password), "passwd"}
 			};
 
-			// Add new content to string.
 			SaveNewCredentials(text, password);
 			_response =  HttpClient.PostAsync(_resourceAddress, form).AsTask(_cts.Token).Result;
-			return _response;
+            return _response;
 		}
 
 		private static bool IsPasswordValid(string password)
@@ -88,10 +91,16 @@ namespace Kopra
 			var form = new HttpMultipartFormDataContent();
 			form.Add(new HttpFormUrlEncodedContent(new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("","")}));
 			var response = HttpClient.PostAsync(apiGeneratorAddress, form).AsTask(_cts.Token).Result;
-			await Task.Delay(10000);
+            StartAPITimer();
+            while (canSendAPIRequest == false)
+            {
+                await Task.Delay(100);
+            }
 			var apiAccessAdress = new Uri("https://kokos.pl/webapiinfo/key");
 			_response = HttpClient.GetAsync(apiAccessAdress).AsTask(_cts.Token).Result;
-			var key = _response.Content.ToString();
+            StartAPITimer();
+
+            var key = _response.Content.ToString();
 			var credentials = new SettingsManager();
 			if (key.Contains("klucz to: <strong>"))
 			{
@@ -131,26 +140,34 @@ namespace Kopra
 
 		public static async Task<SearchAuctionResult> SendRestRequest(Uri address)
 		{
-			await Task.Delay(TimeSpan.FromSeconds(1)); //Change for Timestamp
-			_response = await HttpClient.GetAsync(address).AsTask(_cts.Token);
+            while (canSendAPIRequest == false)
+            {
+                await Task.Delay(100);
+            }
+            _response = await HttpClient.GetAsync(address).AsTask(_cts.Token);
 			var auctionsJson = new SearchAuctionResult();
 			var acute = new Regex(@"&oacute;");
 			var response = acute.Replace(_response.Content.ToString(), @"ó");
 			try
 			{
 				auctionsJson = JsonConvert.DeserializeObject<SearchAuctionResult>(response);
-			}
+            }
 			catch (Exception exception)
 			{
-				return null;
+                StartAPITimer();
+                return null;
 			}
-			return auctionsJson;
+            StartAPITimer();
+            return auctionsJson;
 		}
 
 		public static async Task<Model.Auction.Auction> GetAuctionDataRequest(Uri address)
 		{
-			//await Task.Delay(TimeSpan.FromSeconds(1));
-			_response = await HttpClient.GetAsync(address).AsTask(_cts.Token);
+		    while (canSendAPIRequest == false)
+		    {
+		        await Task.Delay(100);
+		    }
+            _response = await HttpClient.GetAsync(address).AsTask(_cts.Token);
 			var auctionJson = new GetAuctionDataRoot();
 			var acute = new Regex(@"&oacute;");
 			var response = acute.Replace(_response.Content.ToString(), @"ó");
@@ -164,16 +181,39 @@ namespace Kopra
 			}
 			catch (Exception exception)
 			{
-				throw exception;
+                StartAPITimer();
+
+                return null;
 			}
-			return auctionJson.response.auction;
+            StartAPITimer();
+
+            return auctionJson.response.auction;
 		}
 
 		public static async Task<string> GetWebSource(string address)
 		{
 			var location = new Uri(address);
 			var source = await HttpClient.GetAsync(location).AsTask(_cts.Token);
-			return source.Content.ToString();
+            StartAPITimer();
+
+            return source.Content.ToString();
 		}
+
+	    public static void BlockAPIRequests(object sender, object e)
+	    {
+            baseTime = baseTime - 1;
+            if (baseTime == 0)
+            {
+                Timer.Stop();
+                canSendAPIRequest = true;
+            }
+        }
+
+	    private static void StartAPITimer()
+	    {
+            canSendAPIRequest = false;
+            baseTime = 1;
+            Timer.Start();
+	    }
 	}
 }

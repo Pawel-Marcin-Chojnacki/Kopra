@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Globalization;
+using Windows.System.Threading;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -27,6 +28,7 @@ namespace Kopra
         {
             InitializeComponent();
             Suspending += OnSuspending;
+            KokosConnectionManager.Timer.Tick += KokosConnectionManager.BlockAPIRequests;
         }
 
         /// <summary>

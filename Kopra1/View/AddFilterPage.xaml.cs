@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -109,7 +110,18 @@ namespace Kopra
 				await msgBox.ShowAsync();
 				return;
 			}
-			_viewModel.AddFilter();
+            Regex validate = new Regex("^[A-z0-9]*$");
+            if (validate.IsMatch(FilterName.Text))
+            {
+                _viewModel.AddFilter();
+
+            }
+            else
+            {
+                var msgBox = new MessageDialog("Nazwa może się składać tylko z liter oraz cyfr!");
+                await msgBox.ShowAsync();
+                return;
+            }
 		}
 
 		private void WyczyśćAppBarButton_Click(object sender, RoutedEventArgs e)

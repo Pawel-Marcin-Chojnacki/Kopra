@@ -7,6 +7,7 @@ using System;
 using Windows.Storage;
 using System.Text;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 
@@ -220,15 +221,40 @@ namespace Kopra.ViewModel
 			}
 			set
 			{
+                Regex validate = new Regex("^[A-z0-9]*$");
+			    if (validate.IsMatch(value))
+			    {
+			        IsErrorVisible = false;
+			    }
+			    else
+			    {
+			        IsErrorVisible = true;
+			    }
 				_filterName = value;
 				NotifyPropertyChanged(nameof(FilterName));
 			}
 		}
 
+	    public bool IsErrorVisible
+	    {
+	        get { return _isErrorVisible; }
+	        set
+	        {
+	            _isErrorVisible = value;
+				NotifyPropertyChanged(nameof(IsErrorVisible));
+                NotifyPropertyChanged(nameof(NegatedIsErrorVisible));
 
-		internal async void AddFilter()
+            }
+        }
+
+	    public bool NegatedIsErrorVisible
+	    {
+	        get { return !IsErrorVisible; }
+	        set { _negatedIsErrorVisible = value; }
+	    }
+
+	    internal async void AddFilter()
 		{
-			//if (FileExists(FilterName).Result) return;
 			var filterLink = CreateLinkFromFields();
 
 			try
@@ -236,9 +262,9 @@ namespace Kopra.ViewModel
 				StorageFolder folder = ApplicationData.Current.LocalFolder;
 				if (folder != null)
 				{
-					var file = folder.CreateFileAsync(FilterName, CreationCollisionOption.ReplaceExisting).GetResults();
+					var file = await folder.CreateFileAsync(FilterName, CreationCollisionOption.ReplaceExisting);
 					var fileContent = Encoding.UTF8.GetBytes(filterLink);
-					var fileStream = file.OpenStreamForWriteAsync().Result;
+					var fileStream = await file.OpenStreamForWriteAsync();
 					fileStream.Write(fileContent, 0, fileContent.Length);
 					fileStream.Flush();
 					fileStream.Dispose();
@@ -352,8 +378,10 @@ namespace Kopra.ViewModel
 		private Status _status;
 		private string _titleSearch;
 		private string _filterName;
+	    private bool _isErrorVisible = false;
+	    private bool _negatedIsErrorVisible;
 
-		#endregion Fields
+	    #endregion Fields
 
 		private void InicjalizujIlośćInwestorów()
 		{
@@ -399,7 +427,7 @@ namespace Kopra.ViewModel
 		{
 			LoanInterests = new List<Interest>()
 			{
-				new Interest() {Description = "Dowolny %", percentFrom = 0, percentTo = int.MaxValue},
+				new Interest() {Description = "Dowolne", percentFrom = 0, percentTo = int.MaxValue},
 				new Interest() {Description = "Od 1 do 10%", percentFrom = 1, percentTo = 10},
 				new Interest() {Description = "Od 11 do 20%", percentFrom = 11, percentTo = 20},
 				new Interest() {Description = "Od 21 do 25%", percentFrom = 21, percentTo = 25},

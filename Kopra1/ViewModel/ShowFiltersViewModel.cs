@@ -61,7 +61,7 @@ namespace Kopra.ViewModel
 			return content;
 		}
 
-		public async void DeleteFilter(SearchFilter dataContext)
+		public void DeleteFilter(SearchFilter dataContext)
 		{
 			// Get the app's installation folder.
 			var appFolder =
@@ -72,18 +72,18 @@ namespace Kopra.ViewModel
 				{
 					if (FileExists(dataContext.Name))
 					{
-						StorageFile fileToDelete = await appFolder.GetFileAsync(dataContext.Name);
-						await fileToDelete.DeleteAsync();
+						StorageFile fileToDelete = appFolder.GetFileAsync(dataContext.Name).GetAwaiter().GetResult();
+						fileToDelete.DeleteAsync().GetAwaiter();
 					}
 					this.Filters.Remove(dataContext);
 					return;
 				}
-				await ShowDeleteErrorFlyout();
+				ShowDeleteErrorFlyout().GetAwaiter();
 				return;
 			}
 			catch (Exception e)
 			{
-				await ShowDeleteErrorFlyout();
+				ShowDeleteErrorFlyout().GetAwaiter();
 			}
 		}
 
@@ -100,7 +100,7 @@ namespace Kopra.ViewModel
 				StorageFolder folder = ApplicationData.Current.LocalFolder;
 				if (folder != null)
 				{
-					ApplicationData.Current.LocalFolder.GetFileAsync(fileName).GetResults();
+					ApplicationData.Current.LocalFolder.GetFileAsync(fileName).GetAwaiter();
 					return true;
 				}
 			}

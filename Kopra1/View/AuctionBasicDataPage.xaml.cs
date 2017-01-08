@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Kopra.Common;
@@ -100,5 +101,13 @@ namespace Kopra
 		}
 
 		#endregion
+
+	    private async void MenuFlyoutItem_OnClick(object sender, RoutedEventArgs e)
+	    {
+	        var auctionId = ((AuctionDataViewModel) this.DataContext).Id; //((Auction)sender).id;
+            string uriToLaunch = @"https://kokos.pl/aukcje?id=" + auctionId;
+            var uri = new Uri(uriToLaunch);
+            var success = await Windows.System.Launcher.LaunchUriAsync(uri);
+        }
 	}
 }
